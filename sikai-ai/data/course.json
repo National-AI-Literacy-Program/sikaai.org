@@ -1,0 +1,75 @@
+[
+  {
+    "day": 1,
+    "hook": "Have you ever wondered how TikTok knows exactly which video will make you laugh, or how digital wallets like eSewa spot a fake transaction instantly?That is not magic — that is Artificial Intelligence (AI).",
+    "concept": "In simple terms, AI is a way to teach computers to recognize patterns and make decisions, much like how a human learns from experience. Think of a local farmer predicting the monsoon. A farmer doesn't just guess; they look at the clouds, remember past weather patterns, and make an informed prediction. AI does the exact same thing. But instead of looking at the sky, it looks at data — like millions of past videos or financial records — to predict what you want to watch or if a payment is safe. AI is not a physical robot from a sci-fi movie. It is simply a very fast, very smart software tool that helps us sort through massive amounts of information to solve everyday problems.",
+    "action": {
+      "title": "Think about your smartphone. Tap the app below where you think AI is working right now:",
+      "options": [
+        {
+          "label": "YouTube",
+          "correct": false,
+          "explanation": "YouTube does use AI heavily for recommendations — but it's only one of the apps here, not the full picture."
+        },
+        {
+          "label": "Khalti / eSewa",
+          "correct": false,
+          "explanation": "Khalti and eSewa do use AI to catch fraud — but that's not the only app on your phone using it."
+        },
+        {
+          "label": "Google Maps",
+          "correct": false,
+          "explanation": "Google Maps does use AI to predict traffic and routes — but so do the other options listed."
+        },
+        {
+          "label": "All of the above",
+          "correct": true,
+          "explanation": "Correct — YouTube recommends videos with AI, Khalti/eSewa detect fraud with AI, and Google Maps predicts traffic with AI. All three run on it at once."
+        }
+      ],
+      "feedback": {
+        "correct": "Right! YouTube, digital wallets, and Maps all run on AI.",
+        "incorrect": "True, but look closer at every option."
+      }
+    },
+
+    "quiz": {
+      "title": "Based on what we just read, what is the best way to describe AI?",
+      "options": [
+        {
+          "label": "A robot that has human feelings.",
+          "correct": false,
+          "explanation": "AI isn't a physical robot and it doesn't have feelings — that's a sci-fi idea, not how real AI works."
+        },
+        {
+          "label": "A computer system trained on data to recognize patterns and make predictions.",
+          "correct": true,
+          "explanation": "Correct — like the farmer reading clouds, AI studies past data to find patterns and predict what comes next."
+        },
+        {
+          "label": "A new type of fast internet connection.",
+          "correct": false,
+          "explanation": "AI has nothing to do with internet speed — it's about recognizing patterns in data, not how fast data travels."
+        },
+        {
+          "label": "All of the above",
+          "correct": false,
+          "explanation": "Only one of the earlier options actually describes AI correctly, so 'all of the above' doesn't hold up."
+        }
+      ],
+      "feedback": {
+        "correct": "Correct! Patterns, data, predictions, that's AI.",
+        "incorrect": "Not quite! Remember the farmer analogy—AI uses data to make predictions."
+      }
+    },
+
+    "reward": {
+      "message": "Great job! You have taken your first step. See you tomorrow to uncover why AI chatbots aren't quite what they seem."
+    },
+    "completed": false
+  },
+  {
+
+
+  }
+]
