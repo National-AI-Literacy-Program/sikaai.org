@@ -1,15 +1,15 @@
+"use client";
+
 import Link from "next/link";
+import { getCourseTitle, getLessons, getCourseTotal, getLessonStatus } from "@/lib/course";
+import { CourseProgress, useCourseProgress } from "@/app/components/CourseProgress";
+import Example from "@/app/components/Example";
 
 export default function CoursePage() {
-  return (
-    <main>
-      <h1>4 Weeks AI Literacy Course</h1>
-
-      <p>Start your AI learning journey.</p>
-
-      <Link href="course/1">
-            Start Day 1
-      </Link>
-    </main>
-  );
+  const lessons = getLessons();
+  const total = getCourseTotal();
+  const { completed } = useCourseProgress();
+  const nextDay = lessons.find((lesson) => !completed.includes(lesson.day))?.day;
+  const isComplete = completed.length === total && total > 0;
+  return <main className="course-page"><nav className="site-nav shell"><Link className="brand" href="/">Sikaai<span>AI</span></Link><Link className="back-link" href="/">← Back home</Link></nav><div className="course-dashboard shell"><header className="course-dashboard-hero"><div><p className="eyebrow">YOUR LEARNING PATH</p><h1>Small steps,<br /><span>real confidence.</span></h1><p className="course-lede">A calm, practical introduction to AI. Pick up where you left off and build one useful idea at a time.</p></div><div className="course-progress-orb"><strong>{completed.length}</strong><span>of {total}<br />complete</span></div></header><CourseProgress completed={completed} total={total} /><div className="course-dashboard-grid"><section className="course-lessons-panel"><div className="course-section-heading"><div><p className="eyebrow">THE COURSE</p><h2>Learn at your pace.</h2></div><span>{total} short lessons</span></div><div className="lesson-list">{lessons.map((lesson, index) => { const status = getLessonStatus(lesson.day, completed); const current = lesson.day === nextDay; const locked = status === "locked"; return locked ? <div className={`day-card day-card-locked`} aria-disabled="true" key={lesson.day}><div className="topic-badge">{String(index + 1).padStart(2, "0")}</div><div className="day-card-copy"><p className="eyebrow">LOCKED</p><h2>{getCourseTitle(lesson)}</h2><p>Complete the previous lesson to continue.</p></div><span className="day-arrow" aria-hidden="true">Locked</span></div> : <Link className={`day-card ${current ? "day-card-current" : ""} ${status === "completed" ? "day-card-done" : ""}`} href={`/course/${lesson.day}`} key={lesson.day}><div className="topic-badge">{String(index + 1).padStart(2, "0")}</div><div className="day-card-copy"><p className="eyebrow">{status === "completed" ? "COMPLETED" : current ? "CONTINUE · 2.5 MIN" : "UP NEXT"}</p><h2>{getCourseTitle(lesson)}</h2><p>{lesson.hook}</p><span className="card-link">{status === "completed" ? "Review lesson" : "Open lesson"} →</span></div><span className="day-arrow">{status === "completed" ? "✓" : "↗"}</span></Link>; })}</div></section><aside className="course-side-panel"><p className="eyebrow">A LITTLE ENCOURAGEMENT</p><h2>Curiosity is a skill.</h2><p>There is no perfect pace here. Just show up, explore, and let the ideas become familiar.</p><Example /></aside></div>{isComplete && <div className="certificate-banner"><div><p className="eyebrow">COURSE COMPLETE</p><h2>Your learning journey is complete.</h2></div><Link className="button button-primary" href="/certificate">Request certificate →</Link></div>}</div></main>;
 }

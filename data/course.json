@@ -1,30 +1,26 @@
 [
   {
     "day": 1,
-    "hook": "Have you ever wondered how TikTok knows exactly which video will make you laugh, or how digital wallets like eSewa spot a fake transaction instantly?That is not magic — that is Artificial Intelligence (AI).",
+    "hook": "Have you ever wondered how TikTok knows exactly which video will make you laugh, or how digital wallets like eSewa spot a fake transaction instantly? That is not magic — that is Artificial Intelligence (AI).",
     "concept": "In simple terms, AI is a way to teach computers to recognize patterns and make decisions, much like how a human learns from experience. Think of a local farmer predicting the monsoon. A farmer doesn't just guess; they look at the clouds, remember past weather patterns, and make an informed prediction. AI does the exact same thing. But instead of looking at the sky, it looks at data — like millions of past videos or financial records — to predict what you want to watch or if a payment is safe. AI is not a physical robot from a sci-fi movie. It is simply a very fast, very smart software tool that helps us sort through massive amounts of information to solve everyday problems.",
     "action": {
       "title": "Think about your smartphone. Tap the app below where you think AI is working right now:",
       "options": [
         {
           "label": "YouTube",
-          "correct": false,
-          "explanation": "YouTube does use AI heavily for recommendations — but it's only one of the apps here, not the full picture."
+          "correct": false
         },
         {
           "label": "Khalti / eSewa",
-          "correct": false,
-          "explanation": "Khalti and eSewa do use AI to catch fraud — but that's not the only app on your phone using it."
+          "correct": false
         },
         {
           "label": "Google Maps",
-          "correct": false,
-          "explanation": "Google Maps does use AI to predict traffic and routes — but so do the other options listed."
+          "correct": false
         },
         {
           "label": "All of the above",
-          "correct": true,
-          "explanation": "Correct — YouTube recommends videos with AI, Khalti/eSewa detect fraud with AI, and Google Maps predicts traffic with AI. All three run on it at once."
+          "correct": true
         }
       ],
       "feedback": {
@@ -32,29 +28,24 @@
         "incorrect": "True, but look closer at every option."
       }
     },
-
     "quiz": {
       "title": "Based on what we just read, what is the best way to describe AI?",
       "options": [
         {
           "label": "A robot that has human feelings.",
-          "correct": false,
-          "explanation": "AI isn't a physical robot and it doesn't have feelings — that's a sci-fi idea, not how real AI works."
+          "correct": false
         },
         {
           "label": "A computer system trained on data to recognize patterns and make predictions.",
-          "correct": true,
-          "explanation": "Correct — like the farmer reading clouds, AI studies past data to find patterns and predict what comes next."
+          "correct": true
         },
         {
           "label": "A new type of fast internet connection.",
-          "correct": false,
-          "explanation": "AI has nothing to do with internet speed — it's about recognizing patterns in data, not how fast data travels."
+          "correct": false
         },
         {
           "label": "All of the above",
-          "correct": false,
-          "explanation": "Only one of the earlier options actually describes AI correctly, so 'all of the above' doesn't hold up."
+          "correct": false
         }
       ],
       "feedback": {
@@ -62,14 +53,124 @@
         "incorrect": "Not quite! Remember the farmer analogy—AI uses data to make predictions."
       }
     },
-
     "reward": {
       "message": "Great job! You have taken your first step. See you tomorrow to uncover why AI chatbots aren't quite what they seem."
-    },
-    "completed": false
+    }
   },
   {
-
-
+    "day": 2,
+    "hook": "Yesterday, we learned that AI learns from data. But here is the surprising part: what happens when you ask an AI chatbot a question and it gives you a completely confident answer that is actually wrong?",
+    "concept": "This is where Generative AI comes in. Tools like ChatGPT can create new text, images, ideas, and even computer code by learning patterns from huge amounts of existing data. Imagine giving a student thousands of books and conversations to study. After seeing enough examples, the student becomes good at predicting what words or ideas should come next. A language model works in a similar way. When you type a question, it does not simply look up one stored answer. It generates a response based on patterns it learned during training. That is why AI can be incredibly useful for brainstorming, explaining difficult topics, writing, and learning. But there is a catch: AI can sometimes produce information that sounds convincing but is incorrect. These mistakes are often called 'hallucinations.' So the smartest way to use AI is not to blindly trust everything it says, but to treat it as a helpful assistant whose important answers should be checked.",
+    "action": {
+      "title": "You ask an AI chatbot: 'Who is the current president of Nepal?' What should you do before using its answer in an important assignment?",
+      "options": [
+        {
+          "label": "Trust it because AI is always correct.",
+          "correct": false
+        },
+        {
+          "label": "Ask the same question again until the answer sounds right.",
+          "correct": false
+        },
+        {
+          "label": "Verify the answer using a reliable source.",
+          "correct": true
+        },
+        {
+          "label": "Ignore every answer from AI.",
+          "correct": false
+        }
+      ],
+      "feedback": {
+        "correct": "Exactly! AI can be useful, but important facts should be verified with reliable sources.",
+        "incorrect": "AI can sound confident even when it is wrong. Always verify important information."
+      }
+    },
+    "quiz": {
+      "title": "Why can an AI chatbot sometimes give an incorrect answer that sounds convincing?",
+      "options": [
+        {
+          "label": "Because it is secretly trying to trick you.",
+          "correct": false
+        },
+        {
+          "label": "Because it generates responses from learned patterns and can sometimes produce inaccurate information.",
+          "correct": true
+        },
+        {
+          "label": "Because AI does not use any data.",
+          "correct": false
+        },
+        {
+          "label": "Because chatbots are actually humans typing behind the screen.",
+          "correct": false
+        }
+      ],
+      "feedback": {
+        "correct": "Correct! AI generates responses from learned patterns, but those responses are not guaranteed to be factually correct.",
+        "incorrect": "Not quite! Remember: AI can generate convincing answers that still contain mistakes."
+      }
+    },
+    "reward": {
+      "message": "Nice work! You now know that AI can create useful content — and that you should not blindly trust everything it generates. Tomorrow, we will learn how AI actually learns from examples."
+    }
+  },
+  {
+    "day": 3,
+    "hook": "So how does a computer actually learn? Nobody sits beside an AI and explains every single photo, sentence, or transaction one by one. Instead, AI learns by finding patterns in examples — and this is where Machine Learning begins.",
+    "concept": "Machine Learning is a method of teaching computers to learn patterns from data instead of programming every rule by hand. Imagine you want to teach a child to recognize a mango. You could describe its color, shape, smell, and taste, but it would be much easier to show the child many examples. After seeing enough mangoes, the child starts recognizing the pattern. Machine Learning works in a similar way. We provide a model with examples, such as emails labeled 'spam' and 'not spam.' The model studies those examples and learns patterns that help it classify new emails. The more useful and representative the training data is, the better the model can potentially perform. But poor or biased data can lead to poor results. This is why data is one of the most important ingredients in modern AI.",
+    "action": {
+      "title": "Imagine you are training an AI to identify spam messages. Which examples would be most useful?",
+      "options": [
+        {
+          "label": "Only 5 spam messages.",
+          "correct": false
+        },
+        {
+          "label": "Thousands of messages clearly labeled as spam or not spam.",
+          "correct": true
+        },
+        {
+          "label": "One message that you personally dislike.",
+          "correct": false
+        },
+        {
+          "label": "No examples — the AI should just guess.",
+          "correct": false
+        }
+      ],
+      "feedback": {
+        "correct": "Exactly! Machine Learning relies on examples and patterns in data.",
+        "incorrect": "Think about the mango example: the computer needs many useful examples to learn a reliable pattern."
+      }
+    },
+    "quiz": {
+      "title": "What is the key idea behind Machine Learning?",
+      "options": [
+        {
+          "label": "Programming every possible decision manually.",
+          "correct": false
+        },
+        {
+          "label": "Teaching computers to learn patterns from examples and data.",
+          "correct": true
+        },
+        {
+          "label": "Making computers physically faster.",
+          "correct": false
+        },
+        {
+          "label": "Giving computers human emotions.",
+          "correct": false
+        }
+      ],
+      "feedback": {
+        "correct": "Correct! Machine Learning allows computers to discover useful patterns from data and use those patterns to make predictions or decisions.",
+        "incorrect": "Not quite! The key idea is learning patterns from examples rather than manually programming every rule."
+      }
+    },
+    "reward": {
+      "message": "Awesome! You have now connected the dots: AI uses data, Generative AI can create content, and Machine Learning helps computers learn patterns from examples. Keep going — there is much more to discover."
+    }
   }
 ]
