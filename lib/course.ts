@@ -1,3 +1,9 @@
+import { clsx, type ClassValue } from "clsx";
+import { twMerge } from "tailwind-merge";
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
+}
 import rawCourse from "@/data/course.json";
 
 export type Choice = { label: string; correct: boolean };

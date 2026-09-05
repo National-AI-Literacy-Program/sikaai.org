@@ -1,15 +1,212 @@
 "use client";
 
 import Link from "next/link";
-import { getCourseTitle, getLessons, getCourseTotal, getLessonStatus } from "@/lib/course";
-import { CourseProgress, useCourseProgress } from "@/app/components/CourseProgress";
-import Example from "@/app/components/Example";
+import { useMemo, useState } from "react";
+import {
+  getCourseTitle,
+  getLessonStatus,
+  getLessons,
+  getCourseTotal,
+} from "@/lib/course";
+import { useCourseProgress } from "@/app/components/CourseProgress";
+
+const WEEK_COUNT = 4;
+const TOPICS_PER_WEEK = 7;
 
 export default function CoursePage() {
   const lessons = getLessons();
-  const total = getCourseTotal();
   const { completed } = useCourseProgress();
-  const nextDay = lessons.find((lesson) => !completed.includes(lesson.day))?.day;
-  const isComplete = completed.length === total && total > 0;
-  return <main className="course-page"><nav className="site-nav shell"><Link className="brand" href="/">Sikaai<span>AI</span></Link><Link className="back-link" href="/">← Back home</Link></nav><div className="course-dashboard shell"><header className="course-dashboard-hero"><div><p className="eyebrow">YOUR LEARNING PATH</p><h1>Small steps,<br /><span>real confidence.</span></h1><p className="course-lede">A calm, practical introduction to AI. Pick up where you left off and build one useful idea at a time.</p></div><div className="course-progress-orb"><strong>{completed.length}</strong><span>of {total}<br />complete</span></div></header><CourseProgress completed={completed} total={total} /><div className="course-dashboard-grid"><section className="course-lessons-panel"><div className="course-section-heading"><div><p className="eyebrow">THE COURSE</p><h2>Learn at your pace.</h2></div><span>{total} short lessons</span></div><div className="lesson-list">{lessons.map((lesson, index) => { const status = getLessonStatus(lesson.day, completed); const current = lesson.day === nextDay; const locked = status === "locked"; return locked ? <div className={`day-card day-card-locked`} aria-disabled="true" key={lesson.day}><div className="topic-badge">{String(index + 1).padStart(2, "0")}</div><div className="day-card-copy"><p className="eyebrow">LOCKED</p><h2>{getCourseTitle(lesson)}</h2><p>Complete the previous lesson to continue.</p></div><span className="day-arrow" aria-hidden="true">Locked</span></div> : <Link className={`day-card ${current ? "day-card-current" : ""} ${status === "completed" ? "day-card-done" : ""}`} href={`/course/${lesson.day}`} key={lesson.day}><div className="topic-badge">{String(index + 1).padStart(2, "0")}</div><div className="day-card-copy"><p className="eyebrow">{status === "completed" ? "COMPLETED" : current ? "CONTINUE · 2.5 MIN" : "UP NEXT"}</p><h2>{getCourseTitle(lesson)}</h2><p>{lesson.hook}</p><span className="card-link">{status === "completed" ? "Review lesson" : "Open lesson"} →</span></div><span className="day-arrow">{status === "completed" ? "✓" : "↗"}</span></Link>; })}</div></section><aside className="course-side-panel"><p className="eyebrow">A LITTLE ENCOURAGEMENT</p><h2>Curiosity is a skill.</h2><p>There is no perfect pace here. Just show up, explore, and let the ideas become familiar.</p><Example /></aside></div>{isComplete && <div className="certificate-banner"><div><p className="eyebrow">COURSE COMPLETE</p><h2>Your learning journey is complete.</h2></div><Link className="button button-primary" href="/certificate">Request certificate →</Link></div>}</div></main>;
+  const total = WEEK_COUNT * TOPICS_PER_WEEK;
+  const roadmapLessons = Array.from(
+    { length: total },
+    (_, index) =>
+      lessons[index] ?? {
+        day: index + 1,
+        hook: "This topic will unlock as you move through the course.",
+        concept: "Upcoming topic",
+      },
+  );
+  const nextDay =
+    roadmapLessons.find((lesson) => !completed.includes(lesson.day))?.day ??
+    total;
+  const currentWeek = Math.min(
+    WEEK_COUNT,
+    Math.max(1, Math.ceil(nextDay / TOPICS_PER_WEEK)),
+  );
+  const [selectedWeek, setSelectedWeek] = useState(currentWeek);
+  const weeks = useMemo(
+    () =>
+      Array.from({ length: WEEK_COUNT }, (_, index) => {
+        const week = index + 1;
+        const weekLessons = roadmapLessons.slice(
+          index * TOPICS_PER_WEEK,
+          (index + 1) * TOPICS_PER_WEEK,
+        );
+        const done = weekLessons.filter((lesson) =>
+          completed.includes(lesson.day),
+        ).length;
+        return {
+          week,
+          lessons: weekLessons,
+          done,
+          complete: done === weekLessons.length && weekLessons.length > 0,
+          locked: week > currentWeek,
+        };
+      }),
+    [lessons, completed, currentWeek],
+  );
+  const selected = weeks[selectedWeek - 1] ?? weeks[0];
+  const overallProgress = total
+    ? Math.round((completed.length / total) * 100)
+    : 0;
+  const railProgress = (
+    (Math.max(0, Math.min(completed.length, total)) / total) *
+    100
+  ).toFixed(2);
+
+  return (
+    <main className="course-page">
+      <nav className="site-nav shell">
+        <Link className="brand" href="/">
+          Sikaai<span>AI</span>
+        </Link>
+        <Link className="back-link" href="/">
+          ← Back home
+        </Link>
+      </nav>
+      <div className="course-dashboard shell">
+        <header className="course-dashboard-hero">
+          <div>
+            <p className="eyebrow">YOUR 4-WEEK LEARNING PATH</p>
+            <h1>
+              Small steps,
+              <br />
+              <span>real confidence.</span>
+            </h1>
+            <p className="course-lede">
+              Twenty-eight practical topics, arranged one calm week at a time.
+              Follow the path in order and build momentum without feeling
+              overwhelmed.
+            </p>
+          </div>
+          <div className="course-progress-orb">
+            <strong>{overallProgress}%</strong>
+            <span>
+              {completed.length} of {total}
+              <br />
+              topics complete
+            </span>
+          </div>
+        </header>
+        <section className="week-roadmap" aria-label="Course weeks">
+          <div className="week-roadmap-track">
+            <span style={{ width: `${railProgress}%` }} />
+          </div>
+          <div className="week-nodes">
+            {weeks.map((item) => (
+              <button
+                type="button"
+                className={`week-node ${selectedWeek === item.week ? "is-selected" : ""} ${item.complete ? "is-complete" : ""} ${item.locked ? "is-locked" : ""}`}
+                onClick={() => !item.locked && setSelectedWeek(item.week)}
+                aria-current={selectedWeek === item.week ? "step" : undefined}
+                disabled={item.locked}
+                key={item.week}
+              >
+                <span className="week-circle">
+                  {item.complete ? "✓" : item.week}
+                </span>
+                <span className="week-node-copy">
+                  <b>Week {item.week}</b>
+                  <small>
+                    {item.complete
+                      ? "Complete"
+                      : item.locked
+                        ? "Locked"
+                        : `${item.done}/7 topics`}
+                  </small>
+                </span>
+              </button>
+            ))}
+          </div>
+        </section>
+        <section className="week-panel">
+          <div className="week-panel-heading">
+            <div>
+              <p className="eyebrow">
+                WEEK {selected.week} ·{" "}
+                {selected.complete
+                  ? "COMPLETE"
+                  : selected.locked
+                    ? "LOCKED"
+                    : "YOUR CURRENT FOCUS"}
+              </p>
+              <h2>
+                {selected.week === 1
+                  ? "Start with the foundations."
+                  : selected.week === 2
+                    ? "Make AI useful day to day."
+                    : selected.week === 3
+                      ? "Create with more confidence."
+                      : "Put it all into practice."}
+              </h2>
+            </div>
+            <div className="week-score">
+              <strong>{selected.done}</strong>
+              <span>
+                / 7<br />
+                done
+              </span>
+            </div>
+          </div>
+          <div className="week-progress">
+            <span style={{ width: `${(selected.done / 7) * 100}%` }} />
+          </div>
+          <div className="week-topic-list">
+            {selected.lessons.map((lesson) => {
+              const status = getLessonStatus(lesson.day, completed);
+              const locked = status === "locked";
+              const done = status === "completed";
+              return locked ? (
+                <div className="week-topic week-topic-locked" key={lesson.day}>
+                  <span className="topic-number">
+                    {String(lesson.day).padStart(2, "0")}
+                  </span>
+                  <div>
+                    <p className="eyebrow">LOCKED</p>
+                    <h3>{getCourseTitle(lesson)}</h3>
+                    <p>Complete the previous topic to unlock this lesson.</p>
+                  </div>
+                  <span className="topic-status">Locked</span>
+                </div>
+              ) : (
+                <Link
+                  className={`week-topic ${done ? "week-topic-done" : status === "current" ? "week-topic-current" : ""}`}
+                  href={`/course/${lesson.day}`}
+                  key={lesson.day}
+                >
+                  <span className="topic-number">
+                    {done ? "✓" : String(lesson.day).padStart(2, "0")}
+                  </span>
+                  <div>
+                    <p className="eyebrow">
+                      {done
+                        ? "COMPLETED"
+                        : status === "current"
+                          ? "CONTINUE · 2.5 MIN"
+                          : "UP NEXT"}
+                    </p>
+                    <h3>{getCourseTitle(lesson)}</h3>
+                    <p>{lesson.hook}</p>
+                  </div>
+                  <span className="topic-status">
+                    {done ? "Done" : "Open →"}
+                  </span>
+                </Link>
+              );
+            })}
+          </div>
+        </section>
+      </div>
+    </main>
+  );
 }
