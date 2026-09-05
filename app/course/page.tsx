@@ -2,12 +2,7 @@
 
 import Link from "next/link";
 import { useMemo, useState } from "react";
-import {
-  getCourseTitle,
-  getLessonStatus,
-  getLessons,
-  getCourseTotal,
-} from "@/lib/course";
+import { getCourseTitle, getLessonStatus, getLessons } from "@/lib/course";
 import { useCourseProgress } from "@/app/components/CourseProgress";
 
 const WEEK_COUNT = 4;
@@ -79,15 +74,10 @@ export default function CoursePage() {
           <div>
             <p className="eyebrow">YOUR 4-WEEK LEARNING PATH</p>
             <h1>
-              Small steps,
+              28 topics.
               <br />
-              <span>real confidence.</span>
+              <span>4 focused weeks.</span>
             </h1>
-            <p className="course-lede">
-              Twenty-eight practical topics, arranged one calm week at a time.
-              Follow the path in order and build momentum without feeling
-              overwhelmed.
-            </p>
           </div>
           <div className="course-progress-orb">
             <strong>{overallProgress}%</strong>
@@ -127,6 +117,32 @@ export default function CoursePage() {
                 </span>
               </button>
             ))}
+          </div>
+        </section>
+        <section className="taxonomy-guide" aria-labelledby="taxonomy-title">
+          <div>
+            <p className="eyebrow">QUESTION DESIGN</p>
+            <h2 id="taxonomy-title">What each question builds.</h2>
+          </div>
+          <div className="taxonomy-legend">
+            <div>
+              <b>K</b>
+              <span>
+                <strong>Knowledge</strong> Recall and understand.
+              </span>
+            </div>
+            <div>
+              <b>S</b>
+              <span>
+                <strong>Skills</strong> Apply and analyse.
+              </span>
+            </div>
+            <div>
+              <b>A</b>
+              <span>
+                <strong>Attitude</strong> Reflect and respond.
+              </span>
+            </div>
           </div>
         </section>
         <section className="week-panel">
