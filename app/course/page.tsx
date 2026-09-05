@@ -125,23 +125,20 @@ export default function CoursePage() {
             <h2 id="taxonomy-title">What each question builds.</h2>
           </div>
           <div className="taxonomy-legend">
-            <div>
-              <b>K</b>
-              <span>
-                <strong>Knowledge</strong> Recall and understand.
-              </span>
+            <div className="taxonomy-pill taxonomy-pill-knowledge">
+              <span className="taxonomy-pill-dot" aria-hidden="true" />
+              <strong>K</strong>
+              <span>Knowledge</span>
             </div>
-            <div>
-              <b>S</b>
-              <span>
-                <strong>Skills</strong> Apply and analyse.
-              </span>
+            <div className="taxonomy-pill taxonomy-pill-skills">
+              <span className="taxonomy-pill-dot" aria-hidden="true" />
+              <strong>S</strong>
+              <span>Skills</span>
             </div>
-            <div>
-              <b>A</b>
-              <span>
-                <strong>Attitude</strong> Reflect and respond.
-              </span>
+            <div className="taxonomy-pill taxonomy-pill-attitude">
+              <span className="taxonomy-pill-dot" aria-hidden="true" />
+              <strong>A</strong>
+              <span>Attitude</span>
             </div>
           </div>
         </section>

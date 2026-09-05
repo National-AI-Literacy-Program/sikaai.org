@@ -2036,31 +2036,54 @@ html[data-theme="dark"] .day-card-locked {
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 8px;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  background: var(--blue-pale);
 }
-.taxonomy-legend b {
-  display: grid;
-  place-items: center;
-  min-width: 27px;
-  height: 27px;
+.taxonomy-pill {
+  width: fit-content;
+  min-width: 0;
+  padding: 8px 13px 8px 10px;
+  border: 1px solid color-mix(in srgb, var(--blue) 15%, var(--line));
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--blue-pale) 72%, var(--background));
+  color: var(--blue-deep);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+.taxonomy-pill-dot {
+  position: relative;
+  display: inline-flex;
+  width: 8px;
+  height: 8px;
+  margin-right: 2px;
   border-radius: 50%;
   background: var(--blue);
-  color: var(--background);
+}
+.taxonomy-pill-dot::after {
+  position: absolute;
+  inset: -3px;
+  border: 1px solid color-mix(in srgb, var(--blue) 30%, transparent);
+  border-radius: 50%;
+  content: "";
+}
+.taxonomy-pill strong {
+  margin-right: 2px;
+  color: inherit;
   font-size: 10px;
 }
-.taxonomy-legend span {
-  color: var(--muted);
-  font-size: 9px;
-  line-height: 1.25;
+.taxonomy-pill-knowledge .taxonomy-pill-dot {
+  background: var(--blue);
 }
-.taxonomy-legend strong {
-  display: block;
-  margin-bottom: 2px;
-  color: var(--foreground);
-  font-size: 11px;
+.taxonomy-pill-skills .taxonomy-pill-dot {
+  background: var(--saffron);
+}
+.taxonomy-pill-attitude .taxonomy-pill-dot {
+  background: var(--red);
+}
+.taxonomy-pill-skills {
+  border-color: color-mix(in srgb, var(--saffron) 35%, var(--line));
+}
+.taxonomy-pill-attitude {
+  border-color: color-mix(in srgb, var(--red) 25%, var(--line));
 }
 .question-panel {
   position: relative;
