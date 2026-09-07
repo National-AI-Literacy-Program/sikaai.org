@@ -9,7 +9,7 @@ export default function LandingPage() {
       <section className="hero shell" id="about">
         <div className="hero-copy">
           <p className="eyebrow"><span className="eyebrow-dot" /> AI literacy for everyday life in Nepal</p>
-          <h1>Understand AI.<br /><span>Use it wisely.</span></h1>
+          <h1 className="hero-heading">Know AI.<br /><span>Get aware.</span></h1>
           <p className="hero-text">SikaiAI is a four-week AI literacy program that helps you identify AI, understand how it is used, and make more informed choices online.</p>
           <div className="hero-actions">
             <Link href="/course" className="button button-primary">Start the course <span aria-hidden="true">→</span></Link>

@@ -8,6 +8,7 @@
   --muted: #6f625d;
   --line: #ded3c9;
   --blue: #d32f2f;
+  --dark-red: #860505bb;
   --blue-deep: #1e4e59;
   --blue-pale: #f0e5d7;
   --saffron: #f3b229;
@@ -68,9 +69,13 @@ button {
 }
 
 .brand span,
-h1 span,
+/* h1 span, */
 h2 span {
   color: var(--blue);
+}
+
+h1 span{
+  color:var(--dark-red)
 }
 
 .brand:hover {
