@@ -12,11 +12,17 @@ export default function Header() {
           <a href="#about" className="nav-cta">
             About us
           </a>
-          <a href="#approach" className="nav-cta">
-            Our approach
+          <a href="#course-structure" className="nav-cta">
+            Course Structure
           </a>
-          <Link href="/involve" className="nav-cta nav-cta-solid">
-            Get involved
+          <a href="#approach" className="nav-cta">
+            Content
+          </a>
+          <a href="#why" className="nav-cta">
+            Reference
+          </a>
+          <Link href="/involve" className="nav-cta nav-cta-solid button button-primary">
+            Start Learning
           </Link>
           <ThemeToggle />
         </nav>
