@@ -1,5 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap");
-
 @import "tailwindcss";
 
 :root {
@@ -19,7 +17,7 @@
   --color-primary: var(--blue);
   --color-primary-foreground: #fff;
   --color-border: var(--line);
-  --font-sans: "Poppins", sans-serif;
+  --font-sans: "Lato", sans-serif;
 }
 
 * {
@@ -35,7 +33,7 @@ body {
   margin: 0;
   background: var(--background);
   color: var(--foreground);
-  font-family: "Poppins", sans-serif;
+  font-family: "Lato", sans-serif;
   line-height: 1.5;
 }
 
@@ -1650,15 +1648,28 @@ html[data-theme="dark"] .rhythm-main {
 }
 .lesson-card-art {
   position: absolute;
-  top: 42px;
+  top: 34px;
   right: 34px;
   display: grid;
   place-items: center;
-  width: 130px;
-  height: 130px;
+  width: 142px;
+  height: 142px;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--blue) 18%, var(--line));
   border-radius: 50%;
   background: var(--blue-pale);
 }
+.lesson-card-art img {
+  display: block;
+  width: 122px;
+  height: 122px;
+  object-fit: contain;
+  object-position: center bottom;
+}
+.lesson-card-art-success {
+  background: color-mix(in srgb, var(--saffron) 22%, var(--blue-pale));
+}
+
 .lesson-heading-row {
   display: flex;
   align-items: center;
@@ -1867,7 +1878,7 @@ html[data-theme="dark"] .rhythm-main {
 }
 [lang="ne"],
 .nepali {
-  font-family: "Noto Sans Devanagari", Arial, sans-serif;
+  font-family: "Mukta", sans-serif;
 }
 @media (max-width: 760px) {
   .course-dashboard-hero {
@@ -1884,14 +1895,22 @@ html[data-theme="dark"] .rhythm-main {
     padding-right: 0;
   }
   .lesson-card-art {
-    position: static;
+    position: relative;
+    top: auto;
+    right: auto;
+    width: 112px;
+    height: 112px;
     margin: 18px 0 0;
+  }
+  .lesson-card-art img {
+    width: 98px;
+    height: 98px;
   }
   .lesson-reader {
     height: auto;
     max-height: none;
     min-height: 0;
-    padding: 24px;
+    padding: 20px;
     overflow: visible;
   }
   .lesson-nav-actions {
@@ -2201,6 +2220,47 @@ html[data-theme="dark"] .day-card-locked {
 @media (max-width: 420px) {
   .taxonomy-legend {
     grid-template-columns: 1fr;
+  }
+  .shell {
+    width: calc(100% - 24px);
+  }
+  .site-nav {
+    padding-block: 18px;
+  }
+  .lesson-layout {
+    width: calc(100% - 24px);
+  }
+  .lesson-meta {
+    flex-wrap: wrap;
+    gap: 6px 12px;
+    font-size: 9px;
+  }
+  .lesson-reader {
+    padding: 16px;
+    border-radius: 10px;
+  }
+  .lesson-heading h1 {
+    font-size: clamp(38px, 14vw, 58px);
+  }
+  .lesson-hook {
+    font-size: 15px;
+  }
+  .reader-section {
+    padding: 18px;
+  }
+  .reader-actions {
+    flex-wrap: wrap;
+  }
+  .reader-actions .button {
+    flex: 1 1 100%;
+    justify-content: center;
+  }
+  .lesson-ksa {
+    gap: 4px;
+  }
+  .ksa-chip {
+    padding: 5px 6px;
+    font-size: 8px;
   }
 }
 /* Four-week course roadmap */
