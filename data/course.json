@@ -5,8 +5,8 @@
     "concept": "In simple terms, AI is a way to teach computers to recognize patterns and make decisions, much like how a human learns from experience. Think of a local farmer predicting the monsoon. A farmer doesn't just guess; they look at the clouds, remember past weather patterns, and make an informed prediction. AI does the exact same thing. But instead of looking at the sky, it looks at data — like millions of past videos or financial records — to predict what you want to watch or if a payment is safe. AI is not a physical robot from a sci-fi movie. It is simply a very fast, very smart software tool that helps us sort through massive amounts of information to solve everyday problems.",
     "ksa": {
       "knowledge": ["1.4"],
-      "skills": ["Self-awareness", "Social awareness"],
-      "attitude": ["Curious", "Responsible"]
+      "skills": ["Self-awareness,Social awareness"],
+      "attitude": ["Curious,Responsible"]
     },
     "action": {
       "title": "Think about your smartphone. Tap the app below where you think AI is working right now:",
