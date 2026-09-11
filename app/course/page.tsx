@@ -119,29 +119,6 @@ export default function CoursePage() {
             ))}
           </div>
         </section>
-        <section className="taxonomy-guide" aria-labelledby="taxonomy-title">
-          <div>
-            <p className="eyebrow">QUESTION DESIGN</p>
-            <h2 id="taxonomy-title">What each question builds.</h2>
-          </div>
-          <div className="taxonomy-legend">
-            <div className="taxonomy-pill taxonomy-pill-knowledge">
-              <span className="taxonomy-pill-dot" aria-hidden="true" />
-              <strong>K</strong>
-              <span>Knowledge</span>
-            </div>
-            <div className="taxonomy-pill taxonomy-pill-skills">
-              <span className="taxonomy-pill-dot" aria-hidden="true" />
-              <strong>S</strong>
-              <span>Skills</span>
-            </div>
-            <div className="taxonomy-pill taxonomy-pill-attitude">
-              <span className="taxonomy-pill-dot" aria-hidden="true" />
-              <strong>A</strong>
-              <span>Attitude</span>
-            </div>
-          </div>
-        </section>
         <section className="week-panel">
           <div className="week-panel-heading">
             <div>

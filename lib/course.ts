@@ -7,10 +7,17 @@ export function cn(...inputs: ClassValue[]) {
 import rawCourse from "@/data/course.json";
 
 export type Choice = { label: string; correct: boolean };
+export type QuestionProfile = {
+  level: "Knowledge" | "Skill" | "Attitude";
+  type: "Recall" | "Application" | "Critical analysis" | "Reflection";
+  demand: "Foundational" | "Higher ability";
+  code: "K" | "S" | "A";
+};
 export type Lesson = {
   day: number;
   hook: string;
   concept: string;
+  ksa?: { knowledge?: string[]; skills?: string[]; attitude?: string[] };
   action?: {
     title: string;
     options: Choice[];
@@ -47,6 +54,40 @@ export function getCourseTotal() {
 
 export function getCourseTitle(lesson: Lesson) {
   return `Day ${lesson.day}`;
+}
+
+export function getQuestionProfile(
+  day: number,
+  kind: "action" | "quiz",
+): QuestionProfile {
+  const index = Math.max(0, day - 1);
+  if (kind === "action")
+    return {
+      level: "Skill",
+      type: "Application",
+      demand: index % 3 === 0 ? "Higher ability" : "Foundational",
+      code: "S",
+    };
+  if (index % 4 === 3)
+    return {
+      level: "Attitude",
+      type: "Reflection",
+      demand: "Higher ability",
+      code: "A",
+    };
+  if (index % 3 === 2)
+    return {
+      level: "Skill",
+      type: "Critical analysis",
+      demand: "Higher ability",
+      code: "S",
+    };
+  return {
+    level: "Knowledge",
+    type: index % 2 === 0 ? "Recall" : "Application",
+    demand: index % 2 === 0 ? "Foundational" : "Higher ability",
+    code: "K",
+  };
 }
 
 export const courseSource = "data/course.json";

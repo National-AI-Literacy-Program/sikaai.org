@@ -8,6 +8,8 @@ import {
   getLesson,
   getLessons,
   getLessonStatus,
+  getQuestionProfile,
+  type QuestionProfile,
 } from "@/lib/course";
 import { useCourseProgress } from "@/app/components/CourseProgress";
 import CourseSidebar from "@/app/components/CourseSidebar";
@@ -135,7 +137,35 @@ export default function DayPage({
           </div>
           <div className="lesson-reader">
             <header className="lesson-heading">
-              <p className="eyebrow">AI FOUNDATIONS · DAY {day}</p>
+              <div className="lesson-heading-row">
+                <p className="eyebrow">AI FOUNDATIONS · DAY {day}</p>
+                {lesson.ksa && (
+                  <div
+                    className="lesson-ksa"
+                    aria-label="Knowledge, skills, and attitude focus"
+                  >
+                    <span className="ksa-label">KSA</span>
+                    {lesson.ksa.knowledge?.map((item) => (
+                      <span
+                        className="ksa-chip ksa-knowledge"
+                        key={`k-${item}`}
+                      >
+                        K: {item}
+                      </span>
+                    ))}
+                    {lesson.ksa.skills?.map((item) => (
+                      <span className="ksa-chip ksa-skills" key={`s-${item}`}>
+                        S: {item}
+                      </span>
+                    ))}
+                    {lesson.ksa.attitude?.map((item) => (
+                      <span className="ksa-chip ksa-attitude" key={`a-${item}`}>
+                        A: {item}
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </div>
               <h1>{getCourseTitle(lesson)}</h1>
               <p className="lesson-hook">{lesson.hook}</p>
             </header>
@@ -170,6 +200,8 @@ export default function DayPage({
                 answer={actionAnswer}
                 setAnswer={setActionAnswer}
                 feedback={lesson.action.feedback}
+                profile={getQuestionProfile(day, "action")}
+                label="TRY IT"
               />
             )}
             {step === (lesson.action ? 2 : 1) && lesson.quiz && (
@@ -179,6 +211,8 @@ export default function DayPage({
                 answer={answer}
                 setAnswer={setAnswer}
                 feedback={lesson.quiz.feedback}
+                profile={getQuestionProfile(day, "quiz")}
+                label="QUICK CHECK"
               />
             )}
             {step === finalStep && (
@@ -249,85 +283,55 @@ function Question({
   answer,
   setAnswer,
   feedback,
+  profile,
+  label,
 }: {
   title: string;
   options: Option[];
   answer: number | null;
   setAnswer: (value: number) => void;
   feedback?: { correct?: string; incorrect?: string };
+  profile: QuestionProfile;
+  label: string;
 }) {
-  const [tries, setTries] = useState<number[]>([]);
   const correct = answer !== null && options[answer]?.correct;
-  const letters = "ABCD";
-
-  function choose(index: number) {
-    if (correct) return;
-    setAnswer(index);
-    setTries((prev) => (prev.includes(index) ? prev : [...prev, index]));
-  }
-
   return (
-    <section className="reader-section">
-      <p className="eyebrow">QUICK CHECK</p>
+    <section className="reader-section question-panel">
+      <div className="question-topline">
+        <p className="eyebrow">{label}</p>
+        <div
+          className="question-profile"
+          aria-label={`Question profile: ${profile.level}, ${profile.type}, ${profile.demand}`}
+        >
+          <span className={`profile-code profile-${profile.code}`}>
+            {profile.code}
+          </span>
+          <span>{profile.level}</span>
+          <span>{profile.type}</span>
+          <span>{profile.demand === "Higher ability" ? "HA" : "F"}</span>
+        </div>
+      </div>
       <h2>{title}</h2>
-      <div className="choices" role="radiogroup" aria-label={title}>
-        {options.map((option, index) => {
-          const chosen = answer === index;
-          const wasWrong = chosen && tries.includes(index) && !option.correct;
-          const revealCorrect = correct && option.correct && !chosen;
-          return (
-            <button
-              type="button"
-              role="radio"
-              aria-checked={chosen}
-              className={[
-                "choice",
-                chosen && option.correct ? "choice-correct" : "",
-                wasWrong ? "choice-wrong" : "",
-                revealCorrect ? "choice-hint" : "",
-              ]
-                .filter(Boolean)
-                .join(" ")}
-              key={option.label}
-              onClick={() => choose(index)}
-            >
-              <span className="choice-letter">
-                {letters[index] ?? index + 1}
-              </span>
-              <span className="choice-text">{option.label}</span>
-              <span className="choice-mark" aria-hidden="true">
-                {chosen && option.correct && (
-                  <svg viewBox="0 0 24 24" className="choice-icon">
-                    <path d="M4 12.5 9.5 18 20 6" pathLength="1" />
-                  </svg>
-                )}
-                {wasWrong && (
-                  <svg viewBox="0 0 24 24" className="choice-icon">
-                    <path d="M5 5l14 14M19 5 5 19" pathLength="1" />
-                  </svg>
-                )}
-                {!chosen && !revealCorrect && "→"}
-              </span>
-            </button>
-          );
-        })}
+      <div className="choices">
+        {options.map((option, index) => (
+          <button
+            type="button"
+            className={`choice ${answer === index ? (option.correct ? "choice-correct" : "choice-wrong") : ""}`}
+            key={option.label}
+            onClick={() => setAnswer(index)}
+            aria-pressed={answer === index}
+          >
+            {option.label}
+            <span aria-hidden="true">
+              {answer === index ? (option.correct ? "✓" : "×") : "→"}
+            </span>
+          </button>
+        ))}
       </div>
       {answer !== null && (
-        <div className="quiz-feedback-wrap">
-          {correct && (
-            <span className="quiz-confetti" aria-hidden="true">
-              {Array.from({ length: 8 }).map((_, i) => (
-                <span key={i} className="quiz-confetti-piece" />
-              ))}
-            </span>
-          )}
-          <p className={`feedback ${correct ? "feedback-good" : ""}`}>
-            {correct ? feedback?.correct : feedback?.incorrect}
-          </p>
-          {!correct && tries.length >= 2 && (
-            <p className="feedback-nudge">Hint: reread the big idea above.</p>
-          )}
-        </div>
+        <p className={`feedback ${correct ? "feedback-good" : ""}`}>
+          {correct ? feedback?.correct : feedback?.incorrect}
+        </p>
       )}
     </section>
   );

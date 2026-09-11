@@ -8,7 +8,6 @@
   --muted: #6f625d;
   --line: #ded3c9;
   --blue: #d32f2f;
-  --dark-red: #860505bb;
   --blue-deep: #1e4e59;
   --blue-pale: #f0e5d7;
   --saffron: #f3b229;
@@ -69,13 +68,9 @@ button {
 }
 
 .brand span,
-/* h1 span, */
+h1 span,
 h2 span {
   color: var(--blue);
-}
-
-h1 span{
-  color:var(--dark-red)
 }
 
 .brand:hover {
@@ -1663,6 +1658,55 @@ html[data-theme="dark"] .rhythm-main {
   height: 130px;
   border-radius: 50%;
   background: var(--blue-pale);
+}
+.lesson-heading-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.lesson-ksa {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+.ksa-label {
+  color: var(--muted);
+  font: 700 9px monospace;
+  letter-spacing: 0.08em;
+}
+.ksa-chip {
+  padding: 5px 8px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--foreground);
+  font-size: 9px;
+  font-weight: 700;
+  line-height: 1;
+  white-space: nowrap;
+}
+.ksa-knowledge {
+  border-color: color-mix(in srgb, var(--blue) 35%, var(--line));
+  background: color-mix(in srgb, var(--blue-pale) 65%, var(--background));
+}
+.ksa-skills {
+  border-color: color-mix(in srgb, var(--saffron) 45%, var(--line));
+  background: color-mix(in srgb, var(--saffron) 16%, var(--background));
+}
+.ksa-attitude {
+  border-color: color-mix(in srgb, var(--red) 35%, var(--line));
+  background: color-mix(in srgb, var(--red) 10%, var(--background));
+}
+@media (max-width: 760px) {
+  .lesson-heading-row {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .lesson-ksa {
+    justify-content: flex-start;
+  }
 }
 .lesson-card-art img {
   object-fit: contain;
