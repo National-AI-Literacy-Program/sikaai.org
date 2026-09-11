@@ -41,17 +41,25 @@ export default function LandingPage() {
       <section id="approach" className="section approach shell">
         <div className="section-heading"><div><p className="eyebrow">FOUR-WEEK JOURNEY</p><h2>Build confidence<br /><span>one module at a time.</span></h2></div><p>Move from recognising AI to making thoughtful, responsible choices.</p></div>
         <div className="rhythm-grid">
-          <article className="rhythm-card rhythm-main"><span className="step-number">01</span><div><h3>What is AI?</h3><p>Recognise AI in everyday tools and services.</p></div></article>
-          <article className="rhythm-card"><span className="step-number">02</span><div><h3>AI and information</h3><p>Understand recommendations, generated content, and misinformation.</p></div></article>
-          <article className="rhythm-card"><span className="step-number">03</span><div><h3>AI and decisions</h3><p>See how AI can affect work, privacy, and opportunity.</p></div></article>
-          <article className="rhythm-card"><span className="step-number">04</span><div><h3>Use AI responsibly</h3><p>Build safer habits and make informed choices.</p></div></article>
+          <article className="rhythm-card rhythm-main"><span className="step-number">01</span><div><h3>Engage with AI</h3><p>Recognise AI in the apps, search tools, and platforms you already use.</p></div></article>
+          <article className="rhythm-card"><span className="step-number">02</span><div><h3>Create with AI</h3><p>Learn how AI-generated content is created and why it can be misleading or biased.</p></div></article>
+          <article className="rhythm-card"><span className="step-number">03</span><div><h3>Manage AI</h3><p>Understand how AI affects privacy, work, and the choices we make online.</p></div></article>
+          <article className="rhythm-card"><span className="step-number">04</span><div><h3>Wrapping Up</h3><p>Review what you have learned and build habits for safer, smarter AI use.</p></div></article>
         </div>
       </section>
       <section className="section why-section shell" id="why">
         <div className="section-heading"><div><p className="eyebrow">WHY ARE WE DOING THIS?</p><h2>AI is already<br /><span>part of everyday life.</span></h2></div><p>SikaiAI helps learners ask better questions, protect their information, and make confident choices as AI becomes more common.</p></div>
-        <div className="section-heading"><div><p className="eyebrow">REFERENCES</p><h2>Learn from<br /><span>trusted guidance.</span></h2></div><p>This course is informed by digital literacy and responsible AI guidance from UNESCO, UNICEF, and the OECD.</p></div>
       </section>
-      <footer className="site-footer landing-footer shell"><p>© 2026 SikaiAI</p><p>Learn AI. One small lesson at a time.</p></footer>
+      <section className="section references-section shell" id="references">
+        <div className="section-heading"><div><p className="eyebrow">REFERENCES</p><h2>Learn from<br /><span>trusted guidance.</span></h2></div><p>The course draws on established guidance about AI, digital literacy, online safety, and responsible technology use.</p></div>
+        <div className="rhythm-grid references-grid">
+          <article className="rhythm-card rhythm-main"><span className="step-number">01</span><div><h3>UNESCO</h3><p>Guidance for generative AI in education and research.</p><a href="https://www.unesco.org/en/articles/guidance-generative-ai-education-and-research" target="_blank" rel="noreferrer">View reference →</a></div></article>
+          <article className="rhythm-card"><span className="step-number">02</span><div><h3>UNICEF</h3><p>Policy guidance on AI for children and their rights.</p><a href="https://www.unicef.org/globalinsight/reports/policy-guidance-ai-children" target="_blank" rel="noreferrer">View reference →</a></div></article>
+          <article className="rhythm-card"><span className="step-number">03</span><div><h3>OECD</h3><p>Principles for trustworthy and human-centred AI.</p><a href="https://oecd.ai/en/ai-principles" target="_blank" rel="noreferrer">View reference →</a></div></article>
+          <article className="rhythm-card"><span className="step-number">04</span><div><h3>UNESCO</h3><p>Media and information literacy resources for navigating digital life.</p><a href="https://www.unesco.org/en/media-information-literacy" target="_blank" rel="noreferrer">View reference →</a></div></article>
+        </div>
+      </section>
+      <footer className="site-footer landing-footer shell"><p>© 2026 SikaiAI</p><p><a href="#references">References</a> · Learn AI. One small lesson at a time.</p></footer>
     </main>
   );
 }
