@@ -95,12 +95,23 @@ export default function DayPage({
     "Finish",
   ];
   const finalStep = sections.length - 1;
+  const quizStep = lesson.action ? 2 : 1;
   const quizCorrect = lesson.quiz
     ? answer !== null && lesson.quiz.options[answer]?.correct
     : false;
   const actionCorrect = lesson.action
     ? actionAnswer !== null && lesson.action.options[actionAnswer]?.correct
     : false;
+  const questionStep = lesson.action ? 1 : 0;
+  const isQuestionStep =
+    (Boolean(lesson.action) && step === questionStep) ||
+    (Boolean(lesson.quiz) && step === quizStep);
+  const currentQuestionCorrect =
+    Boolean(lesson.action) && step === questionStep
+      ? actionCorrect
+      : Boolean(lesson.quiz) && step === quizStep
+        ? quizCorrect
+        : true;
   const hasCorrectAnswer = quizCorrect || actionCorrect;
 
   return (
@@ -123,6 +134,8 @@ export default function DayPage({
           completed={completed}
           activeSection={step}
           onSectionChange={(section) => {
+            if (section > step && isQuestionStep && !currentQuestionCorrect)
+              return;
             setAnswer(null);
             setActionAnswer(null);
             setStep(section);
@@ -239,17 +252,29 @@ export default function DayPage({
                 </button>
               )}
               {step < finalStep ? (
-                <button
-                  className="button button-primary"
-                  type="button"
-                  onClick={() => {
-                    setAnswer(null);
-                    setActionAnswer(null);
-                    setStep((value) => value + 1);
-                  }}
-                >
-                  Next topic <span aria-hidden="true">→</span>
-                </button>
+                <div className="next-topic-slot">
+                  <button
+                    className={`button button-primary ${isQuestionStep && currentQuestionCorrect ? "button-ready" : ""}`}
+                    type="button"
+                    disabled={isQuestionStep && !currentQuestionCorrect}
+                    onClick={() => {
+                      if (isQuestionStep && !currentQuestionCorrect) return;
+                      setAnswer(null);
+                      setActionAnswer(null);
+                      setStep((value) => value + 1);
+                    }}
+                  >
+                    Next topic <span aria-hidden="true">→</span>
+                  </button>
+                  <p
+                    className={`quiz-lock-hint ${isQuestionStep && !currentQuestionCorrect ? "is-visible" : ""}`}
+                    role="status"
+                  >
+                    {isQuestionStep && !currentQuestionCorrect
+                      ? "Choose the correct answer to continue."
+                      : "Ready for the next topic."}
+                  </p>
+                </div>
               ) : (
                 <button
                   className="button button-primary"
