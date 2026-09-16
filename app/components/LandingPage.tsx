@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import Header from "./Header";
-
+import Typewriter from "./Typewriter";
 export default function LandingPage() {
   return (
     <main className="landing-page">
@@ -9,7 +9,16 @@ export default function LandingPage() {
       <section className="hero shell" id="about">
         <div className="hero-copy">
           <p className="eyebrow"><span className="eyebrow-dot" /> AI literacy for everyday life in Nepal</p>
-          <h1 className="hero-heading">Know AI.<br /><span>Get aware.</span></h1>
+
+          <h1 className="hero-heading"><span> <Typewriter
+        strings={['Engage with', 'Create with', 'Manage', 'Shape']}
+        typeSpeed={70}
+        deleteSpeed={35}
+        pauseDuration={2000}       
+      /></span> AI</h1>
+
+
+
           <p className="hero-text">SikaiAI is a four-week AI literacy program that helps you identify AI, understand how it is used, and make more informed choices online.</p>
           <div className="hero-actions">
             <Link href="/course" className="button button-primary">Start the course <span aria-hidden="true">→</span></Link>
@@ -18,14 +27,14 @@ export default function LandingPage() {
         </div>
         <div className="hero-visual" aria-label="A preview of a SikaAI lesson">
           <div className="lesson-card">
-            <div className="lesson-top"><span>WEEK 01 / 04</span><span className="lesson-time">WITH TESTS</span></div>
+            <div className="lesson-top"><span>Day 01 - 28</span><span className="lesson-time">2.5 minutes/day</span></div>
             <Image className="namaste-art" src="/lesson-art/namaste.svg" alt="Namaste illustration welcoming learners" width={120} height={120} />
-            <p className="lesson-kicker">WEEK 01 · THE BASICS</p>
-            <h2>What is AI, really?</h2>
+            <p className="lesson-kicker">28 days, 28 lessons</p>
+            <h2>AI Explained in Nepali way</h2>
             <p>Start by learning how to recognise AI in everyday life.</p>
-            <div className="lesson-question">Learn · practise · check your understanding</div>
+            <div className="lesson-question">Learn · Practise · Check your understanding</div>
             <div className="progress"><span /></div>
-            <span className="progress-label">One week at a time.</span>
+            <span className="progress-label">One capsule at a time.</span>
           </div>
         </div>
       </section>
