@@ -6,7 +6,7 @@ export default function Header() {
     <>
       <header className="site-nav shell">
         <Link href="/" className="brand">
-          Sikaai<span>AI</span>
+          Sika<span>AI</span>
         </Link>
         <nav className="nav-links" aria-label="Main navigation">
           <a href="#about" className="nav-cta">
