@@ -16,7 +16,7 @@ export default function LandingPage() {
           </div>
           <p className="hero-note">Designed to help people in Nepal recognise AI, understand its impact, and use it with confidence.</p>
         </div>
-        <div className="hero-visual" aria-label="A preview of a SikaiAI lesson">
+        <div className="hero-visual" aria-label="A preview of a SikaAI lesson">
           <div className="lesson-card">
             <div className="lesson-top"><span>WEEK 01 / 04</span><span className="lesson-time">WITH TESTS</span></div>
             <Image className="namaste-art" src="/lesson-art/namaste.svg" alt="Namaste illustration welcoming learners" width={120} height={120} />
@@ -48,7 +48,7 @@ export default function LandingPage() {
         </div>
       </section>
       <section className="section why-section shell" id="why">
-        <div className="section-heading"><div><p className="eyebrow">WHY ARE WE DOING THIS?</p><h2>AI is already<br /><span>part of everyday life.</span></h2></div><p>SikaiAI helps learners ask better questions, protect their information, and make confident choices as AI becomes more common.</p></div>
+        <div className="section-heading"><div><p className="eyebrow">WHY ARE WE DOING THIS?</p><h2>AI is already<br /><span>part of everyday life.</span></h2></div><p>SikaAI helps learners ask better questions, protect their information, and make confident choices as AI becomes more common.</p></div>
       </section>
       <section className="section references-section shell" id="references">
         <div className="section-heading"><div><p className="eyebrow">REFERENCES</p><h2>Learn from<br /><span>trusted guidance.</span></h2></div><p>The course draws on established guidance about AI, digital literacy, online safety, and responsible technology use.</p></div>
@@ -59,7 +59,7 @@ export default function LandingPage() {
           <article className="rhythm-card"><span className="step-number">04</span><div><h3>UNESCO</h3><p>Media and information literacy resources for navigating digital life.</p><a href="https://www.unesco.org/en/media-information-literacy" target="_blank" rel="noreferrer">View reference →</a></div></article>
         </div>
       </section>
-      <footer className="site-footer landing-footer shell"><p>© 2026 SikaiAI</p><p><a href="#references">References</a> · Learn AI. One small lesson at a time.</p></footer>
+      <footer className="site-footer landing-footer shell"><p>© 2026 SikaAI</p><p><a href="#references">References</a> · Learn AI. One small lesson at a time.</p></footer>
     </main>
   );
 }
