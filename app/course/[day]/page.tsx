@@ -188,8 +188,8 @@ export default function DayPage({
               <Image
                 src={
                   hasCorrectAnswer
-                    ? "/lesson-art/happy_boy.svg"
-                    : "/lesson-art/thinking_boy.svg"
+                    ? "/lesson-art/happy_boy.png"
+                    : "/lesson-art/thinking_boy.png"
                 }
                 alt={
                   hasCorrectAnswer
