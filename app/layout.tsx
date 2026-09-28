@@ -4,10 +4,10 @@ import "./globals.css";
 import { ThemeProvider } from "./components/ThemeProvider";
 
 export const metadata: Metadata = {
-  title: "SikaaiAI — AI is for everyone",
+  title: "SikaiAI: AI for Everyone",
   description:
     "Friendly, bite-sized AI lessons for every generation. Learn in 2.5 minutes a day.",
-  generator: "SikaaiAI",
+  generator: "SikaAI",
   icons: {
     icon: [
       {

@@ -901,6 +901,17 @@ html[data-theme="dark"] .choice-correct {
   color: #2f9e5b !important;
 }
 
+.quiz-lock-hint {
+  margin: 0;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 700;
+}
+.reader-actions .button:disabled {
+  cursor: not-allowed;
+  opacity: 0.48;
+}
+
 .lesson-complete {
   display: flex;
   align-items: center;
@@ -3108,6 +3119,173 @@ textarea {
   .namaste-art {
     width: 86px;
     height: 86px;
+  }
+}
+/* Shadcn course sidebar refinement */
+body,
+button,
+input,
+textarea {
+  font-family: "Lato", "Mukta", sans-serif;
+}
+.course-sidebar-new {
+  width: 100% !important;
+  min-height: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+.sidebar-card {
+  width: 100%;
+  border: 1px solid var(--line);
+  background: color-mix(in srgb, var(--blue-pale) 35%, var(--background));
+  color: var(--foreground);
+  box-shadow: 0 16px 34px color-mix(in srgb, var(--foreground) 7%, transparent);
+}
+.sidebar-card-header {
+  gap: 13px;
+}
+.sidebar-card-title {
+  color: var(--foreground);
+  font-size: 25px;
+  line-height: 0.98;
+  letter-spacing: -0.05em;
+}
+.sidebar-day-count {
+  color: var(--muted);
+  font: 700 10px monospace;
+}
+.sidebar-progress-ui {
+  width: 100%;
+}
+.sidebar-progress-ui [data-slot="progress-track"] {
+  height: 6px;
+  background: var(--line);
+}
+.sidebar-progress-ui [data-slot="progress-indicator"] {
+  background: var(--blue);
+}
+.sidebar-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.sidebar-section-label {
+  color: var(--muted);
+  font: 700 9px monospace;
+  letter-spacing: 0.12em;
+}
+.sidebar-current-ui {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--blue);
+  border-radius: 9px;
+  background: var(--background);
+}
+.sidebar-current-number {
+  color: var(--blue);
+  font: 700 11px monospace;
+}
+.sidebar-current-ui strong,
+.sidebar-current-ui span:not(.sidebar-current-number) {
+  display: block;
+}
+.sidebar-current-ui strong {
+  color: var(--foreground);
+  font-size: 12px;
+}
+.sidebar-current-ui span:not(.sidebar-current-number) {
+  margin-top: 3px;
+  color: var(--muted);
+  font-size: 10px;
+}
+.course-sidebar-new .sidebar-sections {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 0;
+}
+.course-sidebar-new .sidebar-sections button {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  width: 100%;
+  padding: 8px 10px;
+  border: 0;
+  border-radius: 7px;
+  background: transparent;
+  color: var(--muted);
+  font:
+    600 11px "Lato",
+    sans-serif;
+  text-align: left;
+  cursor: pointer;
+}
+.course-sidebar-new .sidebar-sections button span {
+  width: 12px;
+  color: var(--line);
+  font-size: 9px;
+}
+.course-sidebar-new .sidebar-sections button:hover {
+  background: color-mix(in srgb, var(--blue-pale) 70%, transparent);
+  color: var(--foreground);
+}
+.course-sidebar-new .sidebar-sections button.is-active {
+  background: var(--blue);
+  color: var(--background);
+}
+.course-sidebar-new .sidebar-sections button.is-active span {
+  color: var(--saffron);
+}
+.course-sidebar-new .path-next-list {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.course-sidebar-new .path-next {
+  display: grid;
+  grid-template-columns: 22px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 0;
+  color: var(--foreground);
+  text-decoration: none;
+}
+.course-sidebar-new .path-next > span {
+  color: var(--blue);
+  font: 10px monospace;
+}
+.course-sidebar-new .path-next strong {
+  overflow: hidden;
+  color: var(--foreground);
+  font-size: 11px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.course-sidebar-new .path-next.locked {
+  opacity: 0.5;
+}
+.course-sidebar-new .path-next .badge {
+  font-size: 9px;
+}
+@media (max-width: 760px) {
+  .course-sidebar-new {
+    width: 100% !important;
+  }
+  .sidebar-card {
+    box-shadow: none;
+  }
+  .sidebar-card-header {
+    padding: 16px;
+  }
+  .sidebar-card-content {
+    padding: 16px;
+  }
+  .course-sidebar-new .path-next-list {
+    display: none;
   }
 }
 /* Focused page system */
