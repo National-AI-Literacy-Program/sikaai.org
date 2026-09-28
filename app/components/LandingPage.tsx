@@ -6,15 +6,22 @@ export default function LandingPage() {
   return (
     <main className="landing-page">
       <Header />
-      <section className="hero shell" id="about">
-        <div className="hero-copy">
-          <p className="eyebrow">
-            <span className="eyebrow-dot" /> AI literacy for everyday life in
-            Nepal
-          </p>
 
-          <h1 className="hero-heading">
-            <span>
+      {/* Hero shell, main part  */}
+      <section className="hero shell flex flex-col" id="about">
+
+            <Image
+              className="h-auto"
+              src="/lesson-art/namaste.svg"
+              alt="Namaste illustration welcoming learners"
+              width={130}
+              height={300}
+            />
+
+        <div className="hero-copy items-center">
+
+          <h1 className=  "justify-center flex flex-row items-center gap-2">
+            <span >
               {" "}
               <Typewriter
                 strings={["Engage with", "Create with", "Manage", "Shape"]}
@@ -26,94 +33,94 @@ export default function LandingPage() {
             AI
           </h1>
 
-          <p className="hero-text">
+          <p className="hero-text text-center">
             SikaiAI is a four-week AI literacy program that helps you identify
             AI, understand how it is used, and make more informed choices
             online.
           </p>
-          <div className="hero-actions">
+          <div className="hero-actions justify-center">
             <Link href="/course" className="button button-primary">
               Start the course <span aria-hidden="true">→</span>
             </Link>
           </div>
-          <p className="hero-note">
-            Designed to help people in Nepal recognise AI, understand its
-            impact, and use it with confidence.
-          </p>
         </div>
-        <div className="hero-visual" aria-label="A preview of a SikaAI lesson">
-          <div className="lesson-card">
-            <div className="lesson-top">
-              <span>Day 01 - 28</span>
-              <span className="lesson-time">2.5 minutes/day</span>
-            </div>
-            <Image
-              className="namaste-art"
-              src="/lesson-art/namaste.svg"
-              alt="Namaste illustration welcoming learners"
-              width={120}
-              height={120}
-            />
-            <p className="lesson-kicker">28 days, 28 lessons</p>
-            <h2>AI Explained in Nepali way</h2>
-            <p>Start by learning how to recognise AI in everyday life.</p>
-            <div className="lesson-question">
-              Learn · Practise · Check your understanding
-            </div>
-            <div className="progress">
-              <span />
-            </div>
-            <span className="progress-label">One capsule at a time.</span>
-          </div>
-        </div>
+
       </section>
-      <section className="section course-structure shell" id="course-structure">
-        <div className="section-heading">
+
+       {/* Details  */}
+       <section className="flex justify-center gap-5">
           <div>
-            <p className="eyebrow">COURSE STRUCTURE</p>
-            <h2>
-              Learn it.
-              <br />
-              <span>Practise it. Check it.</span>
-            </h2>
+            <span>28</span>
+            <p>Lessons</p>
           </div>
+
+          <div>
+            <span>30</span>
+            <p>Days</p>
+          </div>
+
+          <div>
+            <span>30+</span>
+            <p>MCQs</p>
+          </div>
+       </section>
+
+
+
+      {/* Course Structure  */}
+      <section className="section course-structure shell" id="course-structure">
+
+
+        <div className="seciton-heading justify-center flex flex-col gap-2 items-center text-center mb-3">
+          <h2 className="sh-h2">Course Structure</h2>
           <p>
             Each week combines short lessons, everyday examples, and
             multiple-choice questions (MCQs) to help you remember what you
             learn.
           </p>
         </div>
-        <div className="rhythm-grid">
-          <article className="rhythm-card rhythm-main">
-            <span className="step-number">01</span>
-            <div>
-              <h3>Learn</h3>
-              <p>Simple explanations introduce each idea.</p>
-            </div>
-          </article>
-          <article className="rhythm-card">
-            <span className="step-number">02</span>
-            <div>
-              <h3>Practise</h3>
-              <p>Apply the idea to familiar situations.</p>
-            </div>
-          </article>
-          <article className="rhythm-card">
-            <span className="step-number">03</span>
-            <div>
-              <h3>Take an MCQ</h3>
-              <p>Answer a short quiz to check your understanding.</p>
-            </div>
-          </article>
-          <article className="rhythm-card">
-            <span className="step-number">04</span>
-            <div>
-              <h3>Reflect</h3>
-              <p>Take one useful habit into everyday life.</p>
-            </div>
-          </article>
+
+
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {[
+            {
+              step: "01",
+              title: "Learn",
+              description: "Simple explanations introduce each idea.",
+            },
+            {
+              step: "02",
+              title: "Practise",
+              description: "Apply the idea to familiar situations.",
+            },
+            {
+              step: "03",
+              title: "Take an MCQ",
+              description: "Answer a short quiz to check your understanding.",
+            },
+            {
+              step: "04",
+              title: "Reflect",
+              description: "Take one useful habit into everyday life.",
+            },
+          ].map(({ step, title, description }) => (
+            <article
+              key={step}
+              className="flex h-full flex-col gap-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm"
+            >
+              <span className="text-sm font-semibold text-slate-500">{step}</span>
+              <div>
+                <h3 className="text-lg font-semibold text-slate-900">{title}</h3>
+                <p className="mt-2 text-sm leading-6 text-slate-600">{description}</p>
+              </div>
+            </article>
+          ))}
         </div>
+        
       </section>
+
+
+
       <section id="approach" className="section approach shell">
         <div className="section-heading">
           <div>
