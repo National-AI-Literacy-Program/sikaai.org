@@ -6,7 +6,7 @@ export default function Header() {
     <>
       <header className="site-nav shell">
         <Link href="/" className="brand">
-          Sika <span>AI</span>
+          Sika<span>AI</span>
         </Link>
         <nav className="nav-links" aria-label="Main navigation">
           <a href="#about" className="nav-cta">
@@ -21,7 +21,7 @@ export default function Header() {
           <a href="#why" className="nav-cta">
             Reference
           </a>
-          <Link href="/involve" className="nav-cta nav-cta-solid button button-primary">
+          <Link href="/involve" className="nav-cta  button button-primary">
             Start Learning
           </Link>
           <ThemeToggle />

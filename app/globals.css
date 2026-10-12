@@ -1,20 +1,21 @@
 @import "tailwindcss";
-
 :root {
   --background: #f7f3ee;
   --foreground: #2d2422;
   --muted: #6f625d;
   --line: #ded3c9;
-  --blue: #d32f2f;
-  --blue-deep: #1e4e59;
-  --blue-pale: #f0e5d7;
-  --saffron: #f3b229;
+  --crimson: #a32b2b;      /* was --blue: #d32f2f */
+  --teal-deep: #2e4f49;    /* was --blue-deep: #1e4e59 */
+  --crimson-pale: #f0e5d7; /* was --blue-pale, value unchanged */
+  --gold: #c9922a;         /* was --saffron: #f3b229 */
+  --success: #3c8c54;
+  --error: #b5572e;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --color-primary: var(--blue);
+  --color-primary: var(--crimson);
   --color-primary-foreground: #fff;
   --color-border: var(--line);
   --font-sans: "Lato", sans-serif;
@@ -38,13 +39,13 @@ body {
 }
 
 a {
-  color: inherit;
+ 
   text-decoration: none;
 }
 
-button {
+/* button {
   font: inherit;
-}
+} */
 
 .shell {
   width: min(1120px, calc(100% - 48px));
@@ -68,11 +69,11 @@ button {
 .brand span,
 h1 span,
 h2 span {
-  color: var(--blue);
+  color: var(--crimson);
 }
 
 .brand:hover {
-  color: var(--blue);
+  color: var(--crimson);
 }
 
 .nav-links {
@@ -85,7 +86,8 @@ h2 span {
 
 .nav-links a:not(.nav-cta):hover,
 .back-link:hover {
-  color: var(--blue-deep);
+  color: var(--background);
+ background-color:blue ;
 }
 
 .nav-cta {
@@ -96,8 +98,8 @@ h2 span {
 }
 
 .nav-cta:hover {
-  border-color: var(--blue);
-  background: var(--blue-pale);
+  border-color: var(--crimson);
+  background: var(--crimson-pale);
   transform: translateY(-2px);
 }
 
@@ -116,7 +118,7 @@ h2 span {
 
 .eyebrow {
   margin: 0 0 16px;
-  color: var(--blue-deep);
+  color: var(--teal-deep);
   font-size: 11px;
   font-weight: 800;
   letter-spacing: 0.15em;
@@ -128,7 +130,7 @@ h2 span {
   height: 7px;
   margin-right: 8px;
   border-radius: 50%;
-  background: var(--blue);
+  background: var(--crimson);
 }
 
 h1,
@@ -191,7 +193,7 @@ p {
   align-items: center;
   padding: 14px 21px;
   border-radius: 99px;
-  font-weight: 700;
+  /* font-weight: 700; */
   transition:
     transform 0.2s ease,
     background 0.2s ease,
@@ -199,33 +201,32 @@ p {
 }
 
 .button-primary {
-  background: var(--blue);
+  background: var(--crimson);
   color: #fff;
-  box-shadow: 0 8px 18px #00aaff33;
 }
 
 .button-primary:hover {
-  background: var(--blue-deep);
+  background: var(--teal-deep);
   transform: translateY(-3px);
-  box-shadow: 0 12px 24px #00aaff44;
+  /* box-shadow: 0 12px 24px #00aaff44; */
 }
 
 .button span,
 .text-link span {
   margin-left: 8px;
-  color: var(--blue);
+  color: var(--crimson);
 }
 
 .text-link {
   font-size: 14px;
   font-weight: 700;
-  border-bottom: 1px solid var(--blue);
+  border-bottom: 1px solid var(--crimson);
   padding-bottom: 4px;
   transition: color 0.2s ease;
 }
 
 .text-link:hover {
-  color: var(--blue-deep);
+  color: var(--teal-deep);
 }
 
 .carousel-controls {
@@ -249,7 +250,7 @@ p {
 
 .carousel-controls button.active {
   width: 48px;
-  background: var(--blue);
+  background: var(--crimson);
 }
 
 .hero-visual {
@@ -258,14 +259,14 @@ p {
   place-items: center;
   width: 460px;
   height: 440px;
-  background: var(--blue-pale);
+  background: var(--crimson-pale);
   border: 1px solid var(--line);
   border-radius: 48% 52% 50% 45%;
 }
 
 .orbit-label {
   position: absolute;
-  color: var(--blue-deep);
+  color: var(--teal-deep);
   font-size: 10px;
   letter-spacing: 0.12em;
   line-height: 1.35;
@@ -314,7 +315,7 @@ p {
 }
 
 .lesson-time {
-  color: var(--blue);
+  color: var(--crimson);
 }
 
 .lesson-icon {
@@ -324,14 +325,14 @@ p {
   height: 48px;
   margin: 40px 0 17px;
   border-radius: 14px;
-  background: var(--blue);
+  background: var(--crimson);
   color: #fff;
   font-size: 23px;
 }
 
 .lesson-kicker {
   margin: 0;
-  color: var(--blue-deep);
+  color: var(--teal-deep);
   font-size: 10px;
   font-weight: 800;
   letter-spacing: 0.15em;
@@ -354,14 +355,14 @@ p {
   margin-top: 30px;
   overflow: hidden;
   border-radius: 99px;
-  background: var(--blue-pale);
+  background: var(--crimson-pale);
 }
 
 .progress span {
   display: block;
   width: 14%;
   height: 100%;
-  background: var(--blue);
+  background: var(--crimson);
 }
 
 .progress-label {
@@ -393,8 +394,8 @@ p {
   width: 24px;
   height: 24px;
   border-radius: 7px;
-  background: var(--blue-pale);
-  color: var(--blue-deep);
+  background: var(--crimson-pale);
+  color: var(--teal-deep);
 }
 
 .floating-note p {
@@ -413,7 +414,7 @@ p {
 
 .audience-band {
   border-block: 1px solid var(--line);
-  background: var(--blue-pale);
+  background: var(--crimson-pale);
 }
 
 .audience-inner {
@@ -428,12 +429,12 @@ p {
 }
 
 .audience-answer {
-  color: var(--blue-deep);
+  color: var(--teal-deep);
 }
 
 .audience-answer span {
   margin-left: 18px;
-  color: var(--blue);
+  color: var(--crimson);
   font-size: 25px;
 }
 
@@ -450,7 +451,6 @@ p {
 }
 
 .section-heading h2,
-.sh-h2,
 .final-cta h2 {
   margin: 0;
   font-size: clamp(40px, 5vw, 64px);
@@ -489,9 +489,9 @@ p {
 }
 
 .rhythm-main {
-  background: var(--blue);
+  background: var(--crimson);
   color: #fff;
-  border-color: var(--blue);
+  border-color: var(--crimson);
 }
 
 .rhythm-card h3 {
@@ -604,7 +604,7 @@ p {
 
 .sidebar-lesson:hover,
 .sidebar-lesson.active {
-  background: var(--blue-pale);
+  background: var(--crimson-pale);
   color: var(--foreground);
 }
 
@@ -634,8 +634,8 @@ p {
 }
 
 .sidebar-dot.done {
-  background: var(--blue);
-  border-color: var(--blue);
+  background: var(--crimson);
+  border-color: var(--crimson);
   color: #fff;
 }
 
@@ -695,7 +695,7 @@ p {
 }
 
 .day-card:hover {
-  border-color: var(--blue);
+  border-color: var(--crimson);
   box-shadow: 0 14px 35px #007fb914;
   transform: translateY(-3px);
 }
@@ -706,7 +706,7 @@ p {
   flex: 0 0 78px;
   height: 92px;
   border-radius: 13px;
-  background: var(--blue);
+  background: var(--crimson);
   color: #fff;
   font-size: 12px;
   font-weight: 800;
@@ -731,7 +731,7 @@ p {
 .card-link {
   display: block;
   margin-top: 18px;
-  color: var(--blue-deep);
+  color: var(--teal-deep);
   font-size: 13px;
   font-weight: 800;
 }
@@ -739,7 +739,7 @@ p {
 .day-arrow {
   align-self: flex-start;
   margin-left: auto;
-  color: var(--blue);
+  color: var(--crimson);
   font-size: 25px;
 }
 
@@ -808,7 +808,7 @@ p {
   gap: 25px;
   padding: 30px;
   border-radius: 17px;
-  background: var(--blue);
+  background: var(--crimson);
   color: #fff;
 }
 
@@ -866,13 +866,13 @@ p {
 
 .choice:hover,
 .choice:focus-visible {
-  border-color: var(--blue);
-  background: var(--blue-pale);
+  border-color: var(--crimson);
+  background: var(--crimson-pale);
   outline: none;
 }
 
 .choice-mark {
-  color: var(--blue);
+  color: var(--crimson);
   font-size: 20px;
 }
 
@@ -883,8 +883,11 @@ p {
 }
 html[data-theme="dark"] .choice-correct {
   border-color: #72d68e;
-  background: #23412d;
+  background: #3b302d;
   color: #c8f6d2;
+
+
+  
 }
 
 .choice-wrong {
@@ -894,12 +897,12 @@ html[data-theme="dark"] .choice-correct {
 
 .feedback {
   margin: 18px 0 0 !important;
-  color: #a05252 !important;
+  color: var(--error) !important;
   font-weight: 700;
 }
 
 .feedback-good {
-  color: #2f9e5b !important;
+  color: var(--success) !important;
 }
 
 .quiz-lock-hint {
@@ -1066,8 +1069,8 @@ html[data-theme="dark"] .choice-correct {
     width: 58px;
     height: 58px;
     border-radius: 16px;
-    background: var(--blue-pale);
-    color: var(--blue-deep);
+    background: var(--crimson-pale);
+    color: var(--teal-deep);
     font-size: 15px;
     font-weight: 800;
   }
@@ -1125,9 +1128,9 @@ html[data-theme="dark"] .choice-correct {
   gap: 24px;
   margin: 24px 0 38px;
   padding: 24px;
-  border: 1px solid var(--blue);
+  border: 1px solid var(--crimson);
   border-radius: 18px;
-  background: var(--blue-pale);
+  background: var(--crimson-pale);
 }
 
 .certificate-banner h2 {
@@ -1154,7 +1157,7 @@ html[data-theme="dark"] .choice-correct {
 }
 
 .hero-slogan h1 span {
-  color: var(--blue);
+  color: var(--crimson);
 }
 
 .hero-slogan p:last-child {
@@ -1198,7 +1201,7 @@ html[data-theme="dark"] .choice-correct {
 .email-gate label {
   display: block;
   margin-bottom: 10px;
-  color: var(--blue-deep);
+  color: var(--teal-deep);
   font-size: 13px;
   font-weight: 800;
 }
@@ -1220,7 +1223,7 @@ html[data-theme="dark"] .choice-correct {
 
 .email-row input:focus {
   outline: 3px solid #00aaff33;
-  border-color: var(--blue);
+  border-color: var(--crimson);
 }
 
 .email-gate small {
@@ -1261,8 +1264,8 @@ html[data-theme="dark"] .choice-correct {
   min-width: 32px;
   height: 32px;
   border-radius: 50%;
-  background: var(--blue-pale);
-  color: var(--blue-deep);
+  background: var(--crimson-pale);
+  color: var(--teal-deep);
 }
 
 .journey span {
@@ -1331,7 +1334,7 @@ html[data-theme="dark"] .choice-correct {
 
 .intro-content#approach {
   border-top: 1px solid var(--line);
-  background: var(--blue-pale);
+  background: var(--crimson-pale);
 }
 
 .landing-entry {
@@ -1404,7 +1407,7 @@ html[data-theme="dark"] input {
 html[data-theme="dark"] .hero-visual,
 html[data-theme="dark"] .audience-band,
 html[data-theme="dark"] .rhythm-main {
-  background: var(--blue-pale);
+  background: var(--crimson-pale);
 }
 .theme-toggle {
   display: grid;
@@ -1418,8 +1421,8 @@ html[data-theme="dark"] .rhythm-main {
   cursor: pointer;
 }
 .theme-toggle:hover {
-  border-color: var(--blue);
-  color: var(--blue);
+  border-color: var(--crimson);
+  color: var(--crimson);
 }
 .hero-note {
   margin: 20px 0 0;
@@ -1442,7 +1445,7 @@ html[data-theme="dark"] .rhythm-main {
 }
 .sidebar-current small,
 .sidebar-more small {
-  color: var(--blue-deep);
+  color: var(--teal-deep);
   font-size: 9px;
   font-weight: 800;
   letter-spacing: 0.12em;
@@ -1463,11 +1466,11 @@ html[data-theme="dark"] .rhythm-main {
   font-size: 12px;
 }
 .sidebar-sections a:hover {
-  background: var(--blue-pale);
+  background: var(--crimson-pale);
   color: var(--foreground);
 }
 .sidebar-sections span {
-  color: var(--blue);
+  color: var(--crimson);
   font:
     10px "DM Mono",
     monospace;
@@ -1486,25 +1489,25 @@ html[data-theme="dark"] .rhythm-main {
   font-size: 12px;
 }
 .sidebar-more a:hover {
-  color: var(--blue-deep);
+  color: var(--teal-deep);
 }
 .question-block {
   margin: 16px 0;
   padding: 24px;
   border: 1px solid var(--line);
   border-radius: 16px;
-  background: color-mix(in srgb, var(--background) 92%, var(--blue-pale));
+  background: color-mix(in srgb, var(--background) 92%, var(--crimson-pale));
 }
 .lesson-complete {
   margin-top: 24px;
   padding: 24px;
   border: 1px solid var(--line);
   border-radius: 16px;
-  background: var(--blue-pale);
+  background: var(--crimson);
 }
 .button-secondary {
-  border: 1px solid var(--blue);
-  color: var(--blue-deep);
+  border: 1px solid var(--crimson);
+  color: var(--crimson-deep);
 }
 .certificate-shell {
   width: min(760px, calc(100% - 48px));
@@ -1532,7 +1535,7 @@ html[data-theme="dark"] .rhythm-main {
   padding: 26px;
   border: 1px solid var(--line);
   border-radius: 18px;
-  background: var(--blue-pale);
+  background: var(--crimson-pale);
 }
 .form-grid {
   display: grid;
@@ -1543,7 +1546,7 @@ html[data-theme="dark"] .rhythm-main {
   display: flex;
   flex-direction: column;
   gap: 7px;
-  color: var(--blue-deep);
+  color: var(--teal-deep);
   font-size: 12px;
   font-weight: 800;
   letter-spacing: 0.03em;
@@ -1562,8 +1565,8 @@ html[data-theme="dark"] .rhythm-main {
 }
 .certificate-form input:focus,
 .certificate-form textarea:focus {
-  outline: 3px solid color-mix(in srgb, var(--blue) 25%, transparent);
-  border-color: var(--blue);
+  outline: 3px solid color-mix(in srgb, var(--crimson) 25%, transparent);
+  border-color: var(--crimson);
 }
 .form-note {
   margin: 0;
@@ -1588,7 +1591,7 @@ html[data-theme="dark"] .rhythm-main {
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  background: var(--blue);
+  background: var(--crimson);
   color: var(--background);
   font-size: 25px;
 }
@@ -1639,7 +1642,7 @@ html[data-theme="dark"] .rhythm-main {
   min-height: 500px;
 }
 .sidebar-sections a.is-active {
-  background: var(--blue);
+  background: var(--crimson);
   color: #00131c;
   font-weight: 800;
 }
@@ -1667,9 +1670,9 @@ html[data-theme="dark"] .rhythm-main {
   width: 142px;
   height: 142px;
   overflow: hidden;
-  border: 1px solid color-mix(in srgb, var(--blue) 18%, var(--line));
+  border: 1px solid color-mix(in srgb, var(--crimson) 18%, var(--line));
   border-radius: 50%;
-  background: var(--blue-pale);
+  background: var(--crimson-pale);
 }
 .lesson-card-art img {
   display: block;
@@ -1679,7 +1682,7 @@ html[data-theme="dark"] .rhythm-main {
   object-position: center bottom;
 }
 .lesson-card-art-success {
-  background: color-mix(in srgb, var(--saffron) 22%, var(--blue-pale));
+  background: color-mix(in srgb, var(--gold) 22%, var(--crimson-pale));
 }
 
 .lesson-heading-row {
@@ -1711,12 +1714,12 @@ html[data-theme="dark"] .rhythm-main {
   white-space: nowrap;
 }
 .ksa-knowledge {
-  border-color: color-mix(in srgb, var(--blue) 35%, var(--line));
-  background: color-mix(in srgb, var(--blue-pale) 65%, var(--background));
+  border-color: color-mix(in srgb, var(--crimson) 35%, var(--line));
+  background: color-mix(in srgb, var(--crimson-pale) 65%, var(--background));
 }
 .ksa-skills {
-  border-color: color-mix(in srgb, var(--saffron) 45%, var(--line));
-  background: color-mix(in srgb, var(--saffron) 16%, var(--background));
+  border-color: color-mix(in srgb, var(--gold) 45%, var(--line));
+  background: color-mix(in srgb, var(--gold) 16%, var(--background));
 }
 .ksa-attitude {
   border-color: color-mix(in srgb, var(--red) 35%, var(--line));
@@ -1740,7 +1743,7 @@ html[data-theme="dark"] .rhythm-main {
   padding: 28px;
   border: 1px solid var(--line);
   border-radius: 4px;
-  background: color-mix(in srgb, var(--blue-pale) 38%, var(--background));
+  background: color-mix(in srgb, var(--crimson-pale) 38%, var(--background));
 }
 .reader-copy {
   margin: 8px 0 0;
@@ -1788,7 +1791,7 @@ html[data-theme="dark"] .rhythm-main {
   color: var(--muted);
 }
 .course-progress-orb strong {
-  color: var(--blue);
+  color: var(--crimson);
   font-size: 42px;
   line-height: 1;
 }
@@ -1807,11 +1810,11 @@ html[data-theme="dark"] .rhythm-main {
   padding: 26px;
   border: 1px solid var(--line);
   border-radius: 4px;
-  background: color-mix(in srgb, var(--background) 88%, var(--blue-pale));
+  background: color-mix(in srgb, var(--background) 88%, var(--crimson-pale));
 }
 .course-side-panel {
   align-self: start;
-  background: var(--blue-pale);
+  background: var(--crimson-pale);
 }
 .course-side-panel h2 {
   margin: 18px 0 10px;
@@ -1868,7 +1871,7 @@ html[data-theme="dark"] .rhythm-main {
   padding: 14px;
   border: 1px solid var(--line);
   border-radius: 12px;
-  background: var(--blue-pale);
+  background: var(--crimson-pale);
 }
 .language-choice .eyebrow {
   width: 100%;
@@ -1883,8 +1886,8 @@ html[data-theme="dark"] .rhythm-main {
   cursor: pointer;
 }
 .language-choice button.selected {
-  border-color: var(--blue);
-  background: var(--blue);
+  border-color: var(--crimson);
+  background: var(--crimson);
   color: #fff;
   font-weight: 700;
 }
@@ -2121,10 +2124,10 @@ html[data-theme="dark"] .day-card-locked {
   width: fit-content;
   min-width: 0;
   padding: 8px 13px 8px 10px;
-  border: 1px solid color-mix(in srgb, var(--blue) 15%, var(--line));
+  border: 1px solid color-mix(in srgb, var(--crimson) 15%, var(--line));
   border-radius: 999px;
-  background: color-mix(in srgb, var(--blue-pale) 72%, var(--background));
-  color: var(--blue-deep);
+  background: color-mix(in srgb, var(--crimson-pale) 72%, var(--background));
+  color: var(--teal-deep);
   font-size: 10px;
   font-weight: 700;
   letter-spacing: 0.02em;
@@ -2136,12 +2139,12 @@ html[data-theme="dark"] .day-card-locked {
   height: 8px;
   margin-right: 2px;
   border-radius: 50%;
-  background: var(--blue);
+  background: var(--crimson);
 }
 .taxonomy-pill-dot::after {
   position: absolute;
   inset: -3px;
-  border: 1px solid color-mix(in srgb, var(--blue) 30%, transparent);
+  border: 1px solid color-mix(in srgb, var(--crimson) 30%, transparent);
   border-radius: 50%;
   content: "";
 }
@@ -2151,16 +2154,16 @@ html[data-theme="dark"] .day-card-locked {
   font-size: 10px;
 }
 .taxonomy-pill-knowledge .taxonomy-pill-dot {
-  background: var(--blue);
+  background: var(--crimson);
 }
 .taxonomy-pill-skills .taxonomy-pill-dot {
-  background: var(--saffron);
+  background: var(--gold);
 }
 .taxonomy-pill-attitude .taxonomy-pill-dot {
   background: var(--red);
 }
 .taxonomy-pill-skills {
-  border-color: color-mix(in srgb, var(--saffron) 35%, var(--line));
+  border-color: color-mix(in srgb, var(--gold) 35%, var(--line));
 }
 .taxonomy-pill-attitude {
   border-color: color-mix(in srgb, var(--red) 25%, var(--line));
@@ -2196,16 +2199,16 @@ html[data-theme="dark"] .day-card-locked {
   min-width: 24px;
   height: 24px;
   border-radius: 50%;
-  background: var(--blue);
+  background: var(--crimson);
   color: var(--background);
   font: 700 10px monospace;
 }
 .question-profile .profile-S {
-  background: var(--saffron);
+  background: var(--gold);
   color: var(--foreground);
 }
 .question-profile .profile-A {
-  background: var(--blue-deep);
+  background: var(--teal-deep);
   color: var(--background);
 }
 .question-panel h2 {
@@ -2295,7 +2298,7 @@ html[data-theme="dark"] .day-card-locked {
   display: block;
   height: 100%;
   border-radius: inherit;
-  background: var(--blue);
+  background: var(--crimson);
   transition: width 0.35s ease;
 }
 .week-nodes {
@@ -2333,14 +2336,14 @@ html[data-theme="dark"] .day-card-locked {
   transition: 0.2s ease;
 }
 .week-node.is-selected .week-circle {
-  border-color: var(--blue);
-  background: var(--blue);
+  border-color: var(--crimson);
+  background: var(--crimson);
   color: var(--background);
-  box-shadow: 0 0 0 6px color-mix(in srgb, var(--blue) 14%, transparent);
+  box-shadow: 0 0 0 6px color-mix(in srgb, var(--crimson) 14%, transparent);
 }
 .week-node.is-complete .week-circle {
-  border-color: var(--saffron);
-  background: var(--saffron);
+  border-color: var(--gold);
+  background: var(--gold);
   color: var(--foreground);
 }
 .week-node.is-locked {
@@ -2362,7 +2365,7 @@ html[data-theme="dark"] .day-card-locked {
   padding: clamp(20px, 4vw, 34px);
   border: 1px solid var(--line);
   border-radius: 18px;
-  background: color-mix(in srgb, var(--blue-pale) 30%, var(--background));
+  background: color-mix(in srgb, var(--crimson-pale) 30%, var(--background));
 }
 .week-panel-heading {
   display: flex;
@@ -2385,7 +2388,7 @@ html[data-theme="dark"] .day-card-locked {
   color: var(--muted);
 }
 .week-score strong {
-  color: var(--blue);
+  color: var(--crimson);
   font-size: 42px;
   line-height: 1;
 }
@@ -2404,7 +2407,7 @@ html[data-theme="dark"] .day-card-locked {
   display: block;
   height: 100%;
   border-radius: inherit;
-  background: var(--saffron);
+  background: var(--gold);
   transition: width 0.3s ease;
 }
 .week-topic-list {
@@ -2429,16 +2432,16 @@ html[data-theme="dark"] .day-card-locked {
     box-shadow 0.2s ease;
 }
 .week-topic:hover {
-  border-color: var(--blue);
+  border-color: var(--crimson);
   box-shadow: 0 8px 20px color-mix(in srgb, var(--foreground) 7%, transparent);
   transform: translateY(-1px);
 }
 .week-topic-current {
-  border-color: var(--blue);
-  box-shadow: inset 3px 0 0 var(--blue);
+  border-color: var(--crimson);
+  box-shadow: inset 3px 0 0 var(--crimson);
 }
 .week-topic-done {
-  background: color-mix(in srgb, var(--saffron) 12%, var(--background));
+  background: color-mix(in srgb, var(--gold) 12%, var(--background));
 }
 .week-topic-locked {
   opacity: 0.5;
@@ -2450,12 +2453,12 @@ html[data-theme="dark"] .day-card-locked {
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background: var(--blue-pale);
-  color: var(--blue-deep);
+  background: var(--crimson-pale);
+  color: var(--teal-deep);
   font: 700 10px monospace;
 }
 .week-topic-done .topic-number {
-  background: var(--saffron);
+  background: var(--gold);
   color: var(--foreground);
 }
 .week-topic h3 {
@@ -2470,7 +2473,7 @@ html[data-theme="dark"] .day-card-locked {
   line-height: 1.45;
 }
 .topic-status {
-  color: var(--blue-deep);
+  color: var(--teal-deep);
   font-size: 11px;
   font-weight: 700;
   white-space: nowrap;
@@ -2580,12 +2583,12 @@ html[data-theme="dark"] .course-side-panel {
   margin-top: 7px;
   flex: 0 0 auto;
   border-radius: 50%;
-  background: var(--saffron);
-  box-shadow: 0 0 0 5px color-mix(in srgb, var(--saffron) 20%, transparent);
+  background: var(--gold);
+  box-shadow: 0 0 0 5px color-mix(in srgb, var(--gold) 20%, transparent);
 }
 .path-title h2 {
   margin: 0;
-  color: var(--blue-deep);
+  color: var(--teal-deep);
   font-size: 22px;
   line-height: 1.08;
   letter-spacing: -0.05em;
@@ -2601,7 +2604,7 @@ html[data-theme="dark"] .course-side-panel {
   display: block;
   height: 100%;
   border-radius: inherit;
-  background: var(--blue);
+  background: var(--crimson);
   transition: width 0.35s ease;
 }
 .path-progress-label {
@@ -2620,11 +2623,11 @@ html[data-theme="dark"] .course-side-panel {
   gap: 10px;
   margin: 12px 0 14px;
   padding: 12px;
-  border-left: 3px solid var(--blue);
-  background: color-mix(in srgb, var(--blue-pale) 55%, transparent);
+  border-left: 3px solid var(--crimson);
+  background: color-mix(in srgb, var(--crimson-pale) 55%, transparent);
 }
 .path-number {
-  color: var(--blue);
+  color: var(--crimson);
   font: 700 11px monospace;
 }
 .path-current strong,
@@ -2665,12 +2668,12 @@ html[data-theme="dark"] .course-side-panel {
   font-size: 9px;
 }
 .course-sidebar-new .sidebar-sections button.is-active {
-  background: var(--blue);
+  background: var(--crimson);
   color: var(--background);
   font-weight: 700;
 }
 .course-sidebar-new .sidebar-sections button.is-active span {
-  color: var(--saffron);
+  color: var(--gold);
 }
 .path-next-list {
   display: grid;
@@ -2686,7 +2689,7 @@ html[data-theme="dark"] .course-side-panel {
   text-decoration: none;
 }
 .path-next > span {
-  color: var(--blue);
+  color: var(--crimson);
   font: 10px monospace;
 }
 .path-next small {
@@ -2696,7 +2699,7 @@ html[data-theme="dark"] .course-side-panel {
   opacity: 0.48;
 }
 .lesson-card-art-success {
-  background: color-mix(in srgb, var(--saffron) 22%, var(--blue-pale));
+  background: color-mix(in srgb, var(--gold) 22%, var(--crimson-pale));
 }
 .sidebar-brand {
   display: flex;
@@ -2709,14 +2712,14 @@ html[data-theme="dark"] .course-side-panel {
   width: 24px;
   height: 24px;
   border-radius: 50%;
-  background: var(--saffron);
+  background: var(--gold);
   color: var(--foreground);
   font-size: 12px;
 }
 .sidebar-brand strong {
   display: block;
   margin-top: 10px;
-  color: var(--blue-deep);
+  color: var(--teal-deep);
   font-size: 21px;
   line-height: 1.08;
   letter-spacing: -0.04em;
@@ -2732,7 +2735,7 @@ html[data-theme="dark"] .course-side-panel {
   display: block;
   height: 100%;
   border-radius: inherit;
-  background: var(--blue);
+  background: var(--crimson);
   transition: width 0.3s ease;
 }
 .sidebar-count {
@@ -2749,13 +2752,13 @@ html[data-theme="dark"] .course-side-panel {
   gap: 12px;
   padding: 10px 0;
   border-radius: 0;
-  color: var(--blue-deep);
+  color: var(--teal-deep);
   font-size: 12px;
   font-weight: 600;
 }
 .course-sidebar-new .sidebar-sections button span {
   width: 16px;
-  color: var(--blue);
+  color: var(--crimson);
   font: 11px monospace;
 }
 .course-sidebar-new .sidebar-sections button.is-active {
@@ -2780,7 +2783,7 @@ html[data-theme="dark"] .course-side-panel {
   opacity: 0.6;
 }
 .course-sidebar-new .sidebar-locked i {
-  color: var(--saffron);
+  color: var(--gold);
   font-style: normal;
 }
 .course-sidebar-new .sidebar-locked em {
@@ -2801,7 +2804,7 @@ html[data-theme="dark"] .course-side-panel {
   border-bottom: 1px solid var(--line);
 }
 .sidebar-heading strong {
-  color: var(--blue);
+  color: var(--crimson);
   font:
     11px "DM Mono",
     monospace;
@@ -2942,7 +2945,7 @@ html[data-theme="dark"] .course-side-panel {
 }
 html[data-theme="dark"] .example-code {
   background: #252525;
-  color: var(--blue-deep);
+  color: var(--teal-deep);
 }
 @media (max-width: 760px) {
   .lesson-layout {
@@ -2987,7 +2990,7 @@ html[data-theme="dark"] .example-code {
   }
 }
 /* SikaiAI visual system */
-:root {
+/* :root {
   --background: #f7f3ee;
   --foreground: #2d2422;
   --muted: #6f625d;
@@ -2996,7 +2999,7 @@ html[data-theme="dark"] .example-code {
   --blue-deep: #1e4e59;
   --blue-pale: #f0e5d7;
   --saffron: #f3b229;
-}
+} */
 html[data-theme="dark"] {
   --background: #3b302d;
   --foreground: #f7f3ee;
@@ -3019,17 +3022,17 @@ textarea {
   font-family: "Poppins", "Noto Sans Devanagari", sans-serif;
 }
 .button-primary {
-  background: var(--blue);
+  background: var(--crimson);
   color: var(--background);
-  box-shadow: 0 8px 18px color-mix(in srgb, var(--blue) 22%, transparent);
+  /* box-shadow: 0 8px 18px color-mix(in srgb, var(--crimson) 22%, transparent); */
 }
 .button-primary:hover {
-  background: var(--blue-deep);
-  color: var(--background);
+  background: var(--background);
+  color: var(--crimson);
 }
 .button-secondary {
-  border-color: var(--blue-deep);
-  color: var(--blue-deep);
+  border-color: var(--teal-deep);
+  color: var(--teal-deep);
   background: transparent;
 }
 .namaste-art {
@@ -3040,7 +3043,7 @@ textarea {
 }
 .lesson-question {
   margin-top: 14px;
-  color: var(--blue-deep);
+  color: var(--teal-deep);
   font-size: 12px;
   font-weight: 700;
 }
@@ -3064,7 +3067,7 @@ textarea {
   width: 176px;
 }
 .course-sidebar {
-  background: color-mix(in srgb, var(--blue-pale) 42%, var(--background));
+  background: color-mix(in srgb, var(--crimson-pale) 42%, var(--background));
   border: 1px solid var(--line);
   border-radius: 14px;
   padding: 14px 10px;
@@ -3075,7 +3078,7 @@ textarea {
 }
 .sidebar-sections a.is-active,
 .sidebar-sections button.is-active {
-  background: var(--blue);
+  background: var(--crimson);
   color: var(--background);
 }
 .lesson-reader {
@@ -3089,7 +3092,7 @@ textarea {
 }
 .reader-section {
   border-color: var(--line);
-  background: color-mix(in srgb, var(--blue-pale) 35%, var(--background));
+  background: color-mix(in srgb, var(--crimson-pale) 35%, var(--background));
   border-radius: 14px;
 }
 .course-dashboard-grid {
@@ -3139,7 +3142,7 @@ textarea {
 .sidebar-card {
   width: 100%;
   border: 1px solid var(--line);
-  background: color-mix(in srgb, var(--blue-pale) 35%, var(--background));
+  background: color-mix(in srgb, var(--crimson-pale) 35%, var(--background));
   color: var(--foreground);
   box-shadow: 0 16px 34px color-mix(in srgb, var(--foreground) 7%, transparent);
 }
@@ -3164,7 +3167,7 @@ textarea {
   background: var(--line);
 }
 .sidebar-progress-ui [data-slot="progress-indicator"] {
-  background: var(--blue);
+  background: var(--crimson);
 }
 .sidebar-card-content {
   display: flex;
@@ -3182,12 +3185,12 @@ textarea {
   gap: 10px;
   padding: 12px;
   border: 1px solid var(--line);
-  border-left: 3px solid var(--blue);
+  border-left: 3px solid var(--crimson);
   border-radius: 9px;
   background: var(--background);
 }
 .sidebar-current-number {
-  color: var(--blue);
+  color: var(--crimson);
   font: 700 11px monospace;
 }
 .sidebar-current-ui strong,
@@ -3231,15 +3234,15 @@ textarea {
   font-size: 9px;
 }
 .course-sidebar-new .sidebar-sections button:hover {
-  background: color-mix(in srgb, var(--blue-pale) 70%, transparent);
+  background: color-mix(in srgb, var(--crimson-pale) 70%, transparent);
   color: var(--foreground);
 }
 .course-sidebar-new .sidebar-sections button.is-active {
-  background: var(--blue);
+  background: var(--crimson);
   color: var(--background);
 }
 .course-sidebar-new .sidebar-sections button.is-active span {
-  color: var(--saffron);
+  color: var(--gold);
 }
 .course-sidebar-new .path-next-list {
   display: flex;
@@ -3256,7 +3259,7 @@ textarea {
   text-decoration: none;
 }
 .course-sidebar-new .path-next > span {
-  color: var(--blue);
+  color: var(--crimson);
   font: 10px monospace;
 }
 .course-sidebar-new .path-next strong {
@@ -3314,7 +3317,7 @@ body {
   padding: clamp(24px, 5vw, 56px);
   border: 1px solid var(--line);
   border-radius: 24px;
-  background: var(--blue-pale);
+  background: var(--crimson-pale);
   box-shadow: 0 22px 60px color-mix(in srgb, var(--foreground) 10%, transparent);
 }
 .involve-intro h1 {
@@ -3348,8 +3351,8 @@ body {
   border-color: var(--line);
 }
 .involve-page .language-choice button.selected {
-  background: var(--blue);
-  border-color: var(--blue);
+  background: var(--crimson);
+  border-color: var(--crimson);
   color: var(--background);
 }
 .involve-steps {
@@ -3363,11 +3366,11 @@ body {
   align-items: center;
   gap: 10px;
   padding: 12px;
-  border-top: 2px solid var(--saffron);
+  border-top: 2px solid var(--gold);
   color: var(--foreground);
 }
 .involve-steps b {
-  color: var(--blue);
+  color: var(--crimson);
   font: 700 11px monospace;
 }
 .involve-steps span {
@@ -3404,7 +3407,7 @@ body {
   gap: 20px;
   border: 1px solid var(--line);
   border-radius: 18px;
-  background: var(--blue-pale);
+  background: var(--crimson-pale);
   color: var(--foreground);
   box-shadow: none;
 }
@@ -3421,7 +3424,7 @@ body {
   letter-spacing: -0.06em;
 }
 .example-copy h2 span {
-  color: var(--blue);
+  color: var(--crimson);
 }
 .example-description {
   margin: 14px 0 18px;
@@ -3433,7 +3436,7 @@ body {
   padding: 0;
   border: 0;
   background: transparent;
-  color: var(--blue-deep);
+  color: var(--teal-deep);
   font:
     600 12px "Poppins",
     sans-serif;
@@ -3450,7 +3453,7 @@ body {
 }
 .example-label {
   margin: 0 0 10px;
-  color: var(--blue-deep);
+  color: var(--teal-deep);
   font-size: 10px;
   font-weight: 700;
   letter-spacing: 0.12em;
@@ -3486,7 +3489,7 @@ body {
   padding: 14px 10px;
   border: 1px solid var(--line);
   border-radius: 14px;
-  background: var(--blue-pale);
+  background: var(--crimson-pale);
 }
 .sidebar-heading {
   padding-bottom: 12px;
@@ -3508,7 +3511,7 @@ body {
 }
 .sidebar-sections a.is-active,
 .sidebar-sections button.is-active {
-  background: var(--blue);
+  background: var(--crimson);
   color: var(--background);
 }
 .lesson-shell {
@@ -3544,7 +3547,7 @@ body {
   padding: 24px;
   border: 1px solid var(--line);
   border-radius: 14px;
-  background: var(--blue-pale);
+  background: var(--crimson-pale);
 }
 .reader-copy {
   font-size: clamp(16px, 2vw, 22px);
@@ -3559,7 +3562,7 @@ body {
   padding: 24px;
   border: 1px solid var(--line);
   border-radius: 18px;
-  background: var(--blue-pale);
+  background: var(--crimson-pale);
 }
 .course-side-panel .example-card {
   margin-top: 20px;
