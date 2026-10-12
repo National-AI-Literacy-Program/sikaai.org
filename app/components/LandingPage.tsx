@@ -74,29 +74,43 @@ const weeks = [
   },
 ];
 
-const references = [
+const team = [
   {
-    publisher: "UNESCO",
-    description: "Guidance for generative AI in education and research.",
-    href: "https://www.unesco.org/en/articles/guidance-generative-ai-education-and-research",
+    name: "Komalhari Shrestha",
+    role: "Project | Curriculum",
+    bio: "",
+    image: "/team/member-1.png",
   },
   {
-    publisher: "UNICEF",
-    description: "Policy guidance on AI for children and their rights.",
-    href: "https://www.unicef.org/globalinsight/reports/policy-guidance-ai-children",
+    name: "Mandeep Sapkota",
+    role: "UI/UX | Backend Dev",
+    bio: "",
+    image: "/team/member-2.png",
   },
   {
-    publisher: "OECD",
-    description: "Principles for trustworthy and human-centred AI.",
-    href: "https://oecd.ai/en/ai-principles",
+    name: "Pranjal Thapa",
+    role: "Frontend Dev",
+    bio: "",
+    image: "/team/member-3.png",
   },
   {
-    publisher: "UNESCO",
-    description:
-      "Media and information literacy resources for navigating digital life.",
-    href: "https://www.unesco.org/en/media-information-literacy",
+    name: "Mandeep Bhandari",
+    role: "Backend Research",
+    bio: "",
+    image: "/team/member-4.png",
   },
+
 ];
+
+const incubator = {
+  name: "Institute for Rural Development",
+  description:
+    "SikaAI is proudly incubated and supported by the Institute for Rural Development, a non-profit working in education, agriculture, heritage conservation, tourism, entrepreneurship, etc. to foster sustainable development in Nepal.",
+  logo: "/IRD_logo.png",
+  website: "https://ird.com.np",
+};
+
+
 
 export default function LandingPage() {
   return (
@@ -104,13 +118,12 @@ export default function LandingPage() {
       <Header />
 
       {/* Hero */}
-
       <section id="about" className="relative">
         <div className={`${wrap} pb-20 pt-12 sm:pb-28 lg:pb-32`}>
-          <div className="mx-auto grid max-w-6xl grid-cols-1 items-center gap-12 md:grid-cols-2 md:gap-10">
+          <div className="mx-auto grid max-w-6xl grid-cols-1 items-center gap-30 md:grid-cols-2 md:gap-20">
             {/* Left column: Hero content */}
-            <div className="text-center md:text-left">
-              <h1 className="text-[clamp(40px,7.5vw,88px)] font-extrabold leading-[0.94] tracking-[-0.06em]">
+            <div className="text-center md:text-left self-center order-2 sm:order-1">
+              <h1 className="text-[clamp(40px,7.5vw,65px)] font-extrabold leading-[0.94] tracking-[-0.06em]">
                 <span className="block whitespace-nowrap text-primary">
                   <Typewriter
                     strings={["Engage with", "Create with", "Manage", "Shape"]}
@@ -149,7 +162,7 @@ export default function LandingPage() {
             </div>
 
             {/* Right column: Illustration and statistics */}
-            <div className="flex flex-col items-center">
+            <div className="flex flex-col items-center order-1 sm:order-2">
               <div className="mb-7 inline-flex items-center gap-2 rounded-full border border-border bg-background/80 px-3.5 py-2 text-xs font-bold shadow-sm backdrop-blur">
                 <span className="size-2 rounded-full bg-primary" />A four-week
                 AI literacy course
@@ -190,7 +203,6 @@ export default function LandingPage() {
       >
         <div className={wrap}>
           <div className="mx-auto max-w-2xl text-center">
-            {/* <p className={eyebrow}>A SIMPLE LEARNING LOOP</p> */}
             <h2 className={`${h2} mt-4`}>
               Learn something. Use it. Remember it.
             </h2>
@@ -200,143 +212,113 @@ export default function LandingPage() {
             </p>
           </div>
 
-         <ol className="mt-12 grid gap-6 sm:grid-cols-2 lg:mt-16 lg:grid-cols-4">
-  {steps.map(({ step, title, description, icon }, i) => (
-    <li
-      key={step}
-      className="group relative rounded-2xl border border-border bg-background p-6 shadow-sm transition duration-200 hover:-translate-y-1 hover:shadow-xl"
-    >
-      <div className="flex items-start justify-between">
-        <span className="grid place-items-center rounded-xl bg-(--saffron) px-3 py-1 text-sm font-extrabold text-[#2d2422]">
-          {step}
-        </span>
-        <span className="text-xl text-(--blue-deep) transition-transform group-hover:rotate-12">
-          <Image
-            src={icon}
-            alt=""
-            width={56}
-            height={56}
-            className="object-contain"
-          />
-        </span>
-      </div>
-      <h3 className="mt-8 text-xl font-extrabold tracking-tight">
-        {title}
-      </h3>
-      <p className="mt-2 text-sm leading-6 text-(color:--muted)">
-        {description}
-      </p>
+          <ol className="mt-12 grid gap-6 sm:grid-cols-2 lg:mt-16 lg:grid-cols-4">
+            {steps.map(({ step, title, description, icon }, i) => (
+              <li
+                key={step}
+                className="group relative rounded-2xl border border-border bg-background p-6 shadow-sm transition duration-200 hover:-translate-y-1 hover:shadow-xl"
+              >
+                <div className="flex items-start justify-between">
+                  <span className="grid place-items-center rounded-xl bg-(--saffron) px-3 py-1 text-sm font-extrabold text-[#2d2422]">
+                    {step}
+                  </span>
+                  <span className="text-xl text-(--blue-deep) transition-transform group-hover:rotate-12">
+                    <Image
+                      src={icon}
+                      alt=""
+                      width={56}
+                      height={56}
+                      className="object-contain"
+                    />
+                  </span>
+                </div>
+                <h3 className="mt-8 text-xl font-extrabold tracking-tight">
+                  {title}
+                </h3>
+                <p className="mt-2 text-sm leading-6 text-(color:--muted)">
+                  {description}
+                </p>
 
-      {/* Enhanced Step Connector Arrow */}
-      {i < steps.length - 1 && (
-        <div
-          aria-hidden="true"
-          className="absolute -right-4 top-1/2 z-10 hidden -translate-y-1/2 lg:flex h-8 w-8 items-center justify-center rounded-full bg-primary text-white shadow-md font-bold text-lg"
-        >
-          →
-        </div>
-      )}
-    </li>
-  ))}
-</ol>
+                {i < steps.length - 1 && (
+                  <div
+                    aria-hidden="true"
+                    className="absolute -right-4 top-1/2 z-10 hidden -translate-y-1/2 lg:flex h-8 w-8 items-center justify-center rounded-full bg-primary text-white shadow-md font-bold text-lg"
+                  >
+                    →
+                  </div>
+                )}
+              </li>
+            ))}
+          </ol>
         </div>
       </section>
 
       {/* Four-week journey */}
-     <section  id="approach" className={`${wrap} py-8 sm:py-16 lg:py-28`}>
-      <div  className="grid gap-12 lg:grid-cols-12 lg:gap-26">
-        {/* Left Sticky Column */}
-        <div className="lg:col-span-5 lg:sticky lg:top-24 lg:self-start">
-          <p className={eyebrow}>FOUR-WEEK JOURNEY</p>
-          <h2 className={`${h2} mt-4`}>
-            Progress step by step,
-            <br />
-            <span className="text-primary">one domain each week.</span>
-          </h2>
-          <p className={`${lede} mt-6 max-w-md`}>
-            Move from recognising AI to making thoughtful, responsible
-            choices. Start small, build context, and finish with habits you
-            can actually use.
-          </p>
+      <section id="approach" className={`${wrap} py-8 sm:py-16 lg:py-28`}>
+        <div className="grid gap-12 lg:grid-cols-12 lg:gap-26">
+          {/* Left Sticky Column */}
+          <div className="lg:col-span-5 lg:sticky lg:top-24 lg:self-start">
+            <p className={eyebrow}>FOUR-WEEK JOURNEY</p>
+            <h2 className={`${h2} mt-4`}>
+              Progress step by step,
+              <br />
+              <span className="text-primary">one domain each week.</span>
+            </h2>
+            <p className={`${lede} mt-6 max-w-md`}>
+              Move from recognising AI to making thoughtful, responsible
+              choices. Start small, build context, and finish with habits you
+              can actually use.
+            </p>
 
-          <Link
-            href="/course"
-            className="mt-7 inline-flex items-center gap-2 text-sm font-extrabold text-primary underline decoration-2 underline-offset-4 hover:opacity-75"
-          >
-            Explore the curriculum →
-          </Link>
-        </div>
+            <Link
+              href="/course"
+              className="mt-7 inline-flex items-center gap-2 text-sm font-extrabold text-primary underline decoration-2 underline-offset-4 hover:opacity-75"
+            >
+              Explore the curriculum →
+            </Link>
+          </div>
 
-        {/* Right Modules Timeline */}
-        <div className="relative lg:col-span-7">
-          {/* Vertical Connector Line */}
-          <div
-            aria-hidden="true"
-            className="absolute bottom-8 left-9 top-8 w-px bg-border sm:left-10"
-          />
+          {/* Right Modules Timeline */}
+          <div className="relative lg:col-span-7">
+            <div
+              aria-hidden="true"
+              className="absolute bottom-6 left-9 top-6 w-px bg-border sm:left-10"
+            />
 
-          <div className="space-y-4">
-            {weeks.map(({ step, title, description, tag }, i) => (
-              <article
-                key={step}
-                className={`group relative flex items-start gap-5 rounded-2xl border p-5 transition duration-200 sm:p-6 ${
-                  i === 0
-                    ? "border-primary bg-primary text-white shadow-xl shadow-primary/10"
-                    : "border-border bg-background hover:-translate-y-0.5 hover:shadow-md"
-                }`}
-              >
-                {/* Step Number Badge */}
-                <div className="relative z-10 shrink-0">
-                  <span
-                    className={`grid size-12 place-items-center rounded-xl text-sm font-extrabold ${
-                      i === 0
-                        ? "bg-white/15 text-white"
-                        : "bg-(--saffron) text-[#2d2422]"
-                    }`}
-                  >
-                    {step}
-                  </span>
-                </div>
-
-                {/* Content */}
-                <div className="min-w-0 flex-1 pr-6">
-                  <p
-                    className={`text-[10px] font-extrabold tracking-[0.18em] uppercase ${
-                      i === 0 ? "text-white/70" : "text-(--blue-deep)"
-                    }`}
-                  >
-                    {tag}
-                  </p>
-                  <h3
-                    className={`mt-1 text-xl sm:text-2xl font-extrabold tracking-tight ${
-                      i === 0 ? "text-white" : "text-foreground"
-                    }`}
-                  >
-                    {title}
-                  </h3>
-                  <p
-                    className={`mt-1.5 text-sm leading-relaxed ${
-                      i === 0 ? "text-white/85" : "text-(color:--muted)"
-                    }`}
-                  >
-                    {description}
-                  </p>
-                </div>
-
-                {/* Arrow Icon */}
-                <span
-                  className={`absolute right-5 top-5 text-base transition-transform group-hover:translate-x-1 ${
-                    i === 0 ? "text-white/70" : "text-(--muted)"
-                  }`}
+            <div className="space-y-3">
+              {weeks.map(({ step, title, description, tag }) => (
+                <article
+                  key={step}
+                  className="group relative flex items-center gap-4 rounded-xl border border-border bg-background p-3.5 transition duration-200 hover:-translate-y-0.5 hover:border-primary hover:bg-primary hover:text-white hover:shadow-lg hover:shadow-primary/10 sm:p-4"
                 >
-                  →
-                </span>
-              </article>
-            ))}
+                  <div className="relative z-10 shrink-0">
+                    <span className="grid size-10 place-items-center rounded-lg bg-(--saffron) text-xs font-extrabold text-[#2d2422] transition-colors group-hover:bg-white/15 group-hover:text-white">
+                      {step}
+                    </span>
+                  </div>
+
+                  <div className="min-w-0 flex-1 pr-6">
+                    <p className="text-[9px] font-extrabold tracking-[0.18em] uppercase text-(--blue-deep) transition-colors group-hover:text-white/70">
+                      {tag}
+                    </p>
+                    <h3 className="mt-0.5 text-lg sm:text-xl font-extrabold tracking-tight text-foreground transition-colors group-hover:text-white">
+                      {title}
+                    </h3>
+                    <p className="mt-0.5 text-xs sm:text-sm leading-relaxed text-(color:--muted) transition-colors group-hover:text-white/85">
+                      {description}
+                    </p>
+                  </div>
+
+                  <span className="absolute right-4 top-4 text-sm text-(--muted) transition-all group-hover:translate-x-1 group-hover:text-white/70">
+                    →
+                  </span>
+                </article>
+              ))}
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+
       {/* Why */}
       <section id="why" className={`${wrap} pb-20 sm:pb-28`}>
         <div className="relative overflow-hidden rounded-[2rem] bg-(--blue-pale) px-6 py-14 sm:px-12 sm:py-20 lg:px-16">
@@ -346,64 +328,98 @@ export default function LandingPage() {
           />
           <div className="relative grid items-end gap-8 md:grid-cols-[1.2fr_0.8fr]">
             <div>
-              <p className={eyebrow}>WHY ARE WE DOING THIS?</p>
               <h2 className={`${h2} mt-4`}>
-                AI is already
+                Based on
                 <br />
-                <span className="text-primary">part of everyday life.</span>
+                <span className="text-primary">AILit <br/> Framework</span>
               </h2>
             </div>
-            <p className={lede}>
-              SikaAI helps learners ask better questions, protect their
-              information, and make confident choices as AI becomes more common.
-            </p>
+            <div>
+              <p className={lede}>
+                SikaAI is built on the AILit Framework. Its 28 lessons are meticulously designed to align with the framework guidelines while being tailored to Nepal’s unique cultural context.
+              </p>
+              <Link
+                target="_blank"
+                href="https://ailiteracyframework.org/pdfs/framework_pdf/AILF_en.pdf"
+                className="mt-7 inline-flex items-center gap-2 text-sm font-extrabold text-primary underline decoration-2 underline-offset-4 hover:opacity-75"
+              >
+                Explore AILit ↗
+              </Link>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* References */}
-      <section
-        id="references"
-        className="border-t border-border py-20 sm:py-28"
-      >
-        <div className={wrap}>
-          <div className="grid gap-8 md:grid-cols-[0.8fr_1.2fr] md:items-end">
-            <div>
-              <p className={eyebrow}>REFERENCES</p>
-              <h2 className={`${h2} mt-4`}>
-                Learn from
-                <br />
-                <span className="text-primary">trusted guidance.</span>
-              </h2>
-            </div>
-            <p className={`${lede} max-w-lg md:justify-self-end`}>
-              The course draws on established guidance about AI, digital
-              literacy, online safety, and responsible technology use.
-            </p>
-          </div>
+      {/* Meet the Team Section */}
+      <section id="team" className={`${wrap} pb-20 sm:pb-28`}>
+        <div className="mx-auto max-w-2xl text-center">
+          <p className={eyebrow}>THE PEOPLE BEHIND SIKAAI</p>
+          <h2 className={`${h2} mt-4`}>Meet our core team</h2>
+          <p className={`${lede} mt-5`}>
+           working to bring practical AI awareness to every community
+          </p>
+        </div>
 
-          <ul className="mt-12 overflow-hidden rounded-2xl border border-border">
-            {references.map(({ publisher, description, href }) => (
-              <li key={href} className="border-b border-border last:border-b-0">
-                <a
-                  href={href}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="group grid gap-3 px-5 py-5 transition hover:bg-(--blue-pale)/45 sm:grid-cols-[130px_1fr_auto] sm:items-center sm:gap-8 sm:px-7"
-                >
-                  <h3 className="text-lg font-extrabold tracking-tight">
-                    {publisher}
-                  </h3>
-                  <p className="text-sm leading-6 text-(color:--muted)">
-                    {description}
-                  </p>
-                  <span className="text-sm font-extrabold text-(--blue-deep) transition-transform group-hover:translate-x-1">
-                    View →
-                  </span>
-                </a>
-              </li>
-            ))}
-          </ul>
+        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          {team.map((member) => (
+            <div
+              key={member.name}
+              className="group relative flex flex-col rounded-2xl border border-border bg-background p-5 text-center shadow-sm transition duration-200 hover:-translate-y-1 hover:shadow-md"
+            >
+              <div className="mx-auto relative size-20 overflow-hidden rounded-full bg-(--blue-pale) mb-4">
+                <Image
+                  src={member.image}
+                  alt={member.name}
+                  fill
+                  className="object-cover"
+                />
+              </div>
+              <h3 className="text-base font-bold tracking-tight text-foreground">
+                {member.name}
+              </h3>
+              <p className="mt-1 text-[11px] font-bold uppercase tracking-wider text-primary">
+                {member.role}
+              </p>
+              <p className="mt-2.5 text-xs leading-relaxed text-(color:--muted)">
+                {member.bio}
+              </p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Incubated By Section */}
+      <section id="incubator" className={`${wrap} pb-20 sm:pb-28`}>
+        <div className="rounded-2xl border border-border bg-background p-8 sm:p-12 shadow-sm flex flex-col md:flex-row items-center justify-between gap-8">
+          <div className="flex items-center gap-6">
+            <div className="relative size-20 shrink-0 overflow-hidden rounded-xl bg-(--blue-pale) flex items-center justify-center p-3 border border-border">
+              <Image
+                src={incubator.logo}
+                alt={incubator.name}
+                width={64}
+                height={64}
+                className="object-contain"
+              />
+            </div>
+            <div>
+              <p className={eyebrow}>INCUBATED BY</p>
+              <h3 className="mt-1 text-2xl font-extrabold tracking-tight text-foreground">
+                {incubator.name}
+              </h3>
+              <p className="mt-2 text-sm leading-relaxed text-(--muted) max-w-xl">
+                {incubator.description}
+              </p>
+            </div>
+          </div>
+          <div>
+            <Link
+              href={incubator.website}
+              target="_blank"
+              className="inline-flex items-center gap-2 rounded-xl border border-border bg-background px-5 py-3 text-sm font-bold text-foreground transition hover:bg-(--blue-pale)"
+            >
+              Visit Website ↗
+            </Link>
+          </div>
         </div>
       </section>
 
@@ -413,15 +429,7 @@ export default function LandingPage() {
           className={`${wrap} flex flex-col gap-3 py-7 text-xs text-(color:--muted) sm:flex-row sm:items-center sm:justify-between`}
         >
           <p>© 2026 SikaAI</p>
-          <p>
-            <a
-              href="#references"
-              className="font-semibold text-foreground underline-offset-4 hover:underline"
-            >
-              References
-            </a>{" "}
-            · Learn AI. One small lesson at a time.
-          </p>
+         
         </div>
       </footer>
     </main>
