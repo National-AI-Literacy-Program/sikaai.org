@@ -39,8 +39,7 @@ body {
 }
 
 a {
- 
-  text-decoration: none;
+   text-decoration: none;
 }
 
 /* button {
@@ -84,11 +83,11 @@ h2 span {
   font-size: 14px;
 }
 
-.nav-links a:not(.nav-cta):hover,
+/* .nav-links a:not(.nav-cta):hover,
 .back-link:hover {
   color: var(--background);
  background-color:blue ;
-}
+} */
 
 .nav-cta {
   padding: 10px 16px;
@@ -101,6 +100,10 @@ h2 span {
   border-color: var(--crimson);
   background: var(--crimson-pale);
   transform: translateY(-2px);
+}
+
+html[data-theme="dark"] .nav-cta:hover {
+  background: var(--blue-pale);
 }
 
 .hero {
@@ -202,9 +205,11 @@ p {
 
 .button-primary {
   background: var(--crimson);
-  color: #fff;
+color: #fff;
 }
-
+html[data-theme="dark"] .button-primary {
+  color: #fff !important;
+}
 .button-primary:hover {
   background: var(--teal-deep);
   transform: translateY(-3px);

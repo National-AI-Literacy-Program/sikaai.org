@@ -118,7 +118,7 @@ export default function LandingPage() {
       <Header />
 
       {/* Hero */}
-      <section id="about" className="relative">
+      <section id="hero" className="relative">
         <div className={`${wrap} pb-20 pt-12 sm:pb-28 lg:pb-32`}>
           <div className="mx-auto grid max-w-6xl grid-cols-1 items-center gap-30 md:grid-cols-2 md:gap-20">
             {/* Left column: Hero content */}
@@ -198,17 +198,17 @@ export default function LandingPage() {
 
       {/* Course structure */}
       <section
-        id="course-structure"
+        id= "approach"
         className="border-y border-border bg-(--blue-pale)/45 py-20 sm:py-18"
       >
         <div className={wrap}>
           <div className="mx-auto max-w-2xl text-center">
             <h2 className={`${h2} mt-4`}>
-              Learn something. Use it. Remember it.
+              Learn it. Use it. Test it.
             </h2>
             <p className={`${lede} mt-5`}>
-              Each week combines short lessons, everyday examples, and
-              multiple-choice questions so learning never feels like a lecture.
+              Each lesson combines everyday examples and
+              intreactive tests so learning never feels like a lecture.
             </p>
           </div>
 
@@ -254,7 +254,7 @@ export default function LandingPage() {
       </section>
 
       {/* Four-week journey */}
-      <section id="approach" className={`${wrap} py-8 sm:py-16 lg:py-28`}>
+      <section id="course-structure" className={`${wrap} py-8 sm:py-16 lg:py-28`}>
         <div className="grid gap-12 lg:grid-cols-12 lg:gap-26">
           {/* Left Sticky Column */}
           <div className="lg:col-span-5 lg:sticky lg:top-24 lg:self-start">
@@ -320,7 +320,7 @@ export default function LandingPage() {
       </section>
 
       {/* Why */}
-      <section id="why" className={`${wrap} pb-20 sm:pb-28`}>
+      <section id="reference" className={`${wrap} py-20 sm:py-28`}>
         <div className="relative overflow-hidden rounded-[2rem] bg-(--blue-pale) px-6 py-14 sm:px-12 sm:py-20 lg:px-16">
           <div
             aria-hidden="true"
@@ -351,12 +351,12 @@ export default function LandingPage() {
       </section>
 
       {/* Meet the Team Section */}
-      <section id="team" className={`${wrap} pb-20 sm:pb-28`}>
+      <section id="about" className={`${wrap} py-20 sm:py-28`}>
         <div className="mx-auto max-w-2xl text-center">
           <p className={eyebrow}>THE PEOPLE BEHIND SIKAAI</p>
           <h2 className={`${h2} mt-4`}>Meet our core team</h2>
           <p className={`${lede} mt-5`}>
-           working to bring practical AI awareness to every community
+           working to bring practical AI awareness to Nepali community
           </p>
         </div>
 
@@ -389,7 +389,7 @@ export default function LandingPage() {
       </section>
 
       {/* Incubated By Section */}
-      <section id="incubator" className={`${wrap} pb-20 sm:pb-28`}>
+      <section id="incubator" className={`${wrap} py-10 sm:py-18`}>
         <div className="rounded-2xl border border-border bg-background p-8 sm:p-12 shadow-sm flex flex-col md:flex-row items-center justify-between gap-8">
           <div className="flex items-center gap-6">
             <div className="relative size-20 shrink-0 overflow-hidden rounded-xl bg-(--blue-pale) flex items-center justify-center p-3 border border-border">
@@ -426,7 +426,7 @@ export default function LandingPage() {
       {/* Footer */}
       <footer className="border-t border-border">
         <div
-          className={`${wrap} flex flex-col gap-3 py-7 text-xs text-(color:--muted) sm:flex-row sm:items-center sm:justify-between`}
+          className={`${wrap} flex flex-col gap-3 py-7 text-xs text-(--muted) sm:flex-row sm:items-center sm:justify-between`}
         >
           <p>© 2026 SikaAI</p>
          

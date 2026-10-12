@@ -9,7 +9,7 @@ export default function Header() {
           Sika<span>AI</span>
         </Link>
         <nav className="nav-links" aria-label="Main navigation">
-          <a href="#about" className="nav-cta">
+          <a href="#about" className="nav-cta ">
             About us
           </a>
           <a href="#course-structure" className="nav-cta">
@@ -18,10 +18,10 @@ export default function Header() {
           <a href="#approach" className="nav-cta">
             Content
           </a>
-          <a href="#why" className="nav-cta">
+          <a href="#reference" className="nav-cta">
             Reference
           </a>
-          <Link href="/involve" className="nav-cta  button button-primary">
+          <Link href="/involve" className="nav-cta button button-primary">
             Start Learning
           </Link>
           <ThemeToggle />
