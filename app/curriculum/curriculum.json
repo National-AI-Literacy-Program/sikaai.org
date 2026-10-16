@@ -1,0 +1,900 @@
+{
+  "meta": {
+    "title": "SikaAI 28-Day Curriculum",
+    "frameworkName": "AILit Framework",
+    "frameworkFullName": "Empowering Learners for the Age of AI: An AI Literacy Framework for Primary and Secondary Education",
+    "frameworkPublisher": "OECD / European Union, 2026",
+    "frameworkPdf": "https://ailiteracyframework.org/pdfs/framework_pdf/AILF_en.pdf",
+    "pageNote": "'page' values are physical PDF page numbers, used for #page= links. The page printed on the framework's own pages is 2 lower."
+  },
+  "framework": {
+    "knowledge": [
+      {
+        "id": "1.1",
+        "label": "AI is not human",
+        "page": 21
+      },
+      {
+        "id": "1.2",
+        "label": "How machines \"learn\" from data",
+        "page": 21
+      },
+      {
+        "id": "1.3",
+        "label": "Generative AI predicts, it does not understand",
+        "page": 21
+      },
+      {
+        "id": "1.4",
+        "label": "Many types of AI, some of them invisible",
+        "page": 21
+      },
+      {
+        "id": "1.5",
+        "label": "AI uses energy, water and minerals",
+        "page": 21
+      },
+      {
+        "id": "2.1",
+        "label": "AI reflects human choices and labour",
+        "page": 22
+      },
+      {
+        "id": "2.2",
+        "label": "Where AI training data comes from",
+        "page": 22
+      },
+      {
+        "id": "2.3",
+        "label": "AI can collect data as you use it",
+        "page": 22
+      },
+      {
+        "id": "2.4",
+        "label": "AI finds patterns in data that humans selected",
+        "page": 22
+      },
+      {
+        "id": "2.5",
+        "label": "Bias in AI systems",
+        "page": 22
+      },
+      {
+        "id": "3.1",
+        "label": "What AI can and cannot do",
+        "page": 22
+      },
+      {
+        "id": "3.2",
+        "label": "Fact versus fabrication and hallucination",
+        "page": 22
+      },
+      {
+        "id": "3.3",
+        "label": "The same input can give different outputs",
+        "page": 22
+      },
+      {
+        "id": "3.4",
+        "label": "Transparency and explainability",
+        "page": 22
+      },
+      {
+        "id": "4.1",
+        "label": "AI shapes daily decisions; people keep agency",
+        "page": 22
+      },
+      {
+        "id": "4.2",
+        "label": "AI should be understood, audited and regulated",
+        "page": 22
+      },
+      {
+        "id": "4.3",
+        "label": "Responsible and ethical AI design",
+        "page": 22
+      }
+    ],
+    "skills": [
+      {
+        "id": "critical-thinking",
+        "name": "Critical Thinking",
+        "description": "Judge AI use and AI content for accuracy, fairness and bias.",
+        "page": 23
+      },
+      {
+        "id": "collaboration",
+        "name": "Collaboration",
+        "description": "Work with AI step by step: give clear goals, feedback and revisions.",
+        "page": 23
+      },
+      {
+        "id": "creativity",
+        "name": "Creativity",
+        "description": "Use AI to build on original ideas while respecting ownership.",
+        "page": 24
+      },
+      {
+        "id": "problem-solving",
+        "name": "Problem Solving",
+        "description": "Decide if, when and how AI is the right tool for a task.",
+        "page": 24
+      },
+      {
+        "id": "computational-thinking",
+        "name": "Computational Thinking",
+        "description": "Break problems down so AI can help with the right parts.",
+        "page": 24
+      },
+      {
+        "id": "communication",
+        "name": "Communication",
+        "description": "Describe AI accurately, without giving it human traits.",
+        "page": 25
+      },
+      {
+        "id": "self-social-awareness",
+        "name": "Self and Social Awareness",
+        "description": "Notice how AI affects you, your community and the environment.",
+        "page": 25
+      }
+    ],
+    "attitudes": [
+      {
+        "id": "reflective",
+        "name": "Reflective",
+        "description": "Question the claims made about AI and weigh the evidence.",
+        "page": 26
+      },
+      {
+        "id": "responsible",
+        "name": "Responsible",
+        "description": "Own your AI choices, including the choice not to use it.",
+        "page": 26
+      },
+      {
+        "id": "curious",
+        "name": "Curious",
+        "description": "Explore what AI can and cannot do, and keep learning.",
+        "page": 26
+      },
+      {
+        "id": "innovative",
+        "name": "Innovative",
+        "description": "Use AI to tackle real problems and create, not just consume.",
+        "page": 26
+      },
+      {
+        "id": "adaptable",
+        "name": "Adaptable",
+        "description": "Stay flexible and revise your approach when AI falls short.",
+        "page": 26
+      },
+      {
+        "id": "empathetic",
+        "name": "Empathetic",
+        "description": "Consider how AI affects different people and groups.",
+        "page": 26
+      }
+    ]
+  },
+  "weeks": [
+    {
+      "week": 1,
+      "domain": "Engage with AI",
+      "tagline": "Become a critical and responsible participant in a world marked by AI.",
+      "days": [
+        {
+          "day": 1,
+          "title": "What Is AI, Really?",
+          "summary": "Spot where AI already works around you, from payment apps to video recommendations.",
+          "kind": "lesson",
+          "review": false,
+          "competence": {
+            "domain": "Engage with AI",
+            "number": 1,
+            "level": "Basic",
+            "page": 30
+          },
+          "knowledge": [
+            "1.4"
+          ],
+          "skills": [
+            "self-social-awareness"
+          ],
+          "attitudes": [
+            "curious",
+            "responsible"
+          ]
+        },
+        {
+          "day": 2,
+          "title": "AI Doesn't \"Think\" Like You",
+          "summary": "Why \"AI understands me\" is a myth, and why a chatbot is not a friend.",
+          "kind": "lesson",
+          "review": false,
+          "competence": {
+            "domain": "Engage with AI",
+            "number": 2,
+            "level": "Basic",
+            "page": 30
+          },
+          "knowledge": [
+            "1.3",
+            "1.4"
+          ],
+          "skills": [
+            "communication"
+          ],
+          "attitudes": [
+            "reflective",
+            "responsible"
+          ]
+        },
+        {
+          "day": 3,
+          "title": "Why Does My Feed Know Me So Well?",
+          "summary": "How \"For You\" pages use your activity to choose what you see.",
+          "kind": "lesson",
+          "review": false,
+          "competence": {
+            "domain": "Engage with AI",
+            "number": 4,
+            "level": "Basic",
+            "page": 31
+          },
+          "knowledge": [
+            "1.1",
+            "3.2",
+            "4.1"
+          ],
+          "skills": [
+            "self-social-awareness"
+          ],
+          "attitudes": [
+            "curious",
+            "reflective"
+          ]
+        },
+        {
+          "day": 4,
+          "title": "When AI Gets It Wrong",
+          "summary": "See a confident but wrong answer from AI, and learn how to check it.",
+          "kind": "lesson",
+          "review": false,
+          "competence": {
+            "domain": "Engage with AI",
+            "number": 3,
+            "level": "Basic",
+            "page": 31
+          },
+          "knowledge": [
+            "3.1",
+            "3.2"
+          ],
+          "skills": [
+            "critical-thinking"
+          ],
+          "attitudes": [
+            "responsible"
+          ]
+        },
+        {
+          "day": 5,
+          "title": "Whose Voice Is Missing?",
+          "summary": "Why AI often struggles with the Nepali language and script.",
+          "kind": "lesson",
+          "review": false,
+          "competence": {
+            "domain": "Engage with AI",
+            "number": 6,
+            "level": "Basic",
+            "page": 32
+          },
+          "knowledge": [
+            "2.1",
+            "2.5",
+            "4.1"
+          ],
+          "skills": [
+            "critical-thinking",
+            "self-social-awareness"
+          ],
+          "attitudes": [
+            "empathetic",
+            "responsible"
+          ]
+        },
+        {
+          "day": 6,
+          "title": "The Hidden Cost of a Chatbot Reply",
+          "summary": "The energy and water behind every AI answer.",
+          "kind": "lesson",
+          "review": false,
+          "competence": {
+            "domain": "Engage with AI",
+            "number": 5,
+            "level": "Basic",
+            "page": 32
+          },
+          "knowledge": [
+            "1.5"
+          ],
+          "skills": [
+            "self-social-awareness"
+          ],
+          "attitudes": [
+            "responsible"
+          ]
+        },
+        {
+          "day": 7,
+          "title": "Is This AI Use OK?",
+          "summary": "Weigh a simple ethics scenario, then review Week 1 with a quiz.",
+          "kind": "lesson",
+          "review": true,
+          "competence": {
+            "domain": "Engage with AI",
+            "number": 7,
+            "level": "Basic to Intermediate",
+            "page": 33
+          },
+          "knowledge": [
+            "1.4",
+            "4.1",
+            "4.3"
+          ],
+          "skills": [
+            "critical-thinking",
+            "problem-solving",
+            "self-social-awareness"
+          ],
+          "attitudes": [
+            "reflective",
+            "responsible"
+          ]
+        }
+      ]
+    },
+    {
+      "week": 2,
+      "domain": "Create with AI",
+      "tagline": "Use AI as a creative partner while maintaining human agency.",
+      "days": [
+        {
+          "day": 8,
+          "title": "Your Idea First, AI Second",
+          "summary": "Brainstorm alone, then compare your ideas with an AI suggestion.",
+          "kind": "lesson",
+          "review": false,
+          "competence": {
+            "domain": "Create with AI",
+            "number": 1,
+            "level": "Basic",
+            "page": 36
+          },
+          "knowledge": [
+            "3.1"
+          ],
+          "skills": [
+            "creativity"
+          ],
+          "attitudes": [
+            "innovative",
+            "adaptable"
+          ]
+        },
+        {
+          "day": 9,
+          "title": "Remix, Don't Replace",
+          "summary": "Keep your own voice when AI offers ideas.",
+          "kind": "lesson",
+          "review": false,
+          "competence": {
+            "domain": "Create with AI",
+            "number": 1,
+            "level": "Basic",
+            "page": 36
+          },
+          "knowledge": [
+            "3.1"
+          ],
+          "skills": [
+            "creativity"
+          ],
+          "attitudes": [
+            "innovative",
+            "adaptable"
+          ]
+        },
+        {
+          "day": 10,
+          "title": "Turning Words Into Pictures",
+          "summary": "See how a written prompt becomes an image, using a fixed example set.",
+          "kind": "lesson",
+          "review": false,
+          "competence": {
+            "domain": "Create with AI",
+            "number": 2,
+            "level": "Basic",
+            "page": 36
+          },
+          "knowledge": [
+            "1.4"
+          ],
+          "skills": [
+            "collaboration",
+            "creativity"
+          ],
+          "attitudes": [
+            "adaptable",
+            "curious"
+          ]
+        },
+        {
+          "day": 11,
+          "title": "If AI Can Draw It, Can AI Fake It?",
+          "summary": "Spot the signs of fake photos, videos and deepfakes.",
+          "kind": "extension",
+          "review": false,
+          "competence": null,
+          "basis": "SikaAI addition. Linked to related framework items; it is not a framework competence.",
+          "knowledge": [
+            "3.2"
+          ],
+          "skills": [
+            "critical-thinking",
+            "self-social-awareness"
+          ],
+          "attitudes": [
+            "reflective",
+            "responsible"
+          ]
+        },
+        {
+          "day": 12,
+          "title": "Getting Better Feedback",
+          "summary": "Compare two prompts and see which earns more useful feedback.",
+          "kind": "lesson",
+          "review": false,
+          "competence": {
+            "domain": "Create with AI",
+            "number": 3,
+            "level": "Basic",
+            "page": 37
+          },
+          "knowledge": [
+            "2.3",
+            "3.3"
+          ],
+          "skills": [
+            "computational-thinking",
+            "creativity"
+          ],
+          "attitudes": [
+            "adaptable",
+            "innovative"
+          ]
+        },
+        {
+          "day": 13,
+          "title": "Whose Work Is It Anyway?",
+          "summary": "Is it fair when AI copies a real artist's style?",
+          "kind": "lesson",
+          "review": false,
+          "competence": {
+            "domain": "Create with AI",
+            "number": 4,
+            "level": "Basic",
+            "page": 37
+          },
+          "knowledge": [
+            "2.2"
+          ],
+          "skills": [
+            "problem-solving",
+            "self-social-awareness"
+          ],
+          "attitudes": [
+            "empathetic",
+            "responsible"
+          ]
+        },
+        {
+          "day": 14,
+          "title": "Show What You Made",
+          "summary": "Share something you made with an attribution note, then review Week 2.",
+          "kind": "project",
+          "review": true,
+          "competence": null,
+          "basis": "Draws on all four Create with AI competences.",
+          "knowledge": [
+            "1.4",
+            "2.2",
+            "2.3",
+            "3.1",
+            "3.3"
+          ],
+          "skills": [
+            "collaboration",
+            "creativity",
+            "problem-solving",
+            "computational-thinking",
+            "self-social-awareness"
+          ],
+          "attitudes": [
+            "responsible",
+            "curious",
+            "innovative",
+            "adaptable",
+            "empathetic"
+          ]
+        }
+      ]
+    },
+    {
+      "week": 3,
+      "domain": "Manage AI",
+      "tagline": "Divide work intentionally between humans and AI.",
+      "days": [
+        {
+          "day": 15,
+          "title": "Do I Even Need AI For This?",
+          "summary": "A quick checklist for deciding when AI is the right tool.",
+          "kind": "lesson",
+          "review": false,
+          "competence": {
+            "domain": "Manage AI",
+            "number": 1,
+            "level": "Basic",
+            "page": 40
+          },
+          "knowledge": [
+            "3.1",
+            "4.3"
+          ],
+          "skills": [
+            "computational-thinking",
+            "problem-solving"
+          ],
+          "attitudes": [
+            "innovative",
+            "responsible"
+          ]
+        },
+        {
+          "day": 16,
+          "title": "Trust the App, or Ask a Person?",
+          "summary": "Learn to spot a fake investment scheme video before it costs you.",
+          "kind": "lesson",
+          "review": false,
+          "competence": {
+            "domain": "Manage AI",
+            "number": 1,
+            "level": "Basic",
+            "page": 40
+          },
+          "knowledge": [
+            "3.1",
+            "4.3"
+          ],
+          "skills": [
+            "computational-thinking",
+            "problem-solving"
+          ],
+          "attitudes": [
+            "innovative",
+            "responsible"
+          ]
+        },
+        {
+          "day": 17,
+          "title": "Rules vs. Learning: Two Kinds of AI",
+          "summary": "Sort vegetables at a shop to tell fixed rules from learned patterns.",
+          "kind": "lesson",
+          "review": false,
+          "competence": {
+            "domain": "Manage AI",
+            "number": 2,
+            "level": "Basic",
+            "page": 40
+          },
+          "knowledge": [
+            "1.2",
+            "1.4"
+          ],
+          "skills": [
+            "computational-thinking",
+            "problem-solving"
+          ],
+          "attitudes": [
+            "adaptable",
+            "curious"
+          ]
+        },
+        {
+          "day": 18,
+          "title": "How Does Fraud Alert Work?",
+          "summary": "Look inside the fraud checks used by digital wallets.",
+          "kind": "lesson",
+          "review": false,
+          "competence": {
+            "domain": "Manage AI",
+            "number": 2,
+            "level": "Basic",
+            "page": 40
+          },
+          "knowledge": [
+            "1.2",
+            "1.4"
+          ],
+          "skills": [
+            "computational-thinking",
+            "problem-solving"
+          ],
+          "attitudes": [
+            "adaptable",
+            "curious"
+          ]
+        },
+        {
+          "day": 19,
+          "title": "Breaking the Job Into Pieces",
+          "summary": "Plan a family event and decide which parts AI can help with.",
+          "kind": "lesson",
+          "review": false,
+          "competence": {
+            "domain": "Manage AI",
+            "number": 3,
+            "level": "Basic",
+            "page": 41
+          },
+          "knowledge": [
+            "1.1",
+            "3.1"
+          ],
+          "skills": [
+            "collaboration",
+            "computational-thinking",
+            "problem-solving"
+          ],
+          "attitudes": [
+            "adaptable",
+            "innovative"
+          ]
+        },
+        {
+          "day": 20,
+          "title": "Who's the Boss, You or the AI?",
+          "summary": "Know when to double-check or override a suggestion.",
+          "kind": "lesson",
+          "review": false,
+          "competence": {
+            "domain": "Manage AI",
+            "number": 4,
+            "level": "Basic",
+            "page": 41
+          },
+          "knowledge": [
+            "4.1"
+          ],
+          "skills": [
+            "collaboration",
+            "problem-solving"
+          ],
+          "attitudes": [
+            "adaptable",
+            "reflective",
+            "responsible"
+          ]
+        },
+        {
+          "day": 21,
+          "title": "Plan a Human+AI Task Together",
+          "summary": "Plan a real task with a family member, then review Week 3 with a quiz.",
+          "kind": "project",
+          "review": true,
+          "competence": null,
+          "basis": "Draws on all four Manage AI competences.",
+          "knowledge": [
+            "1.1",
+            "1.2",
+            "1.4",
+            "3.1",
+            "4.1",
+            "4.3"
+          ],
+          "skills": [
+            "collaboration",
+            "problem-solving",
+            "computational-thinking"
+          ],
+          "attitudes": [
+            "reflective",
+            "responsible",
+            "curious",
+            "innovative",
+            "adaptable"
+          ]
+        }
+      ]
+    },
+    {
+      "week": 4,
+      "domain": "Shape AI",
+      "tagline": "Improve AI systems to reflect human values.",
+      "days": [
+        {
+          "day": 22,
+          "title": "Who Was This AI Built For?",
+          "summary": "Ask who an app was designed for, and who it leaves out.",
+          "kind": "lesson",
+          "review": false,
+          "competence": {
+            "domain": "Shape AI",
+            "number": 1,
+            "level": "Basic",
+            "page": 44
+          },
+          "knowledge": [
+            "1.2",
+            "2.1"
+          ],
+          "skills": [
+            "communication",
+            "problem-solving",
+            "self-social-awareness"
+          ],
+          "attitudes": [
+            "curious",
+            "reflective",
+            "responsible"
+          ]
+        },
+        {
+          "day": 23,
+          "title": "Good For Some, Not For All",
+          "summary": "See how a navigation app can help some people and slow down others.",
+          "kind": "lesson",
+          "review": false,
+          "competence": {
+            "domain": "Shape AI",
+            "number": 1,
+            "level": "Basic",
+            "page": 44
+          },
+          "knowledge": [
+            "1.2",
+            "2.1"
+          ],
+          "skills": [
+            "communication",
+            "problem-solving",
+            "self-social-awareness"
+          ],
+          "attitudes": [
+            "curious",
+            "reflective",
+            "responsible"
+          ]
+        },
+        {
+          "day": 24,
+          "title": "How Do We Know AI \"Worked\"?",
+          "summary": "Set simple pass-or-fail checks for an everyday school example.",
+          "kind": "lesson",
+          "review": false,
+          "competence": {
+            "domain": "Shape AI",
+            "number": 2,
+            "level": "Basic",
+            "page": 44
+          },
+          "knowledge": [
+            "1.2",
+            "1.4"
+          ],
+          "skills": [
+            "collaboration",
+            "computational-thinking"
+          ],
+          "attitudes": [
+            "adaptable",
+            "innovative",
+            "reflective"
+          ]
+        },
+        {
+          "day": 25,
+          "title": "Data In, Bias Out",
+          "summary": "Return to the language gap and ask: what would you change if you built it?",
+          "kind": "lesson",
+          "review": false,
+          "competence": {
+            "domain": "Shape AI",
+            "number": 3,
+            "level": "Basic",
+            "page": 45
+          },
+          "knowledge": [
+            "1.2",
+            "2.2",
+            "2.4"
+          ],
+          "skills": [
+            "computational-thinking",
+            "self-social-awareness"
+          ],
+          "attitudes": [
+            "innovative",
+            "responsible"
+          ]
+        },
+        {
+          "day": 26,
+          "title": "Designing AI for Good",
+          "summary": "Frame a local problem in health, farming or disaster alerts.",
+          "kind": "lesson",
+          "review": false,
+          "competence": {
+            "domain": "Shape AI",
+            "number": 4,
+            "level": "Basic",
+            "page": 45
+          },
+          "knowledge": [
+            "4.1",
+            "4.2",
+            "4.3"
+          ],
+          "skills": [
+            "computational-thinking",
+            "problem-solving",
+            "self-social-awareness"
+          ],
+          "attitudes": [
+            "empathetic",
+            "innovative",
+            "responsible"
+          ]
+        },
+        {
+          "day": 27,
+          "title": "Design Your Fix",
+          "summary": "With a parent or sibling, shape one AI idea for a real local problem.",
+          "kind": "capstone",
+          "review": false,
+          "competence": null,
+          "basis": "Builds on Shape AI 4.",
+          "knowledge": [
+            "4.1",
+            "4.2",
+            "4.3"
+          ],
+          "skills": [
+            "problem-solving",
+            "computational-thinking",
+            "self-social-awareness"
+          ],
+          "attitudes": [
+            "responsible",
+            "innovative",
+            "empathetic"
+          ]
+        },
+        {
+          "day": 28,
+          "title": "Share, Reflect, Celebrate",
+          "summary": "Present your idea, take the full-programme quiz and request your certificate.",
+          "kind": "capstone",
+          "review": true,
+          "competence": null,
+          "basis": "Reviews the whole programme across all four domains.",
+          "knowledge": [],
+          "skills": [],
+          "attitudes": []
+        }
+      ]
+    }
+  ]
+}

@@ -271,7 +271,7 @@ export default function LandingPage() {
             </p>
 
             <Link
-              href="/course"
+              href="/curriculum"
               className="mt-7 inline-flex items-center gap-2 text-sm font-extrabold text-primary underline decoration-2 underline-offset-4 hover:opacity-75"
             >
               Explore the curriculum →
