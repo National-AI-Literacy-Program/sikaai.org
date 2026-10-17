@@ -151,13 +151,11 @@ export default function DayPage({
           <div className="lesson-reader">
             <header className="lesson-heading">
               <div className="lesson-heading-row">
-                <p className="eyebrow">AI FOUNDATIONS · DAY {day}</p>
                 {lesson.ksa && (
                   <div
                     className="lesson-ksa"
                     aria-label="Knowledge, skills, and attitude focus"
                   >
-                    <span className="ksa-label">KSA</span>
                     {lesson.ksa.knowledge?.map((item) => (
                       <span
                         className="ksa-chip ksa-knowledge"
@@ -289,13 +287,6 @@ export default function DayPage({
               )}
             </div>
           </div>
-          <nav className="lesson-navigation" aria-label="Lesson navigation">
-            {next ? (
-              <Link href={`/course/${next.day}`}>Next lesson →</Link>
-            ) : (
-              <Link href="/course">Back to course →</Link>
-            )}
-          </nav>
         </article>
       </div>
     </main>
