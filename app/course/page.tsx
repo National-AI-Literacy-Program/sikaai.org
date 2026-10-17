@@ -71,14 +71,22 @@ export default function CoursePage() {
       </nav>
       <div className="course-dashboard shell">
         <header className="course-dashboard-hero">
-          {/* <div className="course-progress-orb">
+          <div>
+            <p className="eyebrow">YOUR 4-WEEK LEARNING PATH</p>
+            <h1>
+              28 topics.
+              <br />
+              <span>4 focused weeks.</span>
+            </h1>
+          </div>
+          <div className="course-progress-orb">
             <strong>{overallProgress}%</strong>
             <span>
               {completed.length} of {total}
               <br />
               topics complete
             </span>
-          </div> */}
+          </div>
         </header>
         <section className="week-roadmap" aria-label="Course weeks">
           <div className="week-roadmap-track">
@@ -113,7 +121,25 @@ export default function CoursePage() {
         </section>
         <section className="week-panel">
           <div className="week-panel-heading">
-
+            <div>
+              <p className="eyebrow">
+                WEEK {selected.week} ·{" "}
+                {selected.complete
+                  ? "COMPLETE"
+                  : selected.locked
+                    ? "LOCKED"
+                    : "YOUR CURRENT FOCUS"}
+              </p>
+              <h2>
+                {selected.week === 1
+                  ? "Start with the foundations."
+                  : selected.week === 2
+                    ? "Make AI useful day to day."
+                    : selected.week === 3
+                      ? "Create with more confidence."
+                      : "Put it all into practice."}
+              </h2>
+            </div>
             <div className="week-score">
               <strong>{selected.done}</strong>
               <span>

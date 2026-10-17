@@ -12,7 +12,6 @@ import {
   type QuestionProfile,
 } from "@/lib/course";
 import { useCourseProgress } from "@/app/components/CourseProgress";
-import CourseSidebar from "@/app/components/CourseSidebar";
 import ThemeToggle from "@/app/components/ThemeToggle";
 
 type Option = { label: string; correct: boolean };
@@ -80,8 +79,9 @@ export default function DayPage({
           <Link
             className="button button-primary"
             href={`/course/${Math.max(1, day - 1)}`}
+            aria-label="Go to previous lesson"
           >
-            Go to previous lesson →
+            <span aria-hidden="true">←</span>
           </Link>
         </div>
       </main>
@@ -89,20 +89,21 @@ export default function DayPage({
 
   const next = index < lessons.length - 1 ? lessons[index + 1] : null;
   const sections = [
-    "The big idea",
-    ...(lesson.action ? ["Try it"] : []),
-    ...(lesson.quiz ? ["Quick check"] : []),
-    "Finish",
+    "Question",
+    "Explanation",
+    ...(lesson.action ? ["Practice"] : []),
+    ...(lesson.quiz ? ["Quiz"] : []),
+    "Complete",
   ];
   const finalStep = sections.length - 1;
-  const quizStep = lesson.action ? 2 : 1;
+  const quizStep = 2 + (lesson.action ? 1 : 0);
   const quizCorrect = lesson.quiz
     ? answer !== null && lesson.quiz.options[answer]?.correct
     : false;
   const actionCorrect = lesson.action
     ? actionAnswer !== null && lesson.action.options[actionAnswer]?.correct
     : false;
-  const questionStep = lesson.action ? 1 : 0;
+  const questionStep = lesson.action ? 2 : quizStep;
   const isQuestionStep =
     (Boolean(lesson.action) && step === questionStep) ||
     (Boolean(lesson.quiz) && step === quizStep);
@@ -121,32 +122,22 @@ export default function DayPage({
           Sikaai<span>AI</span>
         </Link>
         <div className="lesson-nav-actions">
-          <Link className="back-link" href="/course">
-            ← Course overview
+          <Link
+            className="back-link lesson-back-arrow"
+            href="/course"
+            aria-label="Back to course overview"
+          >
+            <span aria-hidden="true">←</span>
           </Link>
           <ThemeToggle />
         </div>
       </nav>
-      <div className="lesson-layout">
-        <CourseSidebar
-          lessons={lessons}
-          currentDay={day}
-          completed={completed}
-          activeSection={step}
-          onSectionChange={(section) => {
-            if (section > step && isQuestionStep && !currentQuestionCorrect)
-              return;
-            setAnswer(null);
-            setActionAnswer(null);
-            setStep(section);
-          }}
-        />
+      <div className="lesson-layout lesson-layout-clean">
         <article className="lesson-shell">
           <div className="lesson-meta">
             <span>
               LESSON {String(index + 1).padStart(2, "0")} / {lessons.length}
             </span>
-            <span>{sections[step].toUpperCase()}</span>
           </div>
           <div className="lesson-reader">
             <header className="lesson-heading">
@@ -177,8 +168,7 @@ export default function DayPage({
                   </div>
                 )}
               </div>
-              <h1>{getCourseTitle(lesson)}</h1>
-              <p className="lesson-hook">{lesson.hook}</p>
+              <h1 className="sr-only">Lesson {day}</h1>
             </header>
             <div
               className={`lesson-card-art ${hasCorrectAnswer ? "lesson-card-art-success" : ""}`}
@@ -199,12 +189,16 @@ export default function DayPage({
               />
             </div>
             {step === 0 && (
+              <section className="reader-section lesson-hook-screen">
+                <p className="reader-copy">{lesson.hook}</p>
+              </section>
+            )}
+            {step === 1 && (
               <section className="reader-section">
-                <p className="eyebrow">THE BIG IDEA</p>
                 <p className="reader-copy">{lesson.concept}</p>
               </section>
             )}
-            {step === 1 && lesson.action && (
+            {step === 2 && lesson.action && (
               <Question
                 title={lesson.action.title}
                 options={lesson.action.options}
@@ -212,10 +206,9 @@ export default function DayPage({
                 setAnswer={setActionAnswer}
                 feedback={lesson.action.feedback}
                 profile={getQuestionProfile(day, "action")}
-                label="TRY IT"
               />
             )}
-            {step === (lesson.action ? 2 : 1) && lesson.quiz && (
+            {step === quizStep && lesson.quiz && (
               <Question
                 title={lesson.quiz.title}
                 options={lesson.quiz.options}
@@ -223,36 +216,52 @@ export default function DayPage({
                 setAnswer={setAnswer}
                 feedback={lesson.quiz.feedback}
                 profile={getQuestionProfile(day, "quiz")}
-                label="QUICK CHECK"
               />
             )}
             {step === finalStep && (
-              <section className="reader-section finish-section">
-                <p className="eyebrow">
-                  {quizCorrect || completed.includes(day)
-                    ? "YOU DID IT"
-                    : "FINISH"}
-                </p>
-                <p className="reader-copy">
-                  {lesson.reward?.message ||
-                    "You have reached the end of this lesson."}
-                </p>
+              <section
+                className={`reader-section finish-section ${completed.includes(day) ? "finish-section-success" : ""}`}
+              >
+                {completed.includes(day) ? (
+                  <>
+                    <p className="eyebrow">COMPLETED</p>
+                    <h2>Congratulations.</h2>
+                    <p className="reader-copy">
+                      You&apos;ve successfully completed Day {day}.
+                    </p>
+                    {next && (
+                      <Link
+                        className="button button-primary finish-next-link"
+                        href={`/course/${next.day}`}
+                      >
+                        Continue to Day {next.day}{" "}
+                        <span aria-hidden="true">→</span>
+                      </Link>
+                    )}
+                  </>
+                ) : (
+                  <p className="reader-copy">
+                    {lesson.reward?.message ||
+                      "Complete this lesson to save your progress."}
+                  </p>
+                )}
               </section>
             )}
             <div className="reader-actions">
               {step > 0 && (
                 <button
-                  className="button button-secondary"
+                  className="button button-secondary arrow-control arrow-back"
                   type="button"
                   onClick={() => setStep((value) => value - 1)}
                 >
-                  ← Previous
+                  <span aria-hidden="true">←</span>
+                  <span className="sr-only">Previous</span>
                 </button>
               )}
               {step < finalStep ? (
                 <div className="next-topic-slot">
                   <button
-                    className={`button button-primary ${isQuestionStep && currentQuestionCorrect ? "button-ready" : ""}`}
+                    className={`button button-primary arrow-control arrow-next ${isQuestionStep && currentQuestionCorrect ? "button-ready" : ""}`}
                     type="button"
                     disabled={isQuestionStep && !currentQuestionCorrect}
                     onClick={() => {
@@ -262,7 +271,10 @@ export default function DayPage({
                       setStep((value) => value + 1);
                     }}
                   >
-                    Next topic <span aria-hidden="true">→</span>
+                    <span aria-hidden="true">→</span>
+                    <span className="sr-only">
+                      {day === 1 ? "Next" : "Next topic"}
+                    </span>
                   </button>
                   <p
                     className={`quiz-lock-hint ${isQuestionStep && !currentQuestionCorrect ? "is-visible" : ""}`}
@@ -270,7 +282,7 @@ export default function DayPage({
                   >
                     {isQuestionStep && !currentQuestionCorrect
                       ? "Choose the correct answer to continue."
-                      : "Ready for the next topic."}
+                      : ""}
                   </p>
                 </div>
               ) : (
@@ -300,7 +312,6 @@ function Question({
   setAnswer,
   feedback,
   profile,
-  label,
 }: {
   title: string;
   options: Option[];
@@ -308,13 +319,11 @@ function Question({
   setAnswer: (value: number) => void;
   feedback?: { correct?: string; incorrect?: string };
   profile: QuestionProfile;
-  label: string;
 }) {
   const correct = answer !== null && options[answer]?.correct;
   return (
     <section className="reader-section question-panel">
-      <div className="question-topline">
-        <p className="eyebrow">{label}</p>
+      <div className="question-topline question-topline-right">
         <div
           className="question-profile"
           aria-label={`Question profile: ${profile.level}, ${profile.type}, ${profile.demand}`}
