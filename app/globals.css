@@ -1368,26 +1368,7 @@ html[data-theme="dark"] .choice-correct {
   box-shadow: none;
 }
 
-/* SikaiAI refinement layer */
-:root {
-  --background: #f7fbfc;
-  --foreground: #102b35;
-  --muted: #607780;
-  --line: #d7e8ec;
-  --blue: #00aaff;
-  --blue-deep: #0078b8;
-  --blue-pale: #e6f6ff;
-}
-html[data-theme="dark"] {
-  --background: #2d2422;
-  --foreground: #f7f3ee;
-  --muted: #d3c4bd;
-  --line: #5b4842;
-  --blue: #d32f2f;
-  --blue-deep: #f3b229;
-  --blue-pale: #403330;
-  --saffron: #f3b229;
-}
+
 body,
 .course-page,
 .lesson-page,
