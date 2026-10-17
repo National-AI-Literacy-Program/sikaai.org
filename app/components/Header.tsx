@@ -9,8 +9,8 @@ export default function Header() {
           Sika<span>AI</span>
         </Link>
         <nav className="nav-links" aria-label="Main navigation">
-          <Link href="/#about" className="nav-cta ">
-            About us
+          <Link href="/#aboutus" className="nav-cta ">
+            About 
           </Link>
           <Link href="/#course-structure" className="nav-cta">
             Course Structure
