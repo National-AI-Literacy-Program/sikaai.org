@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { RotateCw } from "lucide-react";
+
 
 type TeamMember = {
   name: string;
@@ -14,16 +14,13 @@ type TeamMember = {
 
 function TeamCard({ member }: { member: TeamMember }) {
   return (
-    <div className="group w-full [perspective:1000px]">
-      <div className="relative w-full rounded-2xl transition-transform duration-1000 ease-in-out [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
+    <div className="group w-full perspective-[1000px]">
+      <div className="relative w-full rounded-2xl transition-transform duration-1000 ease-in-out transform-3d group-hover:transform-[rotateY(180deg)]">
         
         {/* FRONT SIDE */}
-        <div className="relative flex flex-col items-center rounded-2xl border border-border bg-background p-5 text-center shadow-sm [backface-visibility:hidden]">
-          <span className="absolute right-3 top-3 text-(--muted) transition-transform duration-500 group-hover:rotate-45">
-            <RotateCw size={16} />
-          </span>
-
-          {/* Removed bg-(--crimson-pale) so no background color shows around image edges */}
+        <div className="relative flex flex-col items-center rounded-2xl border border-border bg-background p-5 text-center shadow-sm backface-hidden">
+          
+      
           <div className="mx-auto relative size-20 overflow-hidden rounded-full mb-4 mt-2">
             <Image
               src={member.image}
@@ -41,10 +38,8 @@ function TeamCard({ member }: { member: TeamMember }) {
         </div>
 
         {/* BACK SIDE */}
-        <div className="absolute inset-0 flex flex-col items-center justify-center rounded-2xl border border-border bg-background p-5 text-center shadow-sm [backface-visibility:hidden] [transform:rotateY(180deg)]">
-          <span className="absolute right-3 top-3 text-(--muted) transition-transform duration-500 group-hover:-rotate-45">
-            <RotateCw size={16} />
-          </span>
+        <div className="absolute inset-0 flex flex-col items-center justify-center rounded-2xl border border-border bg-background p-5 text-center shadow-sm backface-hidden transform-[rotateY(180deg)]">
+      
 
           <h3 className="text-sm font-bold text-foreground">{member.name}</h3>
           <p className="mt-1 text-[11px] font-semibold text-(--muted)">
@@ -138,19 +133,19 @@ export default function Team() {
 
   return (
     <>
-      <section id="aboutus" className={`${wrap} py-20 sm:py-28`}>
+      <section id="aboutus" className="bg-(--crimson-pale) border-b border-border" >
+      <div className={`${wrap} py-20 sm:py-28 `}>
         <div className="mx-auto max-w-2xl text-center">
           <p className={eyebrow}>THE PEOPLE BEHIND SIKAAI</p>
           <h2 className={`${h2} mt-4`}>Our core team</h2>
-          <p className="mt-2 text-xs font-semibold text-(--muted)">
-            Hover over any card to connect
-          </p>
+         
         </div>
 
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 items-stretch">
           {team.map((member) => (
             <TeamCard key={member.name} member={member} />
           ))}
+        </div>
         </div>
       </section>
     </>

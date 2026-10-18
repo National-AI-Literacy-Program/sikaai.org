@@ -7,7 +7,8 @@ const lede = "text-base leading-7 text-(color:--muted) sm:text-lg sm:leading-8";
 export default function Ref() {
   return (
     <>
-      <section id="reference" className={`${wrap} py-20 sm:py-28`}>
+      <section id="reference" className="border-b border-border bg-(--crimson-pale)/40">
+        <div className={`${wrap} py-20 sm:py-28`}>
         <div className="relative overflow-hidden rounded-4xl bg-(--crimson-pale) px-6 py-14 sm:px-12 sm:py-20 lg:px-16">
           <div
             aria-hidden="true"
@@ -38,6 +39,7 @@ export default function Ref() {
               </Link>
             </div>
           </div>
+        </div>
         </div>
       </section>
     </>

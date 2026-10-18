@@ -83,7 +83,7 @@ const stats = [
                           <p className="text-2xl font-extrabold tracking-[-0.04em] sm:text-3xl">
                             {value}
                           </p>
-                          <p className="mt-1 text-xs font-semibold text-(color:--muted) sm:text-sm">
+                          <p className="mt-1 text-xs font-semibold text-(--muted) sm:text-sm">
                             {label}
                           </p>
                         </div>
