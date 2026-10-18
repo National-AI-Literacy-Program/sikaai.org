@@ -53,9 +53,6 @@ a {
    text-decoration: none;
 }
 
-/* button {
-  font: inherit;
-} */
 
 .shell {
   width: min(1120px, calc(100% - 48px));
@@ -66,8 +63,27 @@ a {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-block: 26px;
+  padding-block: 30px;
+  
 }
+
+.site-nav a:not(.brand),
+.site-nav .nav-cta {
+  box-sizing: border-box;
+  height: 44px;
+  display: inline-flex;
+  align-items: center;
+}
+
+
+.site-nav .theme-toggle {
+  width: 36px;
+  height: 36px;
+  min-height: 36px;
+  flex: 0 0 36px;
+  border-radius: 50%;
+}
+
 
 .brand {
   font-size: 21px;
@@ -82,9 +98,6 @@ h2 span {
   color: var(--crimson);
 }
 
-.brand:hover {
-  color: var(--crimson);
-}
 
 .nav-links {
   display: flex;
@@ -93,12 +106,6 @@ h2 span {
   color: var(--muted);
   font-size: 14px;
 }
-
-/* .nav-links a:not(.nav-cta):hover,
-.back-link:hover {
-  color: var(--background);
- background-color:blue ;
-} */
 
 .nav-cta {
   padding: 10px 16px;

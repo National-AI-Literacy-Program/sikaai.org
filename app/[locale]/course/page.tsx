@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { useMemo, useState } from "react";
 import { getCourseTitle, getLessonStatus, getLessons } from "@/lib/course";
 import { useCourseProgress } from "@/app/components/CourseProgress";
@@ -48,7 +48,7 @@ export default function CoursePage() {
           locked: week > currentWeek,
         };
       }),
-    [lessons, completed, currentWeek],
+    [roadmapLessons, currentWeek, completed],
   );
   const selected = weeks[selectedWeek - 1] ?? weeks[0];
   const overallProgress = total

@@ -18,7 +18,7 @@ export default function EmailGate() {
   }
   return (
     <form className="email-gate" onSubmit={submit} noValidate>
-      <label htmlFor="course-email">Your email, then let&apos;s learn</label>
+      
       <div className="email-row">
         <input
           id="course-email"
@@ -28,19 +28,19 @@ export default function EmailGate() {
             setEmail(event.target.value);
             setError("");
           }}
-          placeholder="you@example.com"
+          placeholder="Enter email address"
           autoComplete="email"
         />
         <button className="button button-primary" type="submit">
-          Get involved <span aria-hidden="true">→</span>
+        Start →
         </button>
       </div>
-      {error && (
+      {error? (
         <p className="form-error" role="alert">
           {error}
         </p>
-      )}
-      <small>No account or password. Your progress stays on this device.</small>
+      ) : ( <small>ss</small>)}
+     
     </form>
   );
 }

@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 
 const wrap = "mx-auto w-full max-w-6xl px-5 sm:px-8";
 const eyebrow =

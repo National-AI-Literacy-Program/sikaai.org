@@ -2,8 +2,8 @@
 
 import { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
-import Link from "next/link";
-import Header from "../components/Header";
+import { Link } from "@/i18n/navigation";
+import Header from "../../components/Header";
 import data from "@/data/curriculum.json"
 /* ---------- types ---------- */
 

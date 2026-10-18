@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { getCourseTitle, getLessonStatus, type Lesson } from "@/lib/course";
 
 export default function CourseSidebar({
