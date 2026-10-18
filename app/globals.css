@@ -25,6 +25,18 @@
   --saffron: #f3b229;
 }
 
+html[data-theme="dark"] {
+  --background: #3b302d;
+  --foreground: #f7f3ee;
+  --muted: #d8c9c1;
+  --line: #66504a;
+  --blue: #d32f2f;
+  --blue-deep: #f3b229;
+  --blue-pale: #51413c;
+  --crimson-pale:#51413c;
+  --saffron: #f3b229;
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -56,10 +68,13 @@ a {
   text-decoration: none;
 }
 
+<<<<<<< Updated upstream
 button {
   font: inherit;
 }
 
+=======
+>>>>>>> Stashed changes
 .shell {
   width: min(1120px, calc(100% - 48px));
   margin-inline: auto;
@@ -937,6 +952,10 @@ html[data-theme="dark"] .choice-correct {
   border-color: #72d68e;
   background: #23412d;
   color: #c8f6d2;
+<<<<<<< Updated upstream
+=======
+  
+>>>>>>> Stashed changes
 }
 
 .choice-wrong {
@@ -3133,6 +3152,7 @@ html[data-theme="dark"] .example-code {
   --blue-deep: #1e4e59;
   --blue-pale: #f0e5d7;
   --saffron: #f3b229;
+<<<<<<< Updated upstream
 }
 html[data-theme="dark"] {
   --background: #3b302d;
@@ -3144,6 +3164,10 @@ html[data-theme="dark"] {
   --blue-pale: #51413c;
   --saffron: #f3b229;
 }
+=======
+} */
+
+>>>>>>> Stashed changes
 html,
 body {
   background: var(--background);

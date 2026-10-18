@@ -4,9 +4,8 @@ import "./globals.css";
 import { ThemeProvider } from "./components/ThemeProvider";
 
 export const metadata: Metadata = {
-  title: "SikaiAI: AI for All",
-  description:
-    "Friendly, bite-sized AI lessons for every generation. Learn in 2.5 minutes a day.",
+  title: "SikaAI: AI for All",
+  description: "SikaAI: AI for All",
   generator: "SikaAI",
   icons: {
     icon: [

@@ -1,10 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import Header from "../components/Header";
-import data from "./curriculum.json";
-
+import data from "@/data/curriculum.json"
 /* ---------- types ---------- */
 
 type Competence = {
@@ -239,18 +239,88 @@ function DayItem({ d }: { d: Day }) {
   );
 }
 
-/* ---------- page ---------- */
+/* ---------- main content component ---------- */
 
-export default function CurriculumPage() {
-  const [selectedWeek, setSelectedWeek] = useState<number>(1);
+function CurriculumContent() {
+  const searchParams = useSearchParams();
+  const weekParam = searchParams.get("week");
+
+  // Read initial week from URL query parameter, fallback to week 1
+  const initialWeek = weekParam ? parseInt(weekParam, 10) : 1;
+  const [selectedWeek, setSelectedWeek] = useState<number>(initialWeek);
+
+  // Sync state if query parameter changes dynamically
+  useEffect(() => {
+    if (weekParam) {
+      const parsedWeek = parseInt(weekParam, 10);
+      if (!isNaN(parsedWeek) && parsedWeek >= 1 && parsedWeek <= 4) {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
+        setSelectedWeek(parsedWeek);
+      }
+    }
+  }, [weekParam]);
 
   return (
     <main className="min-h-dvh bg-background font-sans text-foreground antialiased">
       <Header />
 
       {/* Intro */}
-      <section className={`${wrap} pb-10`}>
-        
+      <section className={`${wrap} pb-5`}>
+        {/* Week selection buttons */}
+        <nav aria-label="Select a week" className="mt-8">
+          <ul className="flex flex-wrap gap-2">
+            {weeks.map((w) => (
+              <li key={w.week}>
+                <button
+                  type="button"
+                  onClick={() => setSelectedWeek(w.week)}
+                  className={`inline-grid h-9 place-items-center rounded-full border px-4 text-sm font-bold leading-none transition-colors ${focusRing} ${
+                    selectedWeek === w.week
+                      ? "border-primary bg-primary text-white"
+                      : "border-border text-foreground hover:border-primary hover:text-primary"
+                  }`}
+                >
+                  Week {w.week}: {w.domain}
+                </button>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </section>
+
+      {/* Weeks */}
+      {weeks.map((w) => (
+        w.week === selectedWeek && (
+          <section
+            key={w.week}
+            id={`week-${w.week}`}
+            aria-labelledby={`week-${w.week}-title`}
+            className={`${wrap} scroll-mt-8 py-5 sm:py-7`}
+          >
+            <header className="max-w-2xl">
+              <p className={`text-sm font-bold ${muted}`}>
+                Week {w.week}, days {w.days[0].day} to {w.days[w.days.length - 1].day}
+              </p>
+              <h2
+                id={`week-${w.week}-title`}
+                className="mt-1 text-3xl font-extrabold tracking-[-0.04em] sm:text-4xl"
+              >
+                {w.domain}
+              </h2>
+              <p className={`mt-3 text-base leading-7 ${muted}`}>{w.tagline}</p>
+            </header>
+
+            <ol className="mt-8 rounded-2xl border border-border px-5 sm:px-8">
+              {w.days.map((d) => (
+                <DayItem key={d.day} d={d} />
+              ))}
+            </ol>
+          </section>
+        )
+      ))}
+
+      {/* Source and attribution */}
+      <section className={`${wrap} pb-16 grid gap-20`}>
         <div className="mt-10 rounded-2xl border border-border p-5 sm:p-6">
           <h2 className="text-base font-extrabold tracking-tight">
             How to read each lesson
@@ -295,61 +365,6 @@ export default function CurriculumPage() {
           </dl>
         </div>
 
-        {/* Week selection buttons */}
-  <nav aria-label="Select a week" className="mt-8">
-  <ul className="flex flex-wrap gap-2">
-    {weeks.map((w) => (
-      <li key={w.week}>
-        <button
-          type="button"
-          onClick={() => setSelectedWeek(w.week)}
-          className={`inline-grid h-9 place-items-center rounded-full border px-4 text-sm font-bold leading-none transition-colors ${focusRing} ${
-            selectedWeek === w.week
-              ? "border-primary bg-primary text-white"
-              : "border-border text-foreground hover:border-primary hover:text-primary"
-          }`}
-        >
-          Week {w.week}: {w.domain}
-        </button>
-      </li>
-    ))}
-  </ul>
-</nav>
-      </section>
-
-      {/* Weeks */}
-      {weeks.map((w) => (
-        w.week === selectedWeek && (
-          <section
-            key={w.week}
-            id={`week-${w.week}`}
-            aria-labelledby={`week-${w.week}-title`}
-            className={`${wrap} scroll-mt-8 py-10 sm:py-14`}
-          >
-            <header className="max-w-2xl">
-              <p className={`text-sm font-bold ${muted}`}>
-                Week {w.week}, days {w.days[0].day} to {w.days[w.days.length - 1].day}
-              </p>
-              <h2
-                id={`week-${w.week}-title`}
-                className="mt-1 text-3xl font-extrabold tracking-[-0.04em] sm:text-4xl"
-              >
-                {w.domain}
-              </h2>
-              <p className={`mt-3 text-base leading-7 ${muted}`}>{w.tagline}</p>
-            </header>
-
-            <ol className="mt-8 rounded-2xl border border-border px-5 sm:px-8">
-              {w.days.map((d) => (
-                <DayItem key={d.day} d={d} />
-              ))}
-            </ol>
-          </section>
-        )
-      ))}
-
-      {/* Source and attribution */}
-      <section className={`${wrap} pb-16 pt-6`}>
         <div className="rounded-2xl border border-border p-6 sm:p-8">
           <h2 className="text-lg font-extrabold tracking-tight">
             Source framework
@@ -371,7 +386,6 @@ export default function CurriculumPage() {
           >
             Open the framework PDF ↗
           </Link>
-        
         </div>
       </section>
 
@@ -381,5 +395,15 @@ export default function CurriculumPage() {
         </div>
       </footer>
     </main>
+  );
+}
+
+/* ---------- page wrapper with suspense boundary ---------- */
+
+export default function CurriculumPage() {
+  return (
+    <Suspense fallback={<div className="min-h-dvh grid place-items-center text-sm font-bold">Loading curriculum...</div>}>
+      <CurriculumContent />
+    </Suspense>
   );
 }
