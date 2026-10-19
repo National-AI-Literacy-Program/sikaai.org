@@ -1,190 +1,239 @@
 "use client";
 
-import { Link } from "@/i18n/navigation";
-import { useMemo, useState } from "react";
-import { getCourseTitle, getLessonStatus, getLessons } from "@/lib/course";
-import { useCourseProgress } from "@/app/components/CourseProgress";
+import Image from "next/image";
+import { Link, useRouter } from "@/i18n/navigation";
+import { useEffect, useMemo, useState } from "react";
+import { getCourseTitle, getLessons } from "@/lib/course";
+import { TOTAL_DAYS, getEmail, useProgress } from "@/lib/progress";
+import Header from "@/app/components/Header";
 
 const WEEK_COUNT = 4;
-const TOPICS_PER_WEEK = 7;
+const PER_WEEK = 7;
+const weekTitles = [
+  "Start with the foundations.",
+  "Make AI useful day to day.",
+  "Create with more confidence.",
+  "Put it all into practice.",
+];
+const focus =
+  "focus-visible:outline-3 focus-visible:outline-offset-4 focus-visible:outline-primary";
+
+function Ring({ value, total }: { value: number; total: number }) {
+  const r = 34;
+  const c = 2 * Math.PI * r;
+  return (
+    <div className="relative size-24 shrink-0" role="img" aria-label={`${value} of ${total} lessons done`}>
+      <svg viewBox="0 0 80 80" className="size-full -rotate-90">
+        <circle cx="40" cy="40" r={r} fill="none" stroke="var(--line)" strokeWidth="9" />
+        <circle cx="40" cy="40" r={r} fill="none" stroke="var(--color-primary, #a32b2b)" strokeWidth="9" strokeLinecap="round" strokeDasharray={c} strokeDashoffset={c * (1 - value / total)} className="transition-all duration-700" />
+      </svg>
+      <p className="absolute inset-0 grid place-items-center text-lg font-extrabold">
+        {value}/{total}
+      </p>
+    </div>
+  );
+}
+
+function CertCard({ P }: { P: ReturnType<typeof useProgress> }) {
+  const [asking, setAsking] = useState(false);
+  const [name, setName] = useState("");
+  const text = P.certificate
+    ? "Your certificate is ready. Open it anytime."
+    : !P.canCertify
+      ? `Finish all ${TOTAL_DAYS} days to unlock it (${P.completed.length}/${TOTAL_DAYS}).`
+      : !P.online
+        ? "Connect to the internet once so we can save your results and issue it."
+        : "Save your results and get your certificate.";
+  const cta = `rounded-2xl bg-primary px-5 py-3 text-sm font-extrabold text-white shadow-[0_4px_0_0_#7d1f1f] disabled:opacity-40 disabled:shadow-none ${focus}`;
+  return (
+    <div className={`flex flex-wrap items-center gap-4 rounded-3xl border-2 p-5 ${P.canCertify ? "border-primary bg-(--crimson-pale) shadow-[0_6px_0_0_var(--line)]" : "border-border opacity-80"}`}>
+      <span className="text-4xl" aria-hidden>🎓</span>
+      <div className="min-w-0 flex-1">
+        <p className="text-base font-extrabold">Your certificate</p>
+        <p className="text-sm font-semibold text-(--muted)">{text}</p>
+      </div>
+      {P.certificate ? (
+        <Link href={`/certificate/${P.certificate.id}`} className={cta}>Open</Link>
+      ) : (
+        !asking && (
+          <button type="button" disabled={!P.canCertify || !P.online} onClick={() => setAsking(true)} className={cta}>
+            Get certificate
+          </button>
+        )
+      )}
+      {asking && !P.certificate && (
+        <form
+          className="basis-full"
+          onSubmit={(e) => {
+            e.preventDefault();
+            if (name.trim()) P.claim(name.trim());
+          }}
+        >
+          <label htmlFor="cert-name" className="text-sm font-bold">Name on your certificate</label>
+          <input
+            id="cert-name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            maxLength={60}
+            autoComplete="name"
+            className="mt-1 w-full rounded-xl border-2 border-border bg-background px-3 py-2.5 text-base font-semibold focus-visible:outline-2 focus-visible:outline-primary"
+          />
+          <p className="mt-1 text-xs font-semibold text-(--muted)">We&apos;ll upload your results now. The name can&apos;t be changed later.</p>
+          {P.error && <p role="alert" className="mt-2 text-sm font-bold text-(--error)">{P.error}</p>}
+          <div className="mt-3 flex gap-3">
+            <button type="submit" disabled={!name.trim() || P.busy || !P.online} className={cta}>
+              {P.busy ? "Saving your results…" : "Save and get certificate"}
+            </button>
+            <button type="button" onClick={() => setAsking(false)} disabled={P.busy} className={`rounded-2xl border-2 border-border px-5 py-3 text-sm font-bold ${focus}`}>Cancel</button>
+          </div>
+        </form>
+      )}
+    </div>
+  );
+}
 
 export default function CoursePage() {
   const lessons = getLessons();
-  const { completed } = useCourseProgress();
-  const total = WEEK_COUNT * TOPICS_PER_WEEK;
-  const roadmapLessons = Array.from(
-    { length: total },
-    (_, index) =>
-      lessons[index] ?? {
-        day: index + 1,
-        hook: "This topic will unlock as you move through the course.",
-        concept: "Upcoming topic",
-      },
-  );
-  const nextDay =
-    roadmapLessons.find((lesson) => !completed.includes(lesson.day))?.day ??
-    total;
-  const currentWeek = Math.min(
-    WEEK_COUNT,
-    Math.max(1, Math.ceil(nextDay / TOPICS_PER_WEEK)),
-  );
+  const P = useProgress();
+  const router = useRouter();
+  const [allowed, setAllowed] = useState(false);
+
+  // Guard: no email saved on this device -> back to the gate
+  useEffect(() => {
+    getEmail().then((e) => {
+      if (e) setAllowed(true);
+      else router.replace("/involve");
+    });
+  }, [router]);
+
+  const { completed } = P;
+  const total = WEEK_COUNT * PER_WEEK;
+
+  const roadmap = Array.from({ length: total }, (_, k) => lessons[k] ?? { day: k + 1, hook: "", concept: "Coming soon" });
+  const nextDay = roadmap.find((l) => !completed.includes(l.day))?.day ?? total;
+  const currentWeek = Math.min(WEEK_COUNT, Math.max(1, Math.ceil(nextDay / PER_WEEK)));
   const [selectedWeek, setSelectedWeek] = useState(currentWeek);
+
   const weeks = useMemo(
     () =>
-      Array.from({ length: WEEK_COUNT }, (_, index) => {
-        const week = index + 1;
-        const weekLessons = roadmapLessons.slice(
-          index * TOPICS_PER_WEEK,
-          (index + 1) * TOPICS_PER_WEEK,
-        );
-        const done = weekLessons.filter((lesson) =>
-          completed.includes(lesson.day),
-        ).length;
-        return {
-          week,
-          lessons: weekLessons,
-          done,
-          complete: done === weekLessons.length && weekLessons.length > 0,
-          locked: week > currentWeek,
-        };
+      Array.from({ length: WEEK_COUNT }, (_, k) => {
+        const ls = roadmap.slice(k * PER_WEEK, (k + 1) * PER_WEEK);
+        const done = ls.filter((l) => completed.includes(l.day)).length;
+        return { week: k + 1, lessons: ls, done, complete: done === ls.length, locked: k + 1 > currentWeek };
       }),
-    [roadmapLessons, currentWeek, completed],
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [completed, currentWeek, lessons.length],
   );
-  const selected = weeks[selectedWeek - 1] ?? weeks[0];
-  const overallProgress = total
-    ? Math.round((completed.length / total) * 100)
-    : 0;
-  const railProgress = (
-    (Math.max(0, Math.min(completed.length, total)) / total) *
-    100
-  ).toFixed(2);
+  const sel = weeks[selectedWeek - 1];
+  const doneCount = Math.min(completed.length, total);
+
+  // Must stay AFTER all hooks
+  if (!allowed) return null;
 
   return (
-    <main className="course-page">
-      <header className="site-nav shell">
-        <Link className="brand" href="/">Sika<span>AI</span></Link>
-        <Link className="back-link nav-cta" href="/">← Back home</Link>
-      </header>
-      <div className=" shell">
-        {/* <header className="course-dashboard-hero">
-          
-          <div className="course-progress-orb">
-            <strong>{overallProgress}%</strong>
-            <span>
-              {completed.length} of {total}
-              <br />
-              topics complete
-            </span>
+    <main className="min-h-dvh bg-background font-sans text-foreground antialiased">
+      <Header />
+
+      <div className="mx-auto w-full max-w-3xl px-5 pb-24 pt-6 sm:px-8">
+        {/* Greeting + overall progress */}
+        <section className="flex items-center gap-4 rounded-3xl border-2 border-border bg-(--crimson-pale) p-5 shadow-[0_6px_0_0_var(--line)] sm:gap-6 sm:p-6">
+          <Image src="/graphics/boy/winking.png" alt="" aria-hidden width={110} height={110} className="h-auto w-20 sm:w-28" />
+          <div className="min-w-0 flex-1">
+            <h1 className="text-2xl font-extrabold leading-tight tracking-[-0.04em] sm:text-3xl">
+              {doneCount === 0 ? "Ready for your first lesson?" : doneCount === total ? "You finished the course!" : "Welcome back, keep going!"}
+            </h1>
+            <p className="mt-1 text-sm font-semibold text-(--muted)">Each lesson takes about 2.5 minutes.</p>
           </div>
-        </header> */}
-        <section className="week-roadmap" aria-label="Course weeks">
-          <div className="week-roadmap-track">
-            <span style={{ width: `${railProgress}%` }} />
-          </div>
-          <div className="week-nodes">
-            {weeks.map((item) => (
+          <Ring value={doneCount} total={total} />
+        </section>
+
+        {P.canCertify && !P.certificate && <div className="mt-5"><CertCard P={P} /></div>}
+
+        {/* Week picker */}
+        <nav aria-label="Weeks" className="mt-8 grid grid-cols-4 gap-2 sm:gap-3">
+          {weeks.map((w) => {
+            const active = w.week === selectedWeek;
+            return (
               <button
+                key={w.week}
                 type="button"
-                className={`week-node ${selectedWeek === item.week ? "is-selected" : ""} ${item.complete ? "is-complete" : ""} ${item.locked ? "is-locked" : ""}`}
-                onClick={() => !item.locked && setSelectedWeek(item.week)}
-                aria-current={selectedWeek === item.week ? "step" : undefined}
-                disabled={item.locked}
-                key={item.week}
+                aria-current={active ? "step" : undefined}
+                onClick={() => setSelectedWeek(w.week)}
+                className={`rounded-2xl border-2 px-2 py-3 text-center transition ${focus} ${
+                  active ? "border-primary bg-primary text-white shadow-[0_4px_0_0_#7d1f1f]" : "border-border hover:border-primary disabled:opacity-50 disabled:hover:border-border"
+                }`}
               >
-                <span className="week-circle">
-                  {item.complete ? "✓" : item.week}
-                </span>
-                <span className="week-node-copy">
-                  <b>Week {item.week}</b>
-                  <small>
-                    {item.complete
-                      ? "Complete"
-                      : item.locked
-                        ? "Locked"
-                        : `${item.done}/7 topics`}
-                  </small>
+                <span className="block text-base font-extrabold">{w.complete ? "✓" : w.locked ? "🔒" : w.week}</span>
+                <span className="block text-xs font-bold">Week {w.week}</span>
+                <span className={`mt-0.5 block text-[11px] font-semibold ${active ? "text-white/80" : "text-(--muted)"}`}>
+                  {w.done}/{PER_WEEK}
                 </span>
               </button>
-            ))}
-          </div>
-        </section>
-        <section className="week-panel">
-          <div className="week-panel-heading">
-            <div>
-              <p className="eyebrow">
-                WEEK {selected.week} ·{" "}
-                {selected.complete
-                  ? "COMPLETE"
-                  : selected.locked
-                    ? "LOCKED"
-                    : "YOUR CURRENT FOCUS"}
-              </p>
-              <h2>
-                {selected.week === 1
-                  ? "Start with the foundations."
-                  : selected.week === 2
-                    ? "Make AI useful day to day."
-                    : selected.week === 3
-                      ? "Create with more confidence."
-                      : "Put it all into practice."}
-              </h2>
-            </div>
-            <div className="week-score">
-              <strong>{selected.done}</strong>
-              <span>
-                / 7<br />
-                done
-              </span>
-            </div>
-          </div>
-          <div className="week-progress">
-            <span style={{ width: `${(selected.done / 7) * 100}%` }} />
-          </div>
-          <div className="week-topic-list">
-            {selected.lessons.map((lesson) => {
-              const status = getLessonStatus(lesson.day, completed);
-              const locked = status === "locked";
-              const done = status === "completed";
-              return locked ? (
-                <div className="week-topic week-topic-locked" key={lesson.day}>
-                  <span className="topic-number">
-                    {String(lesson.day).padStart(2, "0")}
-                  </span>
-                  <div>
-                    <p className="eyebrow">LOCKED</p>
-                    <h3>{getCourseTitle(lesson)}</h3>
-                    <p>Complete the previous topic to unlock this lesson.</p>
-                  </div>
-                  <span className="topic-status">Locked</span>
-                </div>
-              ) : (
-                <Link
-                  className={`week-topic ${done ? "week-topic-done" : status === "current" ? "week-topic-current" : ""}`}
-                  href={`/course/${lesson.day}`}
-                  key={lesson.day}
+            );
+          })}
+        </nav>
+
+        <h2 className="mt-8 text-2xl font-extrabold tracking-[-0.04em] sm:text-3xl">{weekTitles[sel.week - 1]}</h2>
+
+        {/* Winding path of lessons */}
+        <ol className="relative mt-6 flex flex-col gap-5 rounded-3xl border-2 border-border px-4 py-8 sm:px-8">
+          <Image src="/graphics/elements/flower.png" alt="" aria-hidden width={60} height={60} className="pointer-events-none absolute right-3 top-3 h-auto w-10 opacity-80" />
+          <Image src="/graphics/elements/hill.png" alt="" aria-hidden width={300} height={100} className="pointer-events-none absolute bottom-0 right-0 h-auto w-40 opacity-50" />
+
+          {sel.lessons.map((lesson, k) => {
+            const status = P.statusOf(lesson.day);
+            const waiting = status === "waiting";
+            const locked = status === "locked" || waiting;
+            const done = status === "completed";
+            const current = status === "current";
+            const shift = Math.round(Math.sin(k * 1.1) * 36);
+            const title = locked && !lesson.hook ? "Coming soon" : getCourseTitle(lesson);
+
+            const node = (
+              <>
+                <span
+                  className={`relative grid size-16 shrink-0 place-items-center rounded-full border-4 text-xl font-extrabold transition ${
+                    done
+                      ? "border-(--success) bg-(--success) text-white"
+                      : current
+                        ? "border-primary bg-primary text-white shadow-[0_5px_0_0_#7d1f1f] group-hover:-translate-y-0.5"
+                        : "border-border bg-(--crimson-pale) text-(--muted)"
+                  }`}
                 >
-                  <span className="topic-number">
-                    {done ? "✓" : String(lesson.day).padStart(2, "0")}
+                  {done ? "✓" : waiting ? "⏳" : locked ? "🔒" : lesson.day}
+                  {current && <span className="absolute -inset-2 animate-ping rounded-full border-2 border-primary/40 motion-reduce:hidden" aria-hidden />}
+                </span>
+                <span className="min-w-0 text-left">
+                  <span className={`block text-xs font-bold ${current ? "text-primary" : "text-(--muted)"}`}>
+                    Day {lesson.day}
+                    {current && " · Start here"}
+                    {waiting && ` · Opens ${P.opensIn(lesson.day)}`}
                   </span>
-                  <div>
-                    <p className="eyebrow">
-                      {done
-                        ? "COMPLETED"
-                        : status === "current"
-                          ? "CONTINUE · 2.5 MIN"
-                          : "UP NEXT"}
-                    </p>
-                    <h3>{getCourseTitle(lesson)}</h3>
-                    <p>{lesson.hook}</p>
-                  </div>
-                  <span className="topic-status">
-                    {done ? "Done" : "Open →"}
-                  </span>
-                </Link>
-              );
-            })}
-          </div>
-        </section>
+                  <span className={`block text-base font-extrabold leading-snug ${locked ? "text-(--muted)" : ""}`}>{title}</span>
+                </span>
+              </>
+            );
+
+            return (
+              <li key={lesson.day} style={{ transform: `translateX(${shift}px)` }} className="w-full max-w-sm self-center max-sm:translate-x-0!">
+                {locked ? (
+                  <div className="flex items-center gap-4 opacity-70" aria-label={`Day ${lesson.day}, locked`}>{node}</div>
+                ) : (
+                  <Link href={`/course/${lesson.day}`} className={`group flex items-center gap-4 rounded-2xl ${focus}`}>
+                    {node}
+                    {current && <Image src="/graphics/boy/explaining.png" alt="" aria-hidden width={64} height={64} className="ml-auto h-auto w-14 sm:w-16" />}
+                  </Link>
+                )}
+              </li>
+            );
+          })}
+        </ol>
+
+        {sel.week === WEEK_COUNT && <div className="mt-5"><CertCard P={P} /></div>}
+
+        {sel.locked && (
+          <p className="mt-4 text-center text-sm font-semibold text-(--muted)">Finish Week {sel.week - 1} to unlock this week.</p>
+        )}
       </div>
     </main>
   );

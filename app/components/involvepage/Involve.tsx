@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useState } from "react";
+import { saveEmail } from "@/lib/progress";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 
@@ -9,7 +10,8 @@ export default function Involve() {
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
 
-  function submit(event: FormEvent) {
+  
+  async function submit(event: FormEvent) {
     event.preventDefault();
     const value = email.trim();
 
@@ -19,10 +21,23 @@ export default function Involve() {
     }
 
     try {
-      window.localStorage.setItem("Sikaai-email", value);
+      await saveEmail(value); // must finish before navigating
     } catch {
-      // storage can be blocked (private mode); continue anyway
+      setError(
+        "Couldn't save on this device. Check your browser storage settings.",
+      );
+      return;
     }
+
+    // Best-effort: register with the backend, never block the learner
+    if (navigator.onLine) {
+      fetch("/api/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: value }),
+      }).catch(() => {});
+    }
+
     router.push("/course");
   }
 
@@ -68,7 +83,6 @@ export default function Involve() {
           Start learning <span className="text-primary">AI</span> today.
         </h1>
 
-       
         <form
           onSubmit={submit}
           noValidate

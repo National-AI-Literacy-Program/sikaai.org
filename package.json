@@ -21,7 +21,6 @@
   },
   "devDependencies": {
     "@swc/core": "^1.16.18",
-    "@swc/core-win32-x64-msvc": "^1.16.18",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
