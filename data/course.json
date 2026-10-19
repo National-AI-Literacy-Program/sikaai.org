@@ -1,12 +1,19 @@
 [
   {
     "day": 1,
+    "title": "What Is AI, Really?",
     "hook": "Ever wondered how TikTok knows exactly which video will make you laugh, or how digital wallets like eSewa spot a fake transaction instantly?That is not magic — that is Artificial Intelligence (AI).",
     "concept": "In simple terms, AI is a way to teach computers to recognize patterns and make decisions, much like how a human learns from experience. Think of a local farmer predicting the monsoon. A farmer doesn't just guess; they look at the clouds, remember past weather patterns, and make an informed prediction. AI does the exact same thing. But instead of looking at the sky, it looks at data — like millions of past videos or financial records — to predict what you want to watch or if a payment is safe. AI is not a physical robot from a sci-fi movie. It is simply a very fast, very smart software tool that helps us sort through massive amounts of information to solve everyday problems.",
     "ksa": {
-      "knowledge": ["1.4"],
-      "skills": ["Self-awareness,Social awareness"],
-      "attitude": ["Curious,Responsible"]
+      "knowledge": [
+        "1.4"
+      ],
+      "skills": [
+        "Self-awareness,Social awareness"
+      ],
+      "attitude": [
+        "Curious,Responsible"
+      ]
     },
     "action": {
       "title": "Think about your smartphone. Tap the app below where you think AI is working right now:",
@@ -60,6 +67,2152 @@
     },
     "reward": {
       "message": "Great job! You have taken your first step. See you tomorrow to uncover why AI chatbots aren't quite what they seem."
+    }
+  },
+  {
+    "day": 2,
+    "title": "AI Doesn't “Think” Like You",
+    "hook": "A chatbot says “I think” and “I feel.” It sounds like a friend. But is it?",
+    "concept": "Type “Dal Bhat Power, 24…” on your phone. The keyboard may suggest “Hour.” Did your phone understand the saying? No. It has seen those words together many times and predicted what comes next. A chatbot does the same thing, but with a huge amount of text. It builds answers word by word using patterns. It has no feelings and no real understanding. So be careful with words. “AI thinks” and “AI understands” are misleading. Better: “AI predicts” and “AI finds patterns.”",
+    "ksa": {
+      "knowledge": [
+        "1.3",
+        "1.4"
+      ],
+      "skills": [
+        "Communication"
+      ],
+      "attitude": [
+        "Reflective,Responsible"
+      ]
+    },
+    "action": {
+      "title": "A student typed: “I failed my exam and feel like nobody cares.” The chatbot replied: “I'm so sorry to hear that. I truly understand how you feel.” Does the AI actually feel sorry?",
+      "options": [
+        {
+          "label": "Yes, it feels sad for me",
+          "correct": false
+        },
+        {
+          "label": "No, it's predicting comforting-sounding words",
+          "correct": true
+        }
+      ],
+      "feedback": {
+        "correct": "Right: no feelings, just well-matched words.",
+        "incorrect": "Not quite. AI has no feelings to feel sorry with, only patterns to match."
+      }
+    },
+    "quiz": {
+      "title": "Which sentence describes AI most accurately?",
+      "options": [
+        {
+          "label": "AI understands your emotions like a friend does.",
+          "correct": false
+        },
+        {
+          "label": "AI predicts likely responses based on patterns in data, without real feelings.",
+          "correct": true
+        },
+        {
+          "label": "AI knows everything happening in the world right now.",
+          "correct": false
+        }
+      ],
+      "feedback": {
+        "correct": "Correct! Predicting patterns, not real feelings.",
+        "incorrect": "Remember: no thoughts, no feelings, just pattern-matching."
+      }
+    },
+    "reward": {
+      "message": "Awesome! You just upgraded your AI vocabulary. Come back tomorrow to learn what to do when AI sounds sure but is wrong."
+    }
+  },
+  {
+    "day": 3,
+    "title": "Can You Trust the Answer?",
+    "hook": "A friend shows you a chatbot's homework answer. It sounds very sure. But sounding sure is not the same as being right.",
+    "concept": "AI predicts words from patterns. It does not check if something is true. So it can make mistakes and still sound confident. Sometimes it even makes up facts that do not exist.\nSo before you use an AI answer, decide: accept it, revise it, or reject it.\nAccept: it is correct after you check.\nRevise: part of it is right, but you fix the mistake.\nReject: it is wrong, so do not use it.\nTo check, use your textbook, your teacher, a trusted source, or do the work yourself.",
+    "ksa": {
+      "knowledge": [
+        "3.1",
+        "3.2"
+      ],
+      "skills": [
+        "Critical Thinking"
+      ],
+      "attitude": [
+        "Responsible"
+      ]
+    },
+    "action": {
+      "title": "Student: How many provinces does Nepal have? AI: Nepal has 5 provinces. Is this AI's answer correct?",
+      "options": [
+        {
+          "label": "Yes, that's right",
+          "correct": false
+        },
+        {
+          "label": "No, Nepal actually has 7 provinces",
+          "correct": true
+        }
+      ],
+      "feedback": {
+        "correct": "Correct! Nepal has 7 provinces. Always double-check confident-sounding answers.",
+        "incorrect": "Actually, Nepal has 7 provinces. AI can sound confident and still be wrong."
+      }
+    },
+    "quiz": {
+      "title": "An AI gives you a fact for your homework. What should you do first?",
+      "options": [
+        {
+          "label": "Copy it.",
+          "correct": false
+        },
+        {
+          "label": "Check it with a textbook, teacher or trusted source.",
+          "correct": true
+        },
+        {
+          "label": "Trust it if it sounds sure.",
+          "correct": false
+        }
+      ],
+      "feedback": {
+        "correct": "Yes! Check first, then decide.",
+        "incorrect": "Not quite. Sounding sure doesn't make it true, and copying without checking could put a wrong answer in your homework. Check it first."
+      }
+    },
+    "reward": {
+      "message": "Awesome! You are now an AI fact-checker. Come back tomorrow to find out why your video feed seems to know you."
+    }
+  },
+  {
+    "day": 4,
+    "title": "Why Does My Feed Know Me So Well?",
+    "hook": "You watch two cricket videos. Suddenly your whole feed is full of cricket. Coincidence?",
+    "concept": "Apps like YouTube and TikTok use AI to recommend videos. They use data about you: what you watch, like and search, and how long you stay on each video.\nThe AI finds patterns in that data and predicts what you will probably click next. It does not know you as a person. It only uses data about your past choices.\nThat is why it can help you find songs and videos you love. But it can also make your world smaller. Imagine a shopkeeper who only shows you what you bought before. You may never discover something new.",
+    "ksa": {
+      "knowledge": [
+        "1.1",
+        "3.2",
+        "4.1"
+      ],
+      "skills": [
+        "Self-awareness,Social awareness"
+      ],
+      "attitude": [
+        "Curious,Reflective"
+      ]
+    },
+    "action": {
+      "title": "Sita only watches cricket and momo videos. Which video will her feed most likely show next?",
+      "options": [
+        {
+          "label": "Cricket match highlights",
+          "correct": true
+        },
+        {
+          "label": "A chemistry experiment for kids",
+          "correct": false
+        },
+        {
+          "label": "A documentary about deep-sea animals",
+          "correct": false
+        }
+      ],
+      "feedback": {
+        "correct": "Yes! The AI predicts from her past data. She watches a lot of cricket, so she will probably see more.",
+        "incorrect": "Not quite. Sita has not watched or searched for anything like this, so the AI has no pattern to follow. Try again!"
+      }
+    },
+    "quiz": {
+      "title": "Which of these can a video app use to recommend videos to you?",
+      "options": [
+        {
+          "label": "What you watch, like and search",
+          "correct": true
+        },
+        {
+          "label": "What you are thinking about",
+          "correct": false
+        },
+        {
+          "label": "The same videos for every user",
+          "correct": false
+        }
+      ],
+      "feedback": {
+        "correct": "Yes! AI uses data about you to predict what you may enjoy.",
+        "incorrect": "Not quite. AI cannot read your thoughts, and recommendations are not the same for everyone. They come from data about you. Try again!"
+      }
+    },
+    "reward": {
+      "message": "Nicely done! You now know why your feed looks the way it does. Tomorrow: what does it actually cost the planet every time AI answers a question?"
+    }
+  },
+  {
+    "day": 5,
+    "title": "The Hidden Cost of a Chatbot Reply",
+    "hook": "Your phone is at 5% and you panic. You search for the charger like it's treasure. Does AI ever get that hungry?",
+    "concept": "AI is not magic. It is software, and software runs on real computers. Computers need electricity to work, just like your phone. So every AI reply, even a simple one, has a small real-world cost. This doesn't mean we should stop using AI, but for simple tasks, it's worth asking: “Do I really need AI here, or can I quickly work this out myself?” The same way you might walk to a nearby shop instead of taking a vehicle just to save fuel.",
+    "ksa": {
+      "knowledge": [
+        "1.5"
+      ],
+      "skills": [
+        "Self-awareness,Social awareness"
+      ],
+      "attitude": [
+        "Responsible"
+      ]
+    },
+    "action": {
+      "title": "Which of these does a chatbot need to work?",
+      "options": [
+        {
+          "label": "Electricity and computer hardware",
+          "correct": true
+        },
+        {
+          "label": "Just a good idea",
+          "correct": false
+        },
+        {
+          "label": "Nothing, it floats in the air",
+          "correct": false
+        }
+      ],
+      "feedback": {
+        "correct": "Yes! Every AI answer runs on real machines that use electricity.",
+        "incorrect": "Not quite. AI is not magic. It runs on real computers that need electricity and cooling. Try again!"
+      }
+    },
+    "quiz": {
+      "title": "What is one hidden cost of using AI?",
+      "options": [
+        {
+          "label": "AI makes your phone battery last longer.",
+          "correct": false
+        },
+        {
+          "label": "AI uses real electricity and water in data centers to run.",
+          "correct": true
+        },
+        {
+          "label": "AI has no environmental impact at all.",
+          "correct": false
+        }
+      ],
+      "feedback": {
+        "correct": "Correct! Real electricity, real water, every single reply.",
+        "incorrect": "Remember: every AI reply runs on real hardware, using real resources."
+      }
+    },
+    "reward": {
+      "message": "Nice, being mindful, not fearful. Come back tomorrow to find out if AI can be unfair. 🤔"
+    }
+  },
+  {
+    "day": 6,
+    "title": "Can AI Be Unfair?",
+    "hook": "Imagine someone describes you using only your height and your favourite colour. Is that really you? 🤔 AI learns from data like this. So can it be fair to everyone?",
+    "concept": "AI finds patterns in data. People choose that data.\nIf the data leaves some people out, or is unfair, AI can copy the same unfairness. This is called bias.\nHere is an example. AI often has much more English to read than Nepali. So it can be weaker with Nepali words, names and places.\nData also never tells the whole story. It can show your height, but not your kindness or your dreams.\nSo people must check AI, and not just trust it.",
+    "ksa": {
+      "knowledge": [
+        "2.1",
+        "2.5",
+        "4.1"
+      ],
+      "skills": [
+        "Critical Thinking,Self-awareness,Social awareness"
+      ],
+      "attitude": [
+        "Empathetic,Responsible"
+      ]
+    },
+    "action": {
+      "title": "Maya's data card says: Height: 150 cm. Favourite colour: red. What is missing from this data?",
+      "options": [
+        {
+          "label": "Her kindness, dreams and talents",
+          "correct": true
+        },
+        {
+          "label": "Her height",
+          "correct": false
+        },
+        {
+          "label": "Her favourite colour",
+          "correct": false
+        }
+      ],
+      "feedback": {
+        "correct": "Yes! Data captures only a small part of a person. Always ask: who or what is left out?",
+        "incorrect": "Not quite. That is already on the card. Think about what numbers and colours cannot show. Try again!"
+      }
+    },
+    "quiz": {
+      "title": "Why can AI be unfair?",
+      "options": [
+        {
+          "label": "It chooses to be mean",
+          "correct": false
+        },
+        {
+          "label": "It copies patterns from data that may be unfair or leave people out",
+          "correct": true
+        },
+        {
+          "label": "Computers use too much electricity",
+          "correct": false
+        }
+      ],
+      "feedback": {
+        "correct": "Yes! AI copies patterns from data, and that data may be unfair or leave people out.",
+        "incorrect": "Not quite. AI does not choose to be mean, and electricity use is a different issue. Unfair or incomplete data can make AI unfair. Try again!"
+      }
+    },
+    "reward": {
+      "message": "Tomorrow, we close Week 1: how do you decide if a certain way of using AI is actually okay?"
+    }
+  },
+  {
+    "day": 7,
+    "title": "Is It Fair to Use AI This Way?",
+    "hook": "An AI makes a painting in the style of a Mithila artist. The artist spent years learning that art. Is it fair?",
+    "concept": "AI is a tool. Whether using it is fair or unfair depends on how it was designed, how it was built, and why you use it.\nHow it was built matters too. What data did it learn from? Did the artists agree?\nThink of the Mithila artist. If someone uses AI to copy the style and sells the pictures without credit, it can hurt the artist.\nBefore you use AI, ask: Is it honest? Is it fair? Who could be hurt?",
+    "ksa": {
+      "knowledge": [
+        "1.4",
+        "4.1",
+        "4.3"
+      ],
+      "skills": [
+        "Critical Thinking,Problem Solving,Self-awareness,Social awareness"
+      ],
+      "attitude": [
+        "Reflective,Responsible"
+      ]
+    },
+    "action": {
+      "title": "A student uses AI to copy a Mithila artist's style and sells the pictures without telling anyone. What is the most important question to ask?",
+      "options": [
+        {
+          "label": "Is it fair to the artist?",
+          "correct": true
+        },
+        {
+          "label": "Are the colours bright?",
+          "correct": false
+        },
+        {
+          "label": "Was it made quickly?",
+          "correct": false
+        }
+      ],
+      "feedback": {
+        "correct": "Yes! Fairness to the people behind the work is the key question.",
+        "incorrect": "Not quite. Colours and speed don't tell us if it is fair. Think about the artist. Try again!"
+      }
+    },
+    "quiz": {
+      "title": "Fair use of AI depends on:",
+      "options": [
+        {
+          "label": "Only the AI tool",
+          "correct": false
+        },
+        {
+          "label": "Only the user",
+          "correct": false
+        },
+        {
+          "label": "How AI is designed and built, and why you use it",
+          "correct": true
+        }
+      ],
+      "feedback": {
+        "correct": "Yes! Design, development and your own intention all matter.",
+        "incorrect": "Not quite. Both parts matter: how the AI was designed and built, and your own intention. Try again!"
+      }
+    },
+    "reward": {
+      "message": "Week 1 complete! You are no longer just using AI. You are questioning it, checking it and using it fairly. Come back next week to Create with AI!"
+    },
+    "review": {
+      "title": "Week 1 Revision Quiz: True or False? Tap one for each statement.",
+      "questions": [
+        {
+          "statement": "AI can work quietly in the background of your apps.",
+          "options": [
+            {
+              "label": "True",
+              "correct": true
+            },
+            {
+              "label": "False",
+              "correct": false
+            }
+          ],
+          "feedback": {
+            "correct": "Right! You don't always see AI, but it is often working behind the scenes.",
+            "incorrect": "Not quite. AI is often hidden in the background, like in video recommendations and maps."
+          }
+        },
+        {
+          "statement": "A chatbot understands your feelings like a friend.",
+          "options": [
+            {
+              "label": "True",
+              "correct": false
+            },
+            {
+              "label": "False",
+              "correct": true
+            }
+          ],
+          "feedback": {
+            "correct": "Right! A chatbot predicts words from patterns. It has no feelings.",
+            "incorrect": "Not quite. A chatbot can sound caring, but it only predicts words from patterns. It has no feelings or understanding."
+          }
+        },
+        {
+          "statement": "If AI sounds sure, you do not need to check its answer.",
+          "options": [
+            {
+              "label": "True",
+              "correct": false
+            },
+            {
+              "label": "False",
+              "correct": true
+            }
+          ],
+          "feedback": {
+            "correct": "Right! AI can sound sure and still be wrong, so check, then accept, revise or reject.",
+            "incorrect": "Not quite. Sounding sure doesn't make it correct. Always check first."
+          }
+        },
+        {
+          "statement": "Video apps use data about what you watch, like and search to recommend videos.",
+          "options": [
+            {
+              "label": "True",
+              "correct": true
+            },
+            {
+              "label": "False",
+              "correct": false
+            }
+          ],
+          "feedback": {
+            "correct": "Right! AI uses data about you to predict what you may enjoy.",
+            "incorrect": "Not quite. Recommendations come from data about your clicks, likes and searches."
+          }
+        },
+        {
+          "statement": "AI works without electricity because it is only software.",
+          "options": [
+            {
+              "label": "True",
+              "correct": false
+            },
+            {
+              "label": "False",
+              "correct": true
+            }
+          ],
+          "feedback": {
+            "correct": "Right! Software runs on real computers, which need electricity and cooling.",
+            "incorrect": "Not quite. No electricity means no computers, and no computers means no AI."
+          }
+        },
+        {
+          "statement": "AI can be unfair if the data it learns from is unfair or leaves people out.",
+          "options": [
+            {
+              "label": "True",
+              "correct": true
+            },
+            {
+              "label": "False",
+              "correct": false
+            }
+          ],
+          "feedback": {
+            "correct": "Right! Biased data can lead to biased results.",
+            "incorrect": "Not quite. AI finds patterns in data, so unfair or incomplete data can make it unfair."
+          }
+        },
+        {
+          "statement": "Fair use of AI depends only on the AI tool, not on the user.",
+          "options": [
+            {
+              "label": "True",
+              "correct": false
+            },
+            {
+              "label": "False",
+              "correct": true
+            }
+          ],
+          "feedback": {
+            "correct": "Right! It depends on how the AI was designed and built, and on your own intention.",
+            "incorrect": "Not quite. Your own intention matters too, along with how the AI was designed and built."
+          }
+        }
+      ]
+    }
+  },
+  {
+    "day": 8,
+    "title": "Your Idea First, AI Second",
+    "hook": "You are writing a story about a jungle. Nice, but a bit ordinary. Now imagine the jungle is in space. One twist, and the story gets exciting!",
+    "concept": "Great ideas start with you. First, think of your own idea, even a small one.\nThen AI can help spark more ideas. You can ask it for twists, questions or “what if” suggestions. Its suggestions can surprise you and push your thinking in new directions.\nBut AI does not replace your idea. It only produces suggestions. You decide what to keep, change or drop.",
+    "ksa": {
+      "knowledge": [
+        "3.1"
+      ],
+      "skills": [
+        "Creativity"
+      ],
+      "attitude": [
+        "Innovative,Adaptable"
+      ]
+    },
+    "action": {
+      "title": "Your idea is a story about a farmer. Which question to AI will spark the best new ideas?",
+      "options": [
+        {
+          "label": "“Give me 3 surprising twists for my story about a farmer.”",
+          "correct": true
+        },
+        {
+          "label": "“Write my whole story.”",
+          "correct": false
+        },
+        {
+          "label": "“Do my homework.”",
+          "correct": false
+        }
+      ],
+      "feedback": {
+        "correct": "Yes! Your idea comes first, and AI sparks new directions.",
+        "incorrect": "Not quite. That asks AI to replace your idea. Ask for twists or “what if” questions instead. Try again!"
+      }
+    },
+    "quiz": {
+      "title": "AI suggests “a jungle in space” for your story. What should you do?",
+      "options": [
+        {
+          "label": "Use it exactly as it is",
+          "correct": false
+        },
+        {
+          "label": "Decide what to keep, change or drop to fit your idea",
+          "correct": true
+        },
+        {
+          "label": "Delete your own idea",
+          "correct": false
+        }
+      ],
+      "feedback": {
+        "correct": "Yes! You are the creator. AI only gives suggestions.",
+        "incorrect": "Not quite. Your idea matters most. Look at the suggestion, then decide what fits your story. Try again!"
+      }
+    },
+    "reward": {
+      "message": "Good instinct! Your idea comes first, and AI helps it grow. Come back tomorrow to remix AI's ideas with yours, not replace them."
+    }
+  },
+  {
+    "day": 9,
+    "title": "Remix, Don't Replace",
+    "hook": "You love momo. AI suggests pizza. Mix them and you get momo pizza! That is a remix, and it's how new ideas are born.",
+    "concept": "A good creator follows three steps:\nThink first. Write your own ideas before you ask AI.\nCompare. Ask AI for ideas, then put them next to yours. What is the same? What is different?\nRemix. Take the best parts of both and build something new.\nBut be careful. AI's idea may look impressive and make yours feel small. Your idea still counts. You decide what to keep, change or drop.",
+    "ksa": {
+      "knowledge": [
+        "3.1"
+      ],
+      "skills": [
+        "Creativity"
+      ],
+      "attitude": [
+        "Innovative,Adaptable"
+      ]
+    },
+    "action": {
+      "title": "AI suggests three story endings. Which approach counts as a genuine “remix”?",
+      "options": [
+        {
+          "label": "Copy the ending you liked best, word for word",
+          "correct": false
+        },
+        {
+          "label": "Take the strongest idea from two endings and rewrite it in your own words and style",
+          "correct": true
+        }
+      ],
+      "feedback": {
+        "correct": "Right — that's a real remix, in your own voice.",
+        "incorrect": "That's just copying with extra steps — try blending ideas in your own words."
+      }
+    },
+    "quiz": {
+      "title": "What does it mean to “remix” an AI suggestion instead of just using it directly?",
+      "options": [
+        {
+          "label": "Rejecting every suggestion AI makes, no matter what.",
+          "correct": false
+        },
+        {
+          "label": "Taking the useful parts and reshaping them with your own voice and judgment.",
+          "correct": true
+        },
+        {
+          "label": "Copying the AI's exact words to save time.",
+          "correct": false
+        }
+      ],
+      "feedback": {
+        "correct": "Correct! Remixing means reshaping ideas with your own voice.",
+        "incorrect": "Remixing isn't all-or-nothing — it's picking and reshaping the useful parts."
+      }
+    },
+    "reward": {
+      "message": "Nicely done! Remixing keeps you in charge of your own work. Tomorrow: what actually happens when AI turns your words into a picture?"
+    }
+  },
+  {
+    "day": 10,
+    "title": "Turning Words Into Pictures",
+    "hook": "Close your eyes. Picture a goat wearing sunglasses on a grassy ground. Now imagine typing those words and watching the picture appear. That's what AI image tools do!",
+    "concept": "An AI image generator turns your words into a picture. The words you type are called a prompt.\nDetails in your prompt shape the result. “A goat” gives a plain picture. “A goat wearing sunglasses on a grassy ground” gives something much closer to your idea.\nAI cannot see the picture in your mind. It only uses your words. So after it makes a picture, check it. What matches your idea? What did it get wrong? Then change your words and try again.",
+    "ksa": {
+      "knowledge": [
+        "1.4"
+      ],
+      "skills": [
+        "Collaboration,Creativity"
+      ],
+      "attitude": [
+        "Adaptable,Curious"
+      ]
+    },
+    "action": {
+      "title": "You want a picture of a happy village festival. Which prompt will give the closest result?",
+      "options": [
+        {
+          "label": "“Festival”",
+          "correct": false
+        },
+        {
+          "label": "“A happy village festival at night with colourful lights, people dancing, cartoon style”",
+          "correct": true
+        },
+        {
+          "label": "“A picture”",
+          "correct": false
+        }
+      ],
+      "feedback": {
+        "correct": "Yes! It has who, where and style, so the AI has more to work with.",
+        "incorrect": "Not quite. Too few details. AI cannot see your idea, so tell it who, where and what style. Try again!"
+      }
+    },
+    "quiz": {
+      "title": "AI makes a picture, but it is not what you imagined. What is the best next step?",
+      "options": [
+        {
+          "label": "Accept it, because AI made it",
+          "correct": false
+        },
+        {
+          "label": "Compare it with your idea, then change your words and try again",
+          "correct": true
+        },
+        {
+          "label": "Stop using AI",
+          "correct": false
+        }
+      ],
+      "feedback": {
+        "correct": "Yes! The first picture is a first try. Compare, adjust your words and try again.",
+        "incorrect": "Not quite. Check whether the picture matches your idea, then change your prompt. Try again!"
+      }
+    },
+    "reward": {
+      "message": "Nicely done! You can now turn your words into pictures. Come back tomorrow for the next step."
+    }
+  },
+  {
+    "day": 11,
+    "title": "If AI Can Draw It, Can AI Fake It?",
+    "hook": "A photo of a flooded bridge goes viral. Your family shares it. But the flood never happened. Someone made that picture with AI.",
+    "concept": "AI can make more than words. It can make pictures, voices and videos too. Some are so realistic that it is hard to tell real from fake.\nA fake picture, voice or video that looks real is called a deepfake.\nLooking closely is not enough to catch a fake. Instead, check the source. Who posted it? Do trusted news sources report it?\nAnd never use AI to make fakes that could trick or hurt people.",
+    "ksa": {
+      "knowledge": [
+        "1.3",
+        "3.2"
+      ],
+      "skills": [
+        "Critical Thinking,Self-awareness,Social awareness"
+      ],
+      "attitude": [
+        "Responsible,Reflective"
+      ]
+    },
+    "action": {
+      "title": "A photo of a flooded bridge is going viral. It looks real. What should you do first?",
+      "options": [
+        {
+          "label": "Share it fast so people stay safe",
+          "correct": false
+        },
+        {
+          "label": "Check who posted it and whether trusted news reports it",
+          "correct": true
+        },
+        {
+          "label": "Trust it because it looks real",
+          "correct": false
+        }
+      ],
+      "feedback": {
+        "correct": "Yes! Check the source before you share.",
+        "incorrect": "Not quite. A picture that looks real can still be fake. Check who posted it and whether trusted news reports it first. Try again!"
+      }
+    },
+    "quiz": {
+      "title": "What's the safest habit when you see a shocking photo or video online?",
+      "options": [
+        {
+          "label": "Forward it right away, just in case it's true.",
+          "correct": false
+        },
+        {
+          "label": "Verify it with a trusted source before believing or sharing it.",
+          "correct": true
+        },
+        {
+          "label": "Only forward it if it's about someone you don't like.",
+          "correct": false
+        }
+      ],
+      "feedback": {
+        "correct": "Correct! Verify first, especially before sharing.",
+        "incorrect": "Speed isn't safety — always verify shocking content before acting on it."
+      }
+    },
+    "reward": {
+      "message": "This is one of the most important habits in this whole program. These tricks often target parents and grandparents especially — teach this one to your family tonight. Tomorrow: how do you get genuinely useful feedback from AI, not just empty praise?"
+    }
+  },
+  {
+    "day": 12,
+    "title": "Getting Better Feedback",
+    "hook": "You show your drawing to a friend. They say, “Nice.” Helpful? Not really. You want to know what works and what to fix. AI feedback is the same: a better question gets better feedback.",
+    "concept": "AI can give feedback on your idea, but it only knows what you tell it. Compare two prompts for the same poem:\nPrompt 1: “Is my poem good?”\nPrompt 2: “I am in Class 7. I wrote a 4-line poem about the monsoon. Tell me 2 things that work and 1 thing to improve, in simple words.”\nPrompt 2 gets better feedback. It has context (who you are and what it is), it is specific (what you want), and it has limits (2 things, 1 thing, simple words).\nSame idea, different prompt, different answer. And share your idea, not private details like your address or phone number.",
+    "ksa": {
+      "knowledge": [
+        "2.3",
+        "3.3"
+      ],
+      "skills": [
+        "Computational Thinking,Creativity"
+      ],
+      "attitude": [
+        "Adaptable,Innovative"
+      ]
+    },
+    "action": {
+      "title": "You ask AI, “Is my story good?” Which change will get more useful feedback?",
+      "options": [
+        {
+          "label": "Add “please” at the start",
+          "correct": false
+        },
+        {
+          "label": "Add who you are, what the story is about, and what kind of feedback you want",
+          "correct": true
+        },
+        {
+          "label": "Repeat “good” three times",
+          "correct": false
+        }
+      ],
+      "feedback": {
+        "correct": "Yes! Context, details and a clear request give AI more to work with.",
+        "incorrect": "Not quite. Neither gives the AI more useful information. Add context, details and the kind of feedback you want. Try again!"
+      }
+    },
+    "quiz": {
+      "title": "AI replies, “Your poem is nice.” That doesn't help. What is the best next step?",
+      "options": [
+        {
+          "label": "Accept it and stop",
+          "correct": false
+        },
+        {
+          "label": "Ask again: “I am in Class 7. Give me 2 things that work and 1 thing to improve, in simple words.”",
+          "correct": true
+        },
+        {
+          "label": "Ask the exact same question again",
+          "correct": false
+        }
+      ],
+      "feedback": {
+        "correct": "Yes! A clearer prompt gets more useful feedback.",
+        "incorrect": "Not quite. A vague question mostly gets vague feedback. Add context and details, then try again!"
+      }
+    },
+    "reward": {
+      "message": "Well done! Better questions get better feedback. Come back tomorrow to find out whose work it is when AI makes something."
+    }
+  },
+  {
+    "day": 13,
+    "title": "Whose Work Is It Anyway?",
+    "hook": "If AI writes a song “in the style of” a famous singer, who owns it — the singer, the AI company, or the person who typed the request?",
+    "concept": "AI finds patterns in huge amounts of data, including songs, pictures and writing made by real people.\nSome of that work is protected by copyright. Copyright is a law that protects what creators make, so others cannot copy it freely.\nSo AI-made content may reuse or copy a creator's work. That matters to the person who made the original. Their effort, their credit and sometimes their income are at risk.",
+    "ksa": {
+      "knowledge": [
+        "2.2"
+      ],
+      "skills": [
+        "Problem Solving,Self-awareness,Social awareness"
+      ],
+      "attitude": [
+        "Empathetic,Responsible"
+      ]
+    },
+    "action": {
+      "title": "A friend uses AI to make a song that sounds just like a famous singer. They post it as their own. What is the biggest problem?",
+      "options": [
+        {
+          "label": "Nothing. AI made it, so nobody's work was used",
+          "correct": false
+        },
+        {
+          "label": "It may copy the singer's work, and the singer gets no credit",
+          "correct": true
+        },
+        {
+          "label": "The song is too short",
+          "correct": false
+        }
+      ],
+      "feedback": {
+        "correct": "Yes! AI learns from real people's work, so the singer's effort and credit matter.",
+        "incorrect": "Not quite. AI-made content can copy real people's work. Think about the singer. Try again!"
+      }
+    },
+    "quiz": {
+      "title": "When AI-made content copies a creator's work, who can be affected?",
+      "options": [
+        {
+          "label": "Nobody",
+          "correct": false
+        },
+        {
+          "label": "The creator who made the original",
+          "correct": true
+        },
+        {
+          "label": "Only the AI",
+          "correct": false
+        }
+      ],
+      "feedback": {
+        "correct": "Yes! Their effort, credit and sometimes income are affected.",
+        "incorrect": "Not quite. Real people made the original work, and they can lose credit or income. Try again!"
+      }
+    },
+    "reward": {
+      "message": "Thoughtful work! Respecting creators is part of using AI well. Tomorrow, we close Week 2 — time to show what you've learned to make."
+    }
+  },
+  {
+    "day": 14,
+    "title": "Show What You Made (+ Week 2 Review)",
+    "hook": "This week you learned to spark ideas, remix, write prompts, spot fakes, ask for feedback and respect creators. Now it's your turn to make something!",
+    "ksa": {
+      "knowledge": [
+        "1.3",
+        "1.4",
+        "2.2",
+        "2.3",
+        "3.1",
+        "3.2",
+        "3.3"
+      ],
+      "skills": [
+        "Creativity,Critical Thinking,Self-awareness,Social awareness"
+      ],
+      "attitude": [
+        "Innovative,Responsible"
+      ]
+    },
+    "miniProject": {
+      "title": "Mini-Project",
+      "intro": "Pick one: a poster about something you care about, the start of a short story, or a 4-line poem. Then follow these steps:",
+      "steps": [
+        {
+          "title": "Idea first",
+          "text": "Write your own idea in one line."
+        },
+        {
+          "title": "Prompt",
+          "text": "Write a prompt with context, details and limits."
+        },
+        {
+          "title": "Check",
+          "text": "Does the result match your idea? What surprised you? Could any part be wrong or fake?"
+        },
+        {
+          "title": "Remix",
+          "text": "Keep, change or drop parts of it to fit your idea."
+        },
+        {
+          "title": "Think of the creator",
+          "text": "Could it copy someone's work?"
+        }
+      ],
+      "note": "No AI tool? No problem. Write the prompt you would use and imagine what AI might make. If you do use a tool, use it with a teacher or parent."
+    },
+    "review": {
+      "title": "Week 2 Review: True or False? Tap one for each statement.",
+      "questions": [
+        {
+          "statement": "Your own idea should come first, then AI can help spark more ideas.",
+          "options": [
+            {
+              "label": "True",
+              "correct": true
+            },
+            {
+              "label": "False",
+              "correct": false
+            }
+          ],
+          "feedback": {
+            "correct": "Right! Your idea comes first, and AI helps it grow.",
+            "incorrect": "Not quite. Think first, then ask AI for twists and suggestions."
+          }
+        },
+        {
+          "statement": "A remix means throwing away your idea and using AI's instead.",
+          "options": [
+            {
+              "label": "True",
+              "correct": false
+            },
+            {
+              "label": "False",
+              "correct": true
+            }
+          ],
+          "feedback": {
+            "correct": "Right! A remix mixes the best parts of both ideas.",
+            "incorrect": "Not quite. A remix keeps parts of your idea and mixes in AI's. It doesn't replace yours."
+          }
+        },
+        {
+          "statement": "AI can see the picture in your mind, so a short prompt is enough.",
+          "options": [
+            {
+              "label": "True",
+              "correct": false
+            },
+            {
+              "label": "False",
+              "correct": true
+            }
+          ],
+          "feedback": {
+            "correct": "Right! AI only uses your words, so details matter.",
+            "incorrect": "Not quite. AI cannot see your idea. Add who, where and what style."
+          }
+        },
+        {
+          "statement": "If a picture looks real, it must be real.",
+          "options": [
+            {
+              "label": "True",
+              "correct": false
+            },
+            {
+              "label": "False",
+              "correct": true
+            }
+          ],
+          "feedback": {
+            "correct": "Right! AI can make fakes that look real. Check the source.",
+            "incorrect": "Not quite. AI can make fake pictures, voices and videos that look real. Check who posted it first."
+          }
+        },
+        {
+          "statement": "Adding context, details and limits helps AI give more useful feedback.",
+          "options": [
+            {
+              "label": "True",
+              "correct": true
+            },
+            {
+              "label": "False",
+              "correct": false
+            }
+          ],
+          "feedback": {
+            "correct": "Right! A clearer prompt gets more useful feedback.",
+            "incorrect": "Not quite. Context, details and limits give AI more to work with."
+          }
+        },
+        {
+          "statement": "AI-made content may copy the work of real creators.",
+          "options": [
+            {
+              "label": "True",
+              "correct": true
+            },
+            {
+              "label": "False",
+              "correct": false
+            }
+          ],
+          "feedback": {
+            "correct": "Right! Real people's effort, credit and income can be affected.",
+            "incorrect": "Not quite. AI learns from real people's work, so its output can copy it."
+          }
+        },
+        {
+          "statement": "From Week 1: AI answers can be wrong even when they sound sure.",
+          "options": [
+            {
+              "label": "True",
+              "correct": true
+            },
+            {
+              "label": "False",
+              "correct": false
+            }
+          ],
+          "feedback": {
+            "correct": "Right! Always check, then accept, revise or reject.",
+            "incorrect": "Not quite. AI can sound sure and still be wrong. Check first."
+          }
+        }
+      ]
+    },
+    "reward": {
+      "message": "🎉 Week 2 complete! You can now create with AI and think about the people behind the work. Come back next week to Manage AI!"
+    }
+  },
+  {
+    "day": 15,
+    "title": "Which AI Tool Fits Which Job?",
+    "hook": "AI can summarise a long lesson in seconds. But can it cheer up a sad friend?",
+    "concept": "There are many kinds of AI tools, and each is built for certain jobs. Some summarise long texts. Some make pictures. Some translate. Some spot patterns, like a maps app finding traffic.\nBut AI has no feelings and no real understanding of your situation. So it fits some tasks better than others. Other tools fit too. A search engine is good for research, and a calculator is good for sums.\nBefore you start, ask: What is my task? Which tool fits it? What do my teacher and school say about using AI? And never share private details with an AI tool.",
+    "ksa": {
+      "knowledge": [
+        "3.1",
+        "4.3"
+      ],
+      "skills": [
+        "Computational Thinking,Problem Solving"
+      ],
+      "attitude": [
+        "Innovative,Responsible"
+      ]
+    },
+    "action": {
+      "title": "Your teacher says, “Use AI to summarise, and a search engine for research.” You need to summarise a long chapter. Which tool fits best?",
+      "options": [
+        {
+          "label": "An AI summarising tool",
+          "correct": true
+        },
+        {
+          "label": "A search engine",
+          "correct": false
+        },
+        {
+          "label": "An image generator",
+          "correct": false
+        }
+      ],
+      "feedback": {
+        "correct": "Yes! Summarising long text is a job AI tools are built for. Match the tool to the task.",
+        "incorrect": "Not quite. That tool is built for a different job. Match the tool to the task. Try again!"
+      }
+    },
+    "quiz": {
+      "title": "Which of these is a task AI tools are designed to support?",
+      "options": [
+        {
+          "label": "Feeling proud of you",
+          "correct": false
+        },
+        {
+          "label": "Summarising a long text",
+          "correct": true
+        },
+        {
+          "label": "Understanding your friend's feelings",
+          "correct": false
+        }
+      ],
+      "feedback": {
+        "correct": "Yes! AI can support tasks like summarising, spotting patterns and making content.",
+        "incorrect": "Not quite. AI has no feelings or real understanding. Tools like summarisers are built for tasks like summarising text. Try again!"
+      }
+    },
+    "reward": {
+      "message": "Good thinking! You can now match the right tool to the task. Tomorrow: what do you do when something online promises a little too much?"
+    }
+  },
+  {
+    "day": 16,
+    "title": "Do I Even Need AI For This?",
+    "hook": "AI can write a thank-you note to your grandmother in five seconds. But should it?",
+    "concept": "Yesterday you matched AI tools to the jobs they are built for. Today you decide: should AI do this task at all? Sort every task into one of four buckets:\nAI Only: AI can do it well and nothing important is lost, like finding the fastest route on a maps app.\nAI-Supported: AI helps, but you lead, like getting ideas for a poster and then choosing the best one.\nHuman Only: it needs your feelings, judgement or own learning, like a thank-you note to someone you care about. Or your teacher says no AI.\nNot Sure: ask your teacher.\nTo choose, ask: Is this a job AI tools are built for? Does it need my feelings, my judgement or my own thinking? What do my teacher and school say?",
+    "ksa": {
+      "knowledge": [
+        "3.1",
+        "4.3"
+      ],
+      "skills": [
+        "Computational Thinking,Problem Solving"
+      ],
+      "attitude": [
+        "Innovative,Responsible"
+      ]
+    },
+    "action": {
+      "title": "Task: get ideas for your poster, then you pick the best one and draw it. Which bucket?",
+      "options": [
+        {
+          "label": "AI Only",
+          "correct": false
+        },
+        {
+          "label": "AI-Supported",
+          "correct": true
+        },
+        {
+          "label": "Human Only",
+          "correct": false
+        }
+      ],
+      "feedback": {
+        "correct": "Yes! AI helps with ideas, but you choose and make the poster.",
+        "incorrect": "Not quite. AI can help with ideas, but you choose and make the poster. That's AI-Supported. Try again!"
+      }
+    },
+    "quiz": {
+      "title": "Your teacher says, “No AI for today's essay.” Which bucket?",
+      "options": [
+        {
+          "label": "AI Only",
+          "correct": false
+        },
+        {
+          "label": "AI-Supported",
+          "correct": false
+        },
+        {
+          "label": "Human Only",
+          "correct": true
+        }
+      ],
+      "feedback": {
+        "correct": "Yes! Your teacher's rules come first. This task is Human Only.",
+        "incorrect": "Not quite. When your teacher says no AI, the task is Human Only. Always follow your teacher's and school's rules. Try again!"
+      }
+    },
+    "reward": {
+      "message": "Nicely done! You can now sort tasks: AI Only, AI-Supported or Human Only. Tomorrow: what's the difference between an AI that follows fixed rules and one that learns from examples?"
+    }
+  },
+  {
+    "day": 17,
+    "title": "Rules vs. Learning: Two Kinds of AI",
+    "hook": "Imagine two ways to sort vegetables at a kirana pasal: one person follows a strict list of rules, another has learned by watching thousands of examples over time. Both get the job done, but very differently.",
+    "concept": "Some AI systems work by following fixed rules a person wrote, like “if it's green and long, call it a cucumber.” Others work by learning from many examples, noticing patterns in thousands of photos or records, without being told exact rules. Rule-based systems struggle with anything unusual. Learning-based systems are flexible and can handle new situations better, but they can also make surprising mistakes on things they haven't seen much of before. Neither type is “better.” They're suited to different jobs.",
+    "ksa": {
+      "knowledge": [
+        "1.2",
+        "1.4"
+      ],
+      "skills": [
+        "Computational Thinking,Problem Solving"
+      ],
+      "attitude": [
+        "Adaptable,Curious"
+      ]
+    },
+    "action": {
+      "title": "A robot sorts trash using one instruction: “If a magnet sticks, it is metal.” Which type is it?",
+      "options": [
+        {
+          "label": "Rules written by people",
+          "correct": true
+        },
+        {
+          "label": "Patterns found in data",
+          "correct": false
+        },
+        {
+          "label": "Random guessing",
+          "correct": false
+        }
+      ],
+      "feedback": {
+        "correct": "Yes! It follows an exact instruction written by a person.",
+        "incorrect": "Not quite. This robot follows an exact instruction written by a person. That is a rules-based system. Try again!"
+      }
+    },
+    "quiz": {
+      "title": "Which system finds patterns in data?",
+      "options": [
+        {
+          "label": "A robot that follows a list of rules",
+          "correct": false
+        },
+        {
+          "label": "A system trained on thousands of photos of paper, plastic and metal",
+          "correct": true
+        },
+        {
+          "label": "A calculator",
+          "correct": false
+        }
+      ],
+      "feedback": {
+        "correct": "Yes! It learns from examples and uses patterns to sort new items.",
+        "incorrect": "Not quite. Lists of rules and calculators follow instructions written by people. The system that finds patterns is trained on lots of examples. Try again!"
+      }
+    },
+    "reward": {
+      "message": "Nicely done! You now know AI can follow rules or find patterns. Come back tomorrow for the next step."
+    }
+  },
+  {
+    "day": 18,
+    "title": "Which Way Fits the Job?",
+    "hook": "A basic traffic light follows a timer. A translation app learns from examples. Why not use the same method for both?",
+    "concept": "Yesterday you learned two ways AI can work: rules and patterns from data. Today: when is each one better?\nRules (like a calculator or a simple traffic light)\n✅ Same answer every time, and easy to check\n❌ Gets stuck when something isn't covered by a rule, and is hard to write for messy tasks\nPatterns from data (like translation or photo recognition)\n✅ Can handle messy tasks with too many cases for rules\n❌ Needs lots of examples, can be wrong or biased, and is harder to explain\nSo choose according to the task. An exact, simple task suits rules. A messy task with lots of examples suits patterns.",
+    "ksa": {
+      "knowledge": [
+        "1.2",
+        "1.4"
+      ],
+      "skills": [
+        "Computational Thinking,Problem Solving"
+      ],
+      "attitude": [
+        "Adaptable,Curious"
+      ]
+    },
+    "action": {
+      "title": "Which task suits a rules-based approach best?",
+      "options": [
+        {
+          "label": "Translating a Nepali poem into English",
+          "correct": false
+        },
+        {
+          "label": "Adding two numbers on a calculator",
+          "correct": true
+        },
+        {
+          "label": "Recognising a friend's face in photos",
+          "correct": false
+        }
+      ],
+      "feedback": {
+        "correct": "Yes! It is exact and simple, so the rules work perfectly.",
+        "incorrect": "Not quite. That task is too messy for a short list of rules. Adding numbers is exact, so rules work best. Try again!"
+      }
+    },
+    "quiz": {
+      "title": "Which is a drawback of a rules-based system?",
+      "options": [
+        {
+          "label": "It can get stuck when something isn't covered by a rule",
+          "correct": true
+        },
+        {
+          "label": "It needs thousands of examples to learn",
+          "correct": false
+        },
+        {
+          "label": "It cannot give the same answer twice",
+          "correct": false
+        }
+      ],
+      "feedback": {
+        "correct": "Yes! Rules only cover what people think of.",
+        "incorrect": "Not quite. Needing many examples belongs to pattern-learning systems, and rules give the same answer every time. The drawback of rules is that they get stuck in new situations. Try again!"
+      }
+    },
+    "reward": {
+      "message": "Nicely done! You can now say when rules or patterns fit a task better. Tomorrow: what kind of problem is it?"
+    }
+  },
+  {
+    "day": 19,
+    "title": "What Kind of Problem Is It?",
+    "hook": "Predicting tomorrow's weather. Comforting a sad friend. Designing a poster. Are they the same kind of problem? Not at all!",
+    "concept": "Before you use AI, ask: what kind of problem is this? Here are three common types:\nData-based: it needs patterns in lots of information, like predicting the weather. AI can often help.\nEmotional: it needs feelings, care and understanding, like comforting a friend. AI cannot feel, so a person should lead.\nCreative: it needs new ideas, like designing a poster. AI can spark ideas, but you decide and create.\nSo is AI always needed? No. Some problems are best solved by you.",
+    "ksa": {
+      "knowledge": [
+        "1.1",
+        "3.1"
+      ],
+      "skills": [
+        "Collaboration,Computational Thinking,Problem Solving"
+      ],
+      "attitude": [
+        "Adaptable,Innovative"
+      ]
+    },
+    "action": {
+      "title": "What type of problem is “predicting tomorrow's weather”?",
+      "options": [
+        {
+          "label": "Emotional",
+          "correct": false
+        },
+        {
+          "label": "Data-based",
+          "correct": true
+        },
+        {
+          "label": "Creative",
+          "correct": false
+        }
+      ],
+      "feedback": {
+        "correct": "Yes! Weather prediction uses patterns in lots of data.",
+        "incorrect": "Not quite. Weather prediction depends on patterns in lots of data, so it is a data-based problem. Try again!"
+      }
+    },
+    "quiz": {
+      "title": "Your friend is sad after failing a test. What type of problem is this, and who should lead?",
+      "options": [
+        {
+          "label": "Data-based, and AI should lead",
+          "correct": false
+        },
+        {
+          "label": "Emotional, and you should lead with care",
+          "correct": true
+        },
+        {
+          "label": "Creative, and AI should lead",
+          "correct": false
+        }
+      ],
+      "feedback": {
+        "correct": "Yes! Feelings need a caring person. AI cannot feel or truly understand.",
+        "incorrect": "Not quite. Sadness is an emotional problem. AI has no feelings, so a caring person should lead. Try again!"
+      }
+    },
+    "reward": {
+      "message": "Great! You can now name the type of problem before you reach for AI. Tomorrow: how to stay in charge of AI?"
+    }
+  },
+  {
+    "day": 20,
+    "title": "You Stay in Charge",
+    "hook": "A cricket coach uses AI to study every player's moves. But who picks the final team? The coach does! AI helps, and the human decides.",
+    "concept": "AI is used in sports, news, music and schools. In every case, a human must stay in charge.\nWhen you use AI, follow three rules:\nAccountability: You are responsible for what you use and share. If AI is wrong, it is still your work.\nLearning: Use AI to help you learn, not to skip learning.\nFairness: Be honest that you used AI, follow your teacher's rules, and never use it to cheat or hurt others.",
+    "ksa": {
+      "knowledge": [
+        "4.1"
+      ],
+      "skills": [
+        "Collaboration,Problem Solving"
+      ],
+      "attitude": [
+        "Adaptive,Reflective,Responsible"
+      ]
+    },
+    "action": {
+      "title": "Which choice shows responsible AI use?",
+      "options": [
+        {
+          "label": "Ask AI to write your whole essay and hand it in",
+          "correct": false
+        },
+        {
+          "label": "Use AI for ideas if your teacher allows it, write the essay yourself, and say you used AI",
+          "correct": true
+        },
+        {
+          "label": "Use AI, but hide it from your teacher",
+          "correct": false
+        }
+      ],
+      "feedback": {
+        "correct": "Yes! You do the learning, you are honest, and you follow your teacher's rules.",
+        "incorrect": "Not quite. Responsible use means you do the learning, you are honest about AI, and you follow your teacher's rules. Try again!"
+      }
+    },
+    "quiz": {
+      "title": "Your school project used AI, and it contained a mistake. Who is responsible?",
+      "options": [
+        {
+          "label": "The AI",
+          "correct": false
+        },
+        {
+          "label": "You",
+          "correct": true
+        },
+        {
+          "label": "Nobody",
+          "correct": false
+        }
+      ],
+      "feedback": {
+        "correct": "Yes! AI is a tool. You are responsible for what you use and share.",
+        "incorrect": "Not quite. AI is a tool and cannot be held responsible. You are responsible for what you use and share. Try again!"
+      }
+    },
+    "reward": {
+      "message": "Well reasoned! You're the one in charge, always. Tomorrow, we close Week 3 by putting all of this into practice."
+    }
+  },
+  {
+    "day": 21,
+    "title": "Plan a Human+AI Task Together (+ Week 3 Review)",
+    "hook": "Time to plan like a pro! 🤝 You will plan one task where you and AI each do the right part.",
+    "ksa": {
+      "knowledge": [
+        "1.1",
+        "1.2",
+        "1.4",
+        "3.1",
+        "4.1",
+        "4.3"
+      ],
+      "skills": [
+        "Computational Thinking,Problem Solving,Collaboration"
+      ],
+      "attitude": [
+        "Adaptable,Innovative,Responsible,Reflective"
+      ]
+    },
+    "miniProject": {
+      "title": "Mini-Project",
+      "intro": "Pick one task: a poster for a school clean-up day, a 2-minute talk about a local festival, or the start of a short story. Then plan it:",
+      "steps": [
+        {
+          "title": "Name the problem type",
+          "text": "Is it data-based, emotional or creative?"
+        },
+        {
+          "title": "Match the tool",
+          "text": "Is this a job AI tools are built for? Which tool fits?"
+        },
+        {
+          "title": "Decide who leads",
+          "text": "AI Only, AI-Supported or Human Only? Check your teacher's rules first."
+        },
+        {
+          "title": "Stay in charge",
+          "text": "How will you take responsibility for what you share, keep learning, and be honest about using AI?"
+        }
+      ],
+      "note": "No AI tool? No problem. Just write your plan. If you do use a tool, use it with a teacher or parent."
+    },
+    "review": {
+      "title": "Week 3 Remix Quiz: Yes or No? Tap one for each question.",
+      "questions": [
+        {
+          "statement": "You need to summarise a long chapter. Is an AI summarising tool a good match?",
+          "options": [
+            {
+              "label": "Yes",
+              "correct": true
+            },
+            {
+              "label": "No",
+              "correct": false
+            }
+          ],
+          "feedback": {
+            "correct": "Right! Summarising is a job AI tools are built for (Day 15). Match the tool to the task.",
+            "incorrect": "Not quite. AI tools are built for jobs like summarising (Day 15). Match the tool to the task."
+          }
+        },
+        {
+          "statement": "Your friend is sad. Should AI lead by comforting them?",
+          "options": [
+            {
+              "label": "Yes",
+              "correct": false
+            },
+            {
+              "label": "No",
+              "correct": true
+            }
+          ],
+          "feedback": {
+            "correct": "Right! Comforting is an emotional problem (Day 19), and AI has no feelings (Day 15). A caring person should lead.",
+            "incorrect": "Not quite. Comforting a friend is an emotional problem (Day 19). AI has no feelings (Day 15), so a person should lead."
+          }
+        },
+        {
+          "statement": "A calculator follows exact instructions to add numbers. Is it a rules-based system?",
+          "options": [
+            {
+              "label": "Yes",
+              "correct": true
+            },
+            {
+              "label": "No",
+              "correct": false
+            }
+          ],
+          "feedback": {
+            "correct": "Right! Exact instructions written by people are rules (Day 17). Rules work well for exact, simple tasks (Day 18).",
+            "incorrect": "Not quite. A calculator follows exact instructions written by people. That is a rules-based system (Day 17), and rules suit simple tasks like this (Day 18)."
+          }
+        },
+        {
+          "statement": "A project you shared has a mistake that AI made. Is the AI responsible for it?",
+          "options": [
+            {
+              "label": "Yes",
+              "correct": false
+            },
+            {
+              "label": "No",
+              "correct": true
+            }
+          ],
+          "feedback": {
+            "correct": "Right! AI is a tool. You are responsible for what you use and share (Day 20).",
+            "incorrect": "Not quite. AI is a tool and cannot be held responsible. You are responsible for what you use and share (Day 20)."
+          }
+        },
+        {
+          "statement": "Your teacher allows AI for ideas. Can you ask AI for poster ideas, then make the poster yourself?",
+          "options": [
+            {
+              "label": "Yes",
+              "correct": true
+            },
+            {
+              "label": "No",
+              "correct": false
+            }
+          ],
+          "feedback": {
+            "correct": "Right! That is AI-Supported (Day 16). AI helps, and you do the learning and stay in charge (Day 20).",
+            "incorrect": "Not quite. If your teacher allows it, using AI for ideas is AI-Supported (Day 16). You still do the creating and stay in charge (Day 20)."
+          }
+        },
+        {
+          "statement": "Is a rules-based system the best choice for a messy task like translating a poem?",
+          "options": [
+            {
+              "label": "Yes",
+              "correct": false
+            },
+            {
+              "label": "No",
+              "correct": true
+            }
+          ],
+          "feedback": {
+            "correct": "Right! Rules get stuck when something isn't covered (Day 17). Messy tasks suit patterns from data (Day 18).",
+            "incorrect": "Not quite. Rules get stuck when something isn't covered (Day 17). Messy tasks like translation suit systems that find patterns in data (Day 18)."
+          }
+        },
+        {
+          "statement": "Your teacher says “No AI for today's essay.” Can you use AI if you hide it?",
+          "options": [
+            {
+              "label": "Yes",
+              "correct": false
+            },
+            {
+              "label": "No",
+              "correct": true
+            }
+          ],
+          "feedback": {
+            "correct": "Right! The task is Human Only (Day 16), and fairness means being honest and following the rules (Day 20).",
+            "incorrect": "Not quite. When your teacher says no AI, the task is Human Only (Day 16). Fairness means being honest and following the rules (Day 20)."
+          }
+        }
+      ]
+    },
+    "reward": {
+      "message": "Week 3 complete! You can now decide when and how to use AI, and stay in charge of it. Come back next week to Shape AI!"
+    }
+  },
+  {
+    "day": 22,
+    "title": "The AI ID Card",
+    "hook": "Every medicine has a label that tells you what it is for and what to avoid. Should AI have one too?",
+    "concept": "Every AI system is built by people for a certain job. A maps app finds routes. A translator changes languages. A chatbot predicts words. People decide what each one is for.\nSo how do you know what an AI system is designed to do? Read its ID card. Experts call it a model card. It tells you:\nJob: what it is designed to do\nLearned from: the data it was trained on\nLimits: what it is not good at\nUse AI for its job, not for jobs it was never built to do.",
+    "ksa": {
+      "knowledge": [
+        "1.2",
+        "2.1"
+      ],
+      "skills": [
+        "Communication,Problem Solving,Self-awareness,Social awareness"
+      ],
+      "attitude": [
+        "Curious,Reflective,Responsible"
+      ]
+    },
+    "action": {
+      "title": "Read this ID card:\nPhotoSort\nJob: Sorts photos by what is in them (people, food, animals)\nLearned from: 1 million labelled photos\nLimits: Not good with dark or blurry photos\n\nWhat is PhotoSort designed to do?",
+      "options": [
+        {
+          "label": "Translate Nepali into English",
+          "correct": false
+        },
+        {
+          "label": "Sort photos by what is in them",
+          "correct": true
+        },
+        {
+          "label": "Predict tomorrow's weather",
+          "correct": false
+        }
+      ],
+      "feedback": {
+        "correct": "Yes! The Job line tells you what an AI is designed to do.",
+        "incorrect": "Not quite. Read the Job line again. PhotoSort sorts photos by what is in them. Try again!"
+      }
+    },
+    "quiz": {
+      "title": "Using the same ID card, when is PhotoSort NOT a good choice?",
+      "options": [
+        {
+          "label": "Sorting clear photos of food",
+          "correct": false
+        },
+        {
+          "label": "Sorting very dark, blurry photos",
+          "correct": true
+        },
+        {
+          "label": "Sorting photos of animals",
+          "correct": false
+        }
+      ],
+      "feedback": {
+        "correct": "Yes! The Limits line says it is not good with dark or blurry photos.",
+        "incorrect": "Not quite. The card says PhotoSort sorts food and animals. Its limit is dark or blurry photos. Try again!"
+      }
+    },
+    "reward": {
+      "message": "Excellent! You can now read an AI's ID card. Tomorrow: become an AI detective and investigate any AI tool!"
+    }
+  },
+  {
+    "day": 23,
+    "title": "Be an AI Detective",
+    "hook": "A hiking app finds great routes for hikers. But what if a cyclist in a busy city uses it? Would it still work?",
+    "concept": "Yesterday you read an AI's ID card. Today you investigate like a detective. Ask four questions about any AI tool:\nPurpose: What is its main job?\nMade for: Who is it designed for?\nInput → Output: What goes in, and what comes out?\nLimits: Where does it struggle?\nTry it on a chatbot. Its purpose is answering questions in text. It is made for people who can read and type. The input is your question, and the output is words it predicts. Its limit is that it can be wrong, even when it sounds sure.",
+    "ksa": {
+      "knowledge": [
+        "1.2",
+        "2.1"
+      ],
+      "skills": [
+        "Communication,Problem Solving,Self-awareness,Social awareness"
+      ],
+      "attitude": [
+        "Curious,Reflective,Responsible"
+      ]
+    },
+    "action": {
+      "title": "Read this ID card:\nTrekGuide\nPurpose: Suggests safe walking routes on mountain trails\nMade for: Trekkers\nInput → Output: Start point, destination and weather data → a suggested route\nLimits: Does not know about trails closed today\n\nWhat is the input for TrekGuide?",
+      "options": [
+        {
+          "label": "Start point, destination and weather data",
+          "correct": true
+        },
+        {
+          "label": "A suggested route",
+          "correct": false
+        },
+        {
+          "label": "Photos of trekkers",
+          "correct": false
+        }
+      ],
+      "feedback": {
+        "correct": "Yes! Input is what goes in. Output is what comes out.",
+        "incorrect": "Not quite. Input is what goes in: the start point, destination and weather data. The route is what comes out. Try again!"
+      }
+    },
+    "quiz": {
+      "title": "Is TrekGuide a good fit for a cyclist riding in a busy city?",
+      "options": [
+        {
+          "label": "Yes, a route is a route",
+          "correct": false
+        },
+        {
+          "label": "No, it was made for trekkers on mountain trails",
+          "correct": true
+        },
+        {
+          "label": "Yes, because it uses weather data",
+          "correct": false
+        }
+      ],
+      "feedback": {
+        "correct": "Yes! Check Purpose and Made for. City roads are outside what it was designed for.",
+        "incorrect": "Not quite. TrekGuide was designed for trekkers on mountain trails. A tool may not work well for people it wasn't made for. Try again!"
+      }
+    },
+    "reward": {
+      "message": "Good work! You can now investigate any AI tool like a detective. Tomorrow: how do you know if an AI did a good job?"
+    }
+  },
+  {
+    "day": 24,
+    "title": "Did the AI Do a Good Job?",
+    "hook": "A music app suggests 5 songs for you. 🎵 Is that a win? It depends on what “win” means. Decide first, then judge!",
+    "concept": "How do you know if an AI did a good job? Decide what success looks like before you check. This list is called your criteria.\nFor a music AI, the criteria could be:\nThe songs match what the listener likes.\nA few songs are new, so the listener can discover more.\nThe songs are suitable for the listener's age.\nGood criteria are clear. You can answer Yes or No to each one. “The songs are good” is too vague.\nAnd different listeners like different things, so check the AI's picks for different people.",
+    "ksa": {
+      "knowledge": [
+        "1.2",
+        "1.4"
+      ],
+      "skills": [
+        "Collaboration,Computational Thinking"
+      ],
+      "attitude": [
+        "Adaptable,Innovative,Reflective"
+      ]
+    },
+    "action": {
+      "title": "Which is the best success criterion for a music AI?",
+      "options": [
+        {
+          "label": "The songs are good",
+          "correct": false
+        },
+        {
+          "label": "The songs match what the listener likes",
+          "correct": true
+        },
+        {
+          "label": "The app looks nice",
+          "correct": false
+        }
+      ],
+      "feedback": {
+        "correct": "Yes! It is clear and you can check it with Yes or No.",
+        "incorrect": "Not quite. That is vague or not about the AI's job. A good criterion is clear and checkable, like “the songs match what the listener likes.” Try again!"
+      }
+    },
+    "quiz": {
+      "title": "Asha loves Nepali folk songs. Ram loves rock. The AI gives both of them the same 5 pop songs. Did it succeed?",
+      "options": [
+        {
+          "label": "Yes, it gave 5 songs",
+          "correct": false
+        },
+        {
+          "label": "No, the songs don't match their different tastes",
+          "correct": true
+        },
+        {
+          "label": "Yes, because pop is popular",
+          "correct": false
+        }
+      ],
+      "feedback": {
+        "correct": "Yes! Your first criterion is that songs match the listener's taste. Asha and Ram like different things, so the same pop list fails them.",
+        "incorrect": "Not quite. Check your criteria: songs should match what each listener likes. Asha and Ram have different tastes, so the same list fails. Try again!"
+      }
+    },
+    "reward": {
+      "message": "Nice! You can now define what success looks like for an AI. Tomorrow: put an AI to the test and score it!"
+    }
+  },
+  {
+    "day": 25,
+    "title": "Put the AI to the Test",
+    "hook": "Your friend says, “This new AI is the best ever!” Do you believe it? Not until you test it!",
+    "concept": "Yesterday you set criteria for success. Today you use them to test an AI in three steps:\nCriteria: Write your checklist first.\nTest: Try the AI on many examples, easy and tricky. These are your test cases. One good result can be luck.\nScore and ask: Mark each criterion Yes or No for every test. Then ask real people what they think. This is user feedback.\nYou can also use a benchmark test. It is a fixed set of questions with known answers, like a quiz with an answer key, so you can compare AI systems fairly.",
+    "ksa": {
+      "knowledge": [
+        "1.2",
+        "1.4"
+      ],
+      "skills": [
+        "Collaboration,Computational Thinking"
+      ],
+      "attitude": [
+        "Adaptable,Innovative,Reflective"
+      ]
+    },
+    "action": {
+      "title": "You want to test a maths helper AI. Which test is best?",
+      "options": [
+        {
+          "label": "Ask one easy question",
+          "correct": false
+        },
+        {
+          "label": "Ask 10 questions, easy and tricky, and check each answer against an answer key",
+          "correct": true
+        },
+        {
+          "label": "Ask the AI if it is correct",
+          "correct": false
+        }
+      ],
+      "feedback": {
+        "correct": "Yes! Many test cases and an answer key give a fair result.",
+        "incorrect": "Not quite. One test can be lucky, and AI can sound sure even when it is wrong (Day 3). Use many test cases and check each answer against a key. Try again!"
+      }
+    },
+    "quiz": {
+      "title": "The maths AI got 8 of 10 questions right. Three students said its steps were confusing. What is the best conclusion?",
+      "options": [
+        {
+          "label": "It is perfect",
+          "correct": false
+        },
+        {
+          "label": "It is good at correct answers but needs improvement on clear steps",
+          "correct": true
+        },
+        {
+          "label": "It is useless",
+          "correct": false
+        }
+      ],
+      "feedback": {
+        "correct": "Yes! You checked each criterion. The test shows strengths, and the students' feedback shows a weakness.",
+        "incorrect": "Not quite. 8 of 10 is good for correct answers, but students found the steps unclear. A fair result shows both strengths and weaknesses. Try again!"
+      }
+    },
+    "reward": {
+      "message": "Awesome! You can now test an AI and score it. Tomorrow: what does AI learn from? Pick the data to train your own AI!"
+    }
+  },
+  {
+    "day": 26,
+    "title": "What Does AI Learn From?",
+    "hook": "You want to build an AI that tells ripe mangoes from unripe ones. You can't just tell it. You have to show it the right data. Which data would you pick?",
+    "concept": "AI learns from data: photos, text, sounds and numbers. Data comes from many places:\nPublic information, like websites and books\nWhat people post, like photos and videos\nSensors, like cameras, microphones and GPS\nCarefully built collections, like a set of photos with labels\nPeople choose this data, sort it and label it. For the mango AI, you would collect photos of ripe and unripe mangoes, each labelled. Photos of cars would not help.\nData about people should only be used with their permission.",
+    "ksa": {
+      "knowledge": [
+        "1.2",
+        "2.2",
+        "2.4"
+      ],
+      "skills": [
+        "Computational Thinking,Self-awareness,Social awareness"
+      ],
+      "attitude": [
+        "Innovative,Responsible"
+      ]
+    },
+    "action": {
+      "title": "You want to train an AI to tell ripe mangoes from unripe ones. Which data helps most?",
+      "options": [
+        {
+          "label": "Labelled photos of ripe and unripe mangoes",
+          "correct": true
+        },
+        {
+          "label": "Photos of cars",
+          "correct": false
+        },
+        {
+          "label": "A list of cricket scores",
+          "correct": false
+        }
+      ],
+      "feedback": {
+        "correct": "Yes! The data must match the task, and the labels tell the AI which is which.",
+        "incorrect": "Not quite. The data must match the task. For mangoes, you need labelled photos of ripe and unripe mangoes. Try again!"
+      }
+    },
+    "quiz": {
+      "title": "A camera on a farm records photos of crops every day. What kind of data source is this?",
+      "options": [
+        {
+          "label": "A sensor",
+          "correct": true
+        },
+        {
+          "label": "A book",
+          "correct": false
+        },
+        {
+          "label": "It is not data",
+          "correct": false
+        }
+      ],
+      "feedback": {
+        "correct": "Yes! Cameras, microphones and GPS collect data automatically.",
+        "incorrect": "Not quite. Photos are data, and a camera collects them automatically. That makes it a sensor. Try again!"
+      }
+    },
+    "reward": {
+      "message": "Woah! You can now spot the data an AI learns from. Tomorrow: how can we make AI better for everyone?"
+    }
+  },
+  {
+    "day": 27,
+    "title": "Make AI Better for Everyone",
+    "hook": "An AI helper only works in long, hard English words. 😕 Many students and grandparents give up. Can we fix that? Yes, because people built it, and people can improve it.",
+    "concept": "People design AI, so people can change it. Simple changes can make an AI tool helpful for more people:\nClearer instructions that are easy to follow\nAnswers that suit the user's age\nOptions for different needs, like a Nepali language choice, or a voice reader for people who find reading hard\nAI can be designed to help individuals (a study helper), communities (a weather alert for a village) and the environment (a tool that helps farmers use water wisely).\nFor any change, ask: Who would benefit, and why?",
+    "ksa": {
+      "knowledge": [
+        "4.1",
+        "4.2",
+        "4.3"
+      ],
+      "skills": [
+        "Computational Thinking,Problem Solving,Self-awareness,Social awareness"
+      ],
+      "attitude": [
+        "Empathetic,Innovative,Responsible"
+      ]
+    },
+    "action": {
+      "title": "A homework-helper AI uses long, hard English words. Class 6 students and elderly readers struggle. Which change helps most?",
+      "options": [
+        {
+          "label": "Make the words even harder",
+          "correct": false
+        },
+        {
+          "label": "Use simple words and add a Nepali language option",
+          "correct": true
+        },
+        {
+          "label": "Make the text smaller",
+          "correct": false
+        }
+      ],
+      "feedback": {
+        "correct": "Yes! Simple words and a language option make the tool useful for more people.",
+        "incorrect": "Not quite. That would make it harder for more people to use. Simple words and a language option help more people. Try again!"
+      }
+    },
+    "quiz": {
+      "title": "Who would benefit from adding a voice reader to an AI tool?",
+      "options": [
+        {
+          "label": "Only people who like music",
+          "correct": false
+        },
+        {
+          "label": "People who find reading hard, such as some learners and elderly users",
+          "correct": true
+        },
+        {
+          "label": "Nobody",
+          "correct": false
+        }
+      ],
+      "feedback": {
+        "correct": "Yes! Improving AI for different needs helps more people.",
+        "incorrect": "Not quite. A voice reader helps people who find reading hard. Thinking about who benefits is the first step in improving AI. Try again!"
+      }
+    },
+    "reward": {
+      "message": "Great! You now know AI can be improved for people, communities and the planet. Tomorrow: your final Week 4 review!"
+    }
+  },
+  {
+    "day": 28,
+    "title": "Design Your Own AI (+ Week 4 Review)",
+    "hook": "Final day! 🎓 Today you design your own AI, on paper. You'll be the one who shapes it.",
+    "ksa": {
+      "knowledge": [
+        "1.2",
+        "2.1",
+        "2.2",
+        "2.4",
+        "4.1",
+        "4.2",
+        "4.3"
+      ],
+      "skills": [
+        "Communication,Computational Thinking,Problem Solving"
+      ],
+      "attitude": [
+        "Curious,Innovative,Reflective,Responsible"
+      ]
+    },
+    "miniProject": {
+      "title": "Mini-Project",
+      "intro": "Plan an AI helper for your school that finds study resources or shares notices on time. Fill in its ID card:",
+      "steps": [
+        {
+          "title": "Job and Made for",
+          "text": "What is its main job? Who is it designed for?"
+        },
+        {
+          "title": "Learned from",
+          "text": "What data would train it? Where would the data come from?"
+        },
+        {
+          "title": "Success checklist",
+          "text": "Write 2 clear criteria you can check with Yes or No."
+        },
+        {
+          "title": "Test plan",
+          "text": "How will you test it on many examples? Who will you ask for feedback?"
+        },
+        {
+          "title": "Make it better for everyone",
+          "text": "Add one change that helps more people, like a Nepali language option. Who would benefit, and why?"
+        }
+      ],
+      "note": "No AI tool needed. Just plan it on paper or in a note."
+    },
+    "review": {
+      "title": "Week 4 Remix Quiz: Yes or No? Tap one for each question.",
+      "questions": [
+        {
+          "statement": "Does an AI's ID card tell you what the AI is designed to do?",
+          "options": [
+            {
+              "label": "Yes",
+              "correct": true
+            },
+            {
+              "label": "No",
+              "correct": false
+            }
+          ],
+          "feedback": {
+            "correct": "Right! The Job line shows what it was designed to do (Day 22).",
+            "incorrect": "Not quite. The ID card's Job line tells you what the AI is designed to do (Day 22)."
+          }
+        },
+        {
+          "statement": "TrekGuide was made for trekkers on mountain trails. Is it a good fit for a cyclist in a busy city?",
+          "options": [
+            {
+              "label": "Yes",
+              "correct": false
+            },
+            {
+              "label": "No",
+              "correct": true
+            }
+          ],
+          "feedback": {
+            "correct": "Right! Check “Made for.” A tool may not work well for people it wasn't designed for (Day 23).",
+            "incorrect": "Not quite. Remember the detective questions (Day 23): who is it made for? City roads are outside what TrekGuide was designed for."
+          }
+        },
+        {
+          "statement": "Is “the songs match what the listener likes” a clear success criterion you can check with Yes or No?",
+          "options": [
+            {
+              "label": "Yes",
+              "correct": true
+            },
+            {
+              "label": "No",
+              "correct": false
+            }
+          ],
+          "feedback": {
+            "correct": "Right! Good criteria are clear and checkable (Day 24).",
+            "incorrect": "Not quite. You can answer Yes or No to it, which makes it a good criterion (Day 24). “The songs are good” is the vague one."
+          }
+        },
+        {
+          "statement": "Is testing an AI on just one easy question enough to judge it?",
+          "options": [
+            {
+              "label": "Yes",
+              "correct": false
+            },
+            {
+              "label": "No",
+              "correct": true
+            }
+          ],
+          "feedback": {
+            "correct": "Right! Use many test cases and ask real people for feedback (Day 25).",
+            "incorrect": "Not quite. One result can be lucky. Use many test cases, easy and tricky, and ask users what they think (Day 25)."
+          }
+        },
+        {
+          "statement": "To train an AI to spot ripe mangoes, do you need labelled photos of mangoes?",
+          "options": [
+            {
+              "label": "Yes",
+              "correct": true
+            },
+            {
+              "label": "No",
+              "correct": false
+            }
+          ],
+          "feedback": {
+            "correct": "Right! The data must match the task, and labels tell the AI which is which (Day 26).",
+            "incorrect": "Not quite. The data must match the task. For mangoes, you need labelled photos of ripe and unripe ones (Day 26)."
+          }
+        },
+        {
+          "statement": "An ID card says an AI is not good with blurry photos. Should you rely on it for blurry photos?",
+          "options": [
+            {
+              "label": "Yes",
+              "correct": false
+            },
+            {
+              "label": "No",
+              "correct": true
+            }
+          ],
+          "feedback": {
+            "correct": "Right! The Limits line shows where an AI struggles (Day 22).",
+            "incorrect": "Not quite. Check the Limits line on the ID card (Day 22). It says the AI is not good with blurry photos."
+          }
+        },
+        {
+          "statement": "Can people improve an AI tool, for example by adding a language option, to help more people?",
+          "options": [
+            {
+              "label": "Yes",
+              "correct": true
+            },
+            {
+              "label": "No",
+              "correct": false
+            }
+          ],
+          "feedback": {
+            "correct": "Right! People built it, and people can improve it (Day 27).",
+            "incorrect": "Not quite. AI is designed by people, so people can adjust it to help more individuals and communities. A language option is one example (Day 27)."
+          }
+        }
+      ]
+    },
+    "reward": {
+      "message": "You did it! 28 days, 4 skills, and one big achievement. You can now engage with AI, create with it, manage it and shape it. Tomorrow: the world meets a learner who knows how AI works, and that learner is you."
     }
   }
 ]
