@@ -267,7 +267,7 @@ export default function DayPage({ params }: { params: Promise<{ day: string }> }
         </footer>
       )}
 
-      <Image src="/graphics/elements/hill.png" alt="" aria-hidden width={400} height={200} className="pointer-events-none absolute -bottom-2 left-0 -z-10 h-auto w-48 opacity-30 sm:w-64" />
+      <Image src="/graphics/elements/hill.png" alt="" aria-hidden width={300} height={150} className="pointer-events-none absolute -bottom-2 left-0 -z-10 h-auto w-20 opacity-30 sm:w-50" />
     </main>
   );
 }

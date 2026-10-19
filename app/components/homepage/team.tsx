@@ -93,7 +93,7 @@ export default function Team() {
       name: "Komalhari Shrestha",
       role: "FOUNDER | PROGRAM DIRECTOR",
       skills: "Project Management, Frontend Dev & Curriculum Design",
-      image: "/team/komal.png",
+      image: "/team/komalhari.jpg",
       linkedin: "https://www.linkedin.com/in/komalhari-shrestha-43599432b",
       github: "https://github.com/komalhari",
     },
@@ -125,7 +125,7 @@ export default function Team() {
       name: "Himalhari Shrestha",
       role: "CURRICULUM DEVELOPMENT",
       skills: "Curriculum Development & Revision",
-      image: "/team/himal.png",
+      image: "/team/himalhari.jpg",
       linkedin: "https://www.linkedin.com/in/himalhari-shrestha-b22829406/",
 
     },

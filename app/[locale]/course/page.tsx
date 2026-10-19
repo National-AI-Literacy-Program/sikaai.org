@@ -5,7 +5,7 @@ import { Link, useRouter } from "@/i18n/navigation";
 import { useEffect, useMemo, useState } from "react";
 import { getCourseTitle, getLessons } from "@/lib/course";
 import { TOTAL_DAYS, getEmail, useProgress } from "@/lib/progress";
-import Header from "@/app/components/Header";
+import ThemeToggle from "@/app/components/ThemeToggle";
 import PacePrompt from "@/app/components/involvepage/paceprompt";
 
 const WEEK_COUNT = 4;
@@ -137,7 +137,16 @@ export default function CoursePage() {
 
   return (
     <main className="min-h-dvh bg-background font-sans text-foreground antialiased">
-      <Header />
+ 
+    <header className="site-nav shell">
+  <Link href="/" className="brand">
+    Sika<span>AI</span>
+  </Link>
+  <nav className="nav-links" aria-label="Main navigation">
+    <ThemeToggle />
+  </nav>
+</header>
+ 
 
       <div className="mx-auto w-full max-w-3xl px-5 pb-24 pt-6 sm:px-8">
         {/* Greeting + overall progress */}
@@ -152,8 +161,7 @@ export default function CoursePage() {
           <Ring value={doneCount} total={total} />
         </section>
 
-        {P.canCertify && !P.certificate && <div className="mt-5"><CertCard P={P} /></div>}
-
+{P.canCertify && !P.certificate && sel.week !== WEEK_COUNT && <div className="mt-5"><CertCard P={P} /></div>}
         {/* Week picker */}
         <nav aria-label="Weeks" className="mt-8 grid grid-cols-4 gap-2 sm:gap-3">
           {weeks.map((w) => {
@@ -183,7 +191,7 @@ export default function CoursePage() {
         {/* Winding path of lessons */}
         <ol className="relative mt-6 flex flex-col gap-5 rounded-3xl border-2 border-border px-4 py-8 sm:px-8">
           <Image src="/graphics/elements/flower.png" alt="" aria-hidden width={60} height={60} className="pointer-events-none absolute right-3 top-3 h-auto w-10 opacity-80" />
-          <Image src="/graphics/elements/hill.png" alt="" aria-hidden width={300} height={100} className="pointer-events-none absolute bottom-0 right-0 h-auto w-40 opacity-50" />
+          <Image src="/graphics/elements/hill.png" alt="" aria-hidden width={300} height={100} className="pointer-events-none absolute bottom-0 right-5 h-auto w-40 opacity-30" />
 
           {sel.lessons.map((lesson, k) => {
             const status = P.statusOf(lesson.day);
