@@ -2287,7 +2287,7 @@ html[data-theme="dark"] .day-card-locked {
 .week-roadmap {
   position: relative;
   margin: 24px 0 34px;
-  padding: 18px 8px 0;
+  padding: 18px 0;
 }
 .week-roadmap-track {
   position: absolute;

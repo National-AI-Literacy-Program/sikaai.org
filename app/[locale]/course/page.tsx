@@ -61,24 +61,13 @@ export default function CoursePage() {
 
   return (
     <main className="course-page">
-      <nav className="site-nav shell">
-        <Link className="brand" href="/">
-          Sikaai<span>AI</span>
-        </Link>
-        <Link className="back-link" href="/">
-          ← Back home
-        </Link>
-      </nav>
-      <div className="course-dashboard shell">
-        <header className="course-dashboard-hero">
-          <div>
-            <p className="eyebrow">YOUR 4-WEEK LEARNING PATH</p>
-            <h1>
-              28 topics.
-              <br />
-              <span>4 focused weeks.</span>
-            </h1>
-          </div>
+      <header className="site-nav shell">
+        <Link className="brand" href="/">Sika<span>AI</span></Link>
+        <Link className="back-link nav-cta" href="/">← Back home</Link>
+      </header>
+      <div className=" shell">
+        {/* <header className="course-dashboard-hero">
+          
           <div className="course-progress-orb">
             <strong>{overallProgress}%</strong>
             <span>
@@ -87,7 +76,7 @@ export default function CoursePage() {
               topics complete
             </span>
           </div>
-        </header>
+        </header> */}
         <section className="week-roadmap" aria-label="Course weeks">
           <div className="week-roadmap-track">
             <span style={{ width: `${railProgress}%` }} />

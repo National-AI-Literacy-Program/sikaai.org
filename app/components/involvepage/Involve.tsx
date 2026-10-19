@@ -91,7 +91,7 @@ export default function Involve() {
               placeholder="Enter your email address"
               aria-invalid={!!error}
               aria-describedby={error ? "email-error" : undefined}
-              className={`w-full rounded-xl border bg-background/80 px-4 py-3.5 text-sm font-semibold text-foreground shadow-sm backdrop-blur transition placeholder:font-medium placeholder:text-(--muted) focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-(--saffron) ${
+              className={`w-full rounded-xl border bg-background/80 px-4 py-3.5 text-sm font-semibold text-foreground shadow-sm backdrop-blur transition placeholder:font-medium placeholder:text-(--muted) ${
                 error ? "border-primary" : "border-border"
               }`}
             />
