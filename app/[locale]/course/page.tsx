@@ -6,6 +6,7 @@ import { useEffect, useMemo, useState } from "react";
 import { getCourseTitle, getLessons } from "@/lib/course";
 import { TOTAL_DAYS, getEmail, useProgress } from "@/lib/progress";
 import Header from "@/app/components/Header";
+import PacePrompt from "@/app/components/involvepage/paceprompt";
 
 const WEEK_COUNT = 4;
 const PER_WEEK = 7;
@@ -97,6 +98,7 @@ export default function CoursePage() {
   const P = useProgress();
   const router = useRouter();
   const [allowed, setAllowed] = useState(false);
+  const [pending, setPending] = useState<number | null>(null); // day whose "one lesson a day" popup is open
 
   // Guard: no email saved on this device -> back to the gate
   useEffect(() => {
@@ -183,11 +185,11 @@ export default function CoursePage() {
           {sel.lessons.map((lesson, k) => {
             const status = P.statusOf(lesson.day);
             const waiting = status === "waiting";
-            const locked = status === "locked" || waiting;
+            const locked = status === "locked"; // waiting is no longer locked
             const done = status === "completed";
             const current = status === "current";
             const shift = Math.round(Math.sin(k * 1.1) * 36);
-            const title = locked && !lesson.hook ? "Coming soon" : getCourseTitle(lesson);
+            const title = (locked || waiting) && !lesson.hook ? "Coming soon" : getCourseTitle(lesson);
 
             const node = (
               <>
@@ -200,16 +202,16 @@ export default function CoursePage() {
                         : "border-border bg-(--crimson-pale) text-(--muted)"
                   }`}
                 >
-                  {done ? "✓" : waiting ? "⏳" : locked ? "🔒" : lesson.day}
+                  {done ? "✓" : waiting ? "🌙" : locked ? "🔒" : lesson.day}
                   {current && <span className="absolute -inset-2 animate-ping rounded-full border-2 border-primary/40 motion-reduce:hidden" aria-hidden />}
                 </span>
                 <span className="min-w-0 text-left">
                   <span className={`block text-xs font-bold ${current ? "text-primary" : "text-(--muted)"}`}>
                     Day {lesson.day}
                     {current && " · Start here"}
-                    {waiting && ` · Opens ${P.opensIn(lesson.day)}`}
+                    {waiting && " · Best tomorrow"}
                   </span>
-                  <span className={`block text-base font-extrabold leading-snug ${locked ? "text-(--muted)" : ""}`}>{title}</span>
+                  <span className={`block text-base font-extrabold leading-snug ${locked || waiting ? "text-(--muted)" : ""}`}>{title}</span>
                 </span>
               </>
             );
@@ -218,6 +220,10 @@ export default function CoursePage() {
               <li key={lesson.day} style={{ transform: `translateX(${shift}px)` }} className="w-full max-w-sm self-center max-sm:translate-x-0!">
                 {locked ? (
                   <div className="flex items-center gap-4 opacity-70" aria-label={`Day ${lesson.day}, locked`}>{node}</div>
+                ) : waiting ? (
+                  <button type="button" onClick={() => setPending(lesson.day)} className={`group flex w-full items-center gap-4 rounded-2xl text-left ${focus}`}>
+                    {node}
+                  </button>
                 ) : (
                   <Link href={`/course/${lesson.day}`} className={`group flex items-center gap-4 rounded-2xl ${focus}`}>
                     {node}
@@ -230,6 +236,19 @@ export default function CoursePage() {
         </ol>
 
         {sel.week === WEEK_COUNT && <div className="mt-5"><CertCard P={P} /></div>}
+
+        {pending !== null && (
+          <PacePrompt
+            day={pending}
+            when={P.opensIn(pending)}
+            onClose={() => setPending(null)}
+            onContinue={() => {
+              const d = pending;
+              setPending(null);
+              router.push(`/course/${d}`);
+            }}
+          />
+        )}
 
         {sel.locked && (
           <p className="mt-4 text-center text-sm font-semibold text-(--muted)">Finish Week {sel.week - 1} to unlock this week.</p>

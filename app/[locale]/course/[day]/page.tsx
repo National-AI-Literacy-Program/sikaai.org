@@ -109,7 +109,7 @@ export default function DayPage({ params }: { params: Promise<{ day: string }> }
   const day = Number(rawDay);
   const lesson = getLesson(day);
   const lessons = getLessons();
-  const { ready, complete, statusOf, opensIn } = useProgress();
+  const { ready, complete, statusOf } = useProgress();
   const [saved, setSaved] = useState(false);
   const [t0] = useState(() => Date.now());
   const [i, setI] = useState(0);
@@ -135,8 +135,7 @@ export default function DayPage({ params }: { params: Promise<{ day: string }> }
   if (!ready) return <main className="h-dvh bg-background" />;
   if (!lesson)
     return <Notice title="This lesson isn't ready yet" text="Head back to the course to pick a lesson that's open." href="/course" cta="Back to course" />;
-  if (statusOf(day) === "waiting")
-    return <Notice title={`Day ${day} opens ${opensIn(day)}`} text="One lesson a day helps it stick. Come back then and keep going!" href="/course" cta="Back to course" />;
+  // "waiting" days are allowed now: the course page shows the "one lesson a day" popup instead.
   if (statusOf(day) === "locked")
     return <Notice title={`Finish Day ${Math.max(1, day - 1)} first`} text="Small steps make it stick. Complete the last lesson to unlock this one." href={`/course/${Math.max(1, day - 1)}`} cta="Go to the last lesson" />;
 
@@ -229,7 +228,7 @@ export default function DayPage({ params }: { params: Promise<{ day: string }> }
                 graded
                 locked={Boolean(quizRight)}
               />
-              <Deco name="check" className="-right-3 -top-4 rotate-6" />
+            
             </div>
           )}
 
@@ -243,7 +242,7 @@ export default function DayPage({ params }: { params: Promise<{ day: string }> }
               <p className="max-w-md text-(--muted)">{lesson.reward?.message || "Save your progress to unlock the next lesson."}</p>
               {saved && next ? (
                 <>
-                  <p className="font-bold">Day {next.day} opens tomorrow.</p>
+                  <p className="font-bold">Day {next.day} is ready. Tomorrow is best, but you decide!</p>
                   <Link href="/course" className={`${btn} mt-1`}>Back to course</Link>
                 </>
               ) : !saved ? (
