@@ -99,6 +99,8 @@ export default function CoursePage() {
   const router = useRouter();
   const [allowed, setAllowed] = useState(false);
   const [pending, setPending] = useState<number | null>(null); // day whose "one lesson a day" popup is open
+  // null until the user manually picks a week; until then we follow the current week
+  const [pickedWeek, setPickedWeek] = useState<number | null>(null);
 
   // Guard: no email saved on this device -> back to the gate
   useEffect(() => {
@@ -114,7 +116,8 @@ export default function CoursePage() {
   const roadmap = Array.from({ length: total }, (_, k) => lessons[k] ?? { day: k + 1, hook: "", concept: "Coming soon" });
   const nextDay = roadmap.find((l) => !completed.includes(l.day))?.day ?? total;
   const currentWeek = Math.min(WEEK_COUNT, Math.max(1, Math.ceil(nextDay / PER_WEEK)));
-  const [selectedWeek, setSelectedWeek] = useState(currentWeek);
+  // Follows currentWeek automatically (including after progress loads) unless the user picked one
+  const selectedWeek = pickedWeek ?? currentWeek;
 
   const weeks = useMemo(
     () =>
@@ -160,7 +163,7 @@ export default function CoursePage() {
                 key={w.week}
                 type="button"
                 aria-current={active ? "step" : undefined}
-                onClick={() => setSelectedWeek(w.week)}
+                onClick={() => setPickedWeek(w.week)}
                 className={`rounded-2xl border-2 px-2 py-3 text-center transition ${focus} ${
                   active ? "border-primary bg-primary text-white shadow-[0_4px_0_0_#7d1f1f]" : "border-border hover:border-primary disabled:opacity-50 disabled:hover:border-border"
                 }`}

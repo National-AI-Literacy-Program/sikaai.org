@@ -138,9 +138,9 @@ export function useProgress() {
     : !first.has(day - 1) ? "locked"
     : now >= unlockAt(day) ? "current"
     : "waiting";
- const opensIn = (day: number) => {
+const opensIn = (day: number) => {
   const h = Math.ceil((unlockAt(day) - now) / 36e5);
-  return h > 12 ? "tomorrow" : `in ${Math.max(1, h)}h`;
+  return h <= 2 ? `in ${Math.max(1, h)}h` : "tomorrow";
 };
   const complete = useCallback(
     async (day: number, r: { misses: number; ms: number }) => {
