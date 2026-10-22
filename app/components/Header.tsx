@@ -50,61 +50,64 @@ export default function Header() {
         Sika<span>AI</span>
       </Link>
 
-      <button
-        type="button"
-        className={`nav-toggle${open ? " is-open" : ""}`}
-        aria-label={open ? "Close menu" : "Open menu"}
-        aria-expanded={open}
-        aria-controls="main-nav"
-        onClick={() => setOpen(!open)}
-      >
-        <span />
-        <span />
-        <span />
-      </button>
+      <div className="nav-right">
+        <button
+          type="button"
+          className={`nav-toggle${open ? " is-open" : ""}`}
+          aria-label={open ? "Close menu" : "Open menu"}
+          aria-expanded={open}
+          aria-controls="main-nav"
+          onClick={() => setOpen(!open)}
+        >
+          <span />
+          <span />
+          <span />
+        </button>
 
-      <nav
-        id="main-nav"
-        className={`nav-links${open ? " nav-links-open" : ""}`}
-        aria-label="Main navigation"
-      >
-        <Link
-          href="/#about"
-          onClick={(e) => handleHashClick(e, "#about")}
-          className="nav-cta"
+        <nav
+          id="main-nav"
+          className={`nav-links${open ? " nav-links-open" : ""}`}
+          aria-label="Main navigation"
         >
-          About
-        </Link>
-        <Link
-          href="/#course-structure"
-          onClick={(e) => handleHashClick(e, "#course-structure")}
-          className="nav-cta"
-        >
-          Course Structure
-        </Link>
-        <Link
-          href="/#approach"
-          onClick={(e) => handleHashClick(e, "#approach")}
-          className="nav-cta"
-        >
-          Content
-        </Link>
-        <Link
-          href="/curriculum"
-          className="nav-cta"
-          onClick={() => setOpen(false)}
-        >
-          Curriculum
-        </Link>
-        <Link
-          href="/involve"
-          className="nav-cta button button-primary"
-          onClick={() => setOpen(false)}
-        >
-          Start Learning
-        </Link>
+          <Link
+            href="/#about"
+            onClick={(e) => handleHashClick(e, "#about")}
+            className="nav-cta"
+          >
+            About
+          </Link>
+          <Link
+            href="/#course-structure"
+            onClick={(e) => handleHashClick(e, "#course-structure")}
+            className="nav-cta"
+          >
+            Course Structure
+          </Link>
+          <Link
+            href="/#approach"
+            onClick={(e) => handleHashClick(e, "#approach")}
+            className="nav-cta"
+          >
+            Content
+          </Link>
+          <Link
+            href="/curriculum"
+            className="nav-cta"
+            onClick={() => setOpen(false)}
+          >
+            Curriculum
+          </Link>
+          <Link
+            href="/involve"
+            className="nav-cta button button-primary"
+            onClick={() => setOpen(false)}
+          >
+            Start Learning
+          </Link>
+        </nav>
+
         <ThemeToggle />
-      </nav>
+      </div>
     </header>
   );
 }

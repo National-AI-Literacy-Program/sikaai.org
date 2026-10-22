@@ -3645,6 +3645,12 @@ html[data-theme="dark"] .example-label {
   display: none;
 }
 
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
 @media (max-width: 760px) {
   .site-nav {
     position: relative;
@@ -3685,7 +3691,7 @@ html[data-theme="dark"] .example-label {
     transform: translateY(-7px) rotate(-45deg);
   }
 
-  /* Dropdown panel */
+
   .site-nav .nav-links {
     position: absolute;
     top: 100%;
@@ -3719,8 +3725,16 @@ html[data-theme="dark"] .example-label {
     font-size: 15px;
   }
 
-  .site-nav .nav-links .theme-toggle {
-    align-self: center;
-    margin-top: 4px;
+
+  .site-nav .nav-right {
+    gap: 16px;
+  }
+
+  .site-nav .nav-right .theme-toggle {
+    width: 40px;
+    height: 40px;
+    min-height: 40px;
+    flex: 0 0 40px;
+    order: -1; 
   }
 }

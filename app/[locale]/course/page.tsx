@@ -139,7 +139,7 @@ export default function CoursePage() {
     <main className="min-h-dvh overflow-x-clip bg-background font-sans text-foreground antialiased">
  
     <header className="site-nav shell">
-  <Link href="/" className="brand">
+  <Link href="/course" className="brand">
     Sika<span>AI</span>
   </Link>
   <nav className="nav-links" aria-label="Main navigation">
@@ -231,7 +231,7 @@ export default function CoursePage() {
               <li
                 key={lesson.day}
                 style={{ "--shift": `${shift}px` } as React.CSSProperties}
-                className="w-full max-w-sm self-center [transform:translateX(var(--shift))] max-sm:[transform:translateX(calc(var(--shift)*0.25))]"
+                className="w-full max-w-sm self-center transform-[translateX(var(--shift))] max-sm:transform-[translateX(calc(var(--shift)*0.25))]"
               >
                 {locked ? (
                   <div className="flex items-center gap-4 opacity-70" aria-label={`Day ${lesson.day}, locked`}>{node}</div>
@@ -242,7 +242,7 @@ export default function CoursePage() {
                 ) : (
                   <Link href={`/course/${lesson.day}`} className={`group flex items-center gap-4 rounded-2xl ${focus}`}>
                     {node}
-                    {current && <Image src="/graphics/boy/explaining.png" alt="" aria-hidden width={64} height={64} className="ml-auto h-auto w-14 sm:w-16" />}
+                    {current && <Image src="/graphics/boy/explaining.png" alt="" aria-hidden width={64} height={64} className="ml-1 h-auto w-14 shrink-0 sm:ml-3 sm:w-16" />}
                   </Link>
                 )}
               </li>
