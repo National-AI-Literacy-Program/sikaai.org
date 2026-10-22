@@ -50,7 +50,7 @@ export default function Content() {
                 <span className="text-primary">one domain each week.</span>
               </h2>
               <p className={`${lede} mt-6 max-w-md`}>
-                Move from recognising AI to making thoughtful, responsible
+                Move from recognizing AI to making thoughtful, responsible
                 choices. Start small, build context, and finish with habits you
                 can actually use.
               </p>

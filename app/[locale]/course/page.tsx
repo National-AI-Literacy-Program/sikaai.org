@@ -136,7 +136,7 @@ export default function CoursePage() {
   if (!allowed) return null;
 
   return (
-    <main className="min-h-dvh bg-background font-sans text-foreground antialiased">
+    <main className="min-h-dvh overflow-x-clip bg-background font-sans text-foreground antialiased">
  
     <header className="site-nav shell">
   <Link href="/" className="brand">
@@ -228,7 +228,11 @@ export default function CoursePage() {
             );
 
             return (
-              <li key={lesson.day} style={{ transform: `translateX(${shift}px)` }} className="w-full max-w-sm self-center max-sm:translate-x-0!">
+              <li
+                key={lesson.day}
+                style={{ "--shift": `${shift}px` } as React.CSSProperties}
+                className="w-full max-w-sm self-center [transform:translateX(var(--shift))] max-sm:[transform:translateX(calc(var(--shift)*0.25))]"
+              >
                 {locked ? (
                   <div className="flex items-center gap-4 opacity-70" aria-label={`Day ${lesson.day}, locked`}>{node}</div>
                 ) : waiting ? (

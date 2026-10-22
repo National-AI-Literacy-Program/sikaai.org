@@ -34,7 +34,7 @@ const stats = [
                     </h1>
       
                     <p className={`${lede} mx-auto mt-7 max-w-2xl md:mx-0`}>
-                      SikaiAI is a four-week AI literacy program that helps you
+                      SikaAI is a four-week AI literacy program that helps you
                       identify AI, understand how it is used, and make more informed
                       choices online.
                     </p>
@@ -68,7 +68,7 @@ const stats = [
                     <Image
                       className="mb-5 h-auto w-1/2 max-w-36 drop-shadow-sm sm:w-1/3"
                       src="/graphics/namaste.png"
-                      alt="Namaste illustration welcoming learners"
+                      alt="image"
                       width={144}
                       height={144}
                       priority

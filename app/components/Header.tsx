@@ -1,20 +1,40 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
 import { Link, usePathname } from "@/i18n/navigation";
 import ThemeToggle from "./ThemeToggle";
 
 export default function Header() {
-
   const pathname = usePathname();
+  // The menu counts as open only on the page where it was opened,
+  // so navigating anywhere closes it without needing an effect.
+  const [openAt, setOpenAt] = useState<string | null>(null);
+  const open = openAt === pathname;
+  const setOpen = (value: boolean) => setOpenAt(value ? pathname : null);
+  const headerRef = useRef<HTMLElement>(null);
+
+  // Close on Escape or outside click
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpenAt(null);
+    const onClick = (e: MouseEvent) => {
+      if (!headerRef.current?.contains(e.target as Node)) setOpenAt(null);
+    };
+    document.addEventListener("keydown", onKey);
+    document.addEventListener("mousedown", onClick);
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.removeEventListener("mousedown", onClick);
+    };
+  }, [open]);
 
   const handleHashClick = (
     e: React.MouseEvent<HTMLAnchorElement>,
     hash: string
   ) => {
-   
+    setOpen(false);
     if (pathname !== "/") return;
 
-    
     e.preventDefault();
     const element = document.getElementById(hash.replace("#", ""));
 
@@ -25,11 +45,29 @@ export default function Header() {
   };
 
   return (
-    <header className="site-nav shell">
+    <header className="site-nav shell" ref={headerRef}>
       <Link href="/" className="brand">
         Sika<span>AI</span>
       </Link>
-      <nav className="nav-links" aria-label="Main navigation">
+
+      <button
+        type="button"
+        className={`nav-toggle${open ? " is-open" : ""}`}
+        aria-label={open ? "Close menu" : "Open menu"}
+        aria-expanded={open}
+        aria-controls="main-nav"
+        onClick={() => setOpen(!open)}
+      >
+        <span />
+        <span />
+        <span />
+      </button>
+
+      <nav
+        id="main-nav"
+        className={`nav-links${open ? " nav-links-open" : ""}`}
+        aria-label="Main navigation"
+      >
         <Link
           href="/#about"
           onClick={(e) => handleHashClick(e, "#about")}
@@ -51,10 +89,18 @@ export default function Header() {
         >
           Content
         </Link>
-        <Link href="/curriculum" className="nav-cta">
+        <Link
+          href="/curriculum"
+          className="nav-cta"
+          onClick={() => setOpen(false)}
+        >
           Curriculum
         </Link>
-        <Link href="/involve" className="nav-cta button button-primary">
+        <Link
+          href="/involve"
+          className="nav-cta button button-primary"
+          onClick={() => setOpen(false)}
+        >
           Start Learning
         </Link>
         <ThemeToggle />

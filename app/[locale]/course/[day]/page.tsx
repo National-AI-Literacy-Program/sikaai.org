@@ -1,273 +1,274 @@
 "use client";
 
 import Image from "next/image";
-import { Link } from "@/i18n/navigation";
-import { use, useMemo, useState } from "react";
-import { getLesson, getLessons } from "@/lib/course";
-import { useProgress } from "@/lib/progress";
+import { Link, useRouter } from "@/i18n/navigation";
+import { useEffect, useMemo, useState } from "react";
+import { getCourseTitle, getLessons } from "@/lib/course";
+import { TOTAL_DAYS, getEmail, useProgress } from "@/lib/progress";
 import ThemeToggle from "@/app/components/ThemeToggle";
+import PacePrompt from "@/app/components/involvepage/paceprompt";
 
-type Option = { label: string; correct: boolean };
-type Mood = "explaining" | "happy" | "thinking" | "winking" | "surprised";
-type Screen =
-  | { t: "hook" }
-  | { t: "learn"; text: string; n: number; of: number }
-  | { t: "practice" }
-  | { t: "quiz" }
-  | { t: "done" };
+const WEEK_COUNT = 4;
+const PER_WEEK = 7;
+const weekTitles = [
+  "Start with the foundations.",
+  "Make AI useful day to day.",
+  "Create with more confidence.",
+  "Put it all into practice.",
+];
+const focus =
+  "focus-visible:outline-3 focus-visible:outline-offset-4 focus-visible:outline-primary";
 
-const fix = (t: string) => String(t).replace(/([.!?])(?=[A-Z])/g, "$1 ");
-const frame =
-  "rounded-3xl border-2 border-border bg-background shadow-[0_6px_0_0_var(--line)]";
-const btn =
-  "rounded-2xl bg-primary px-8 py-3.5 text-base font-extrabold text-white shadow-[0_4px_0_0_#7d1f1f] transition active:translate-y-1 active:shadow-none disabled:cursor-not-allowed disabled:opacity-40 disabled:shadow-none focus-visible:outline-3 focus-visible:outline-offset-4 focus-visible:outline-primary";
-
-function Mascot({ who, mood, size = 150 }: { who: "boy" | "girl"; mood: Mood; size?: number }) {
-  // Fixed square box so boy/girl art (different aspect ratios) never changes the layout height.
+function Ring({ value, total }: { value: number; total: number }) {
+  const r = 34;
+  const c = 2 * Math.PI * r;
   return (
-    <div className="relative aspect-square shrink-0" style={{ width: `min(${size}px, ${size > 140 ? 16 : 11}dvh)` }}>
-      <Image
-        key={`${who}-${mood}`}
-        src={`/graphics/${who}/${mood}.png`}
-        alt=""
-        fill
-        sizes="180px"
-        priority
-        className="mascot object-contain object-bottom drop-shadow-sm"
-      />
-    </div>
-  );
-}
-
-function Deco({ name, className }: { name: string; className: string }) {
-  return (
-    <Image src={`/graphics/elements/${name}.png`} alt="" aria-hidden width={80} height={80} className={`pointer-events-none absolute h-auto w-14 sm:w-20 ${className}`} />
-  );
-}
-
-function Notice({ title, text, href, cta }: { title: string; text: string; href: string; cta: string }) {
-  return (
-    <main className="grid min-h-dvh place-items-center bg-background px-5 text-center text-foreground">
-      <div className={`${frame} max-w-md p-8`}>
-        <Mascot who="boy" mood="thinking" />
-        <h1 className="mt-4 text-2xl font-extrabold tracking-tight">{title}</h1>
-        <p className="mt-2 text-(--muted)">{text}</p>
-        <Link href={href} className={`${btn} mt-6 inline-block`}>{cta}</Link>
-      </div>
-    </main>
-  );
-}
-
-function Question({
-  title, options, pick, onPick, feedback, graded, locked, mascot,
-}: {
-  title: string; options: Option[]; pick: number | null; onPick: (i: number) => void;
-  feedback?: { correct?: string; incorrect?: string }; graded: boolean; locked: boolean; mascot: React.ReactNode;
-}) {
-  const right = pick !== null && options[pick]?.correct;
-  return (
-    <div className="w-full">
-      <div className="flex items-center gap-3">
-        {mascot}
-        <div className="min-w-0">
-          <p className="mb-1 inline-block rounded-full bg-(--crimson-pale) px-3 py-0.5 text-xs font-extrabold">
-            {graded ? "Quiz time. This one counts!" : "Warm-up. Just for practice."}
-          </p>
-          <h2 className="text-lg font-extrabold leading-snug tracking-tight [@media(min-height:800px)]:text-2xl">{title}</h2>
-        </div>
-      </div>
-      <div className="mt-3 grid gap-2 [@media(min-height:800px)]:mt-5 [@media(min-height:800px)]:gap-3">
-        {options.map((o, i) => {
-          const chosen = pick === i;
-          const state = chosen ? (o.correct ? "border-(--success) bg-(--success)/15 pop" : "border-(--error) bg-(--error)/15 shake") : "border-border hover:border-primary hover:bg-(--crimson-pale)";
-          return (
-            <button
-              key={o.label}
-              type="button"
-              disabled={locked}
-              aria-pressed={chosen}
-              onClick={() => onPick(i)}
-              className={`flex items-center gap-3 rounded-2xl border-2 px-3 py-2 text-left text-base font-bold transition focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-primary [@media(min-height:800px)]:py-3.5 ${state}`}
-            >
-              <span className="grid size-7 shrink-0 place-items-center rounded-lg bg-foreground text-xs font-extrabold text-background">
-                {chosen ? (o.correct ? "✓" : "✕") : "ABCD"[i]}
-              </span>
-              {o.label}
-            </button>
-          );
-        })}
-      </div>
-      <p role="status" className={`mt-2 min-h-10 rounded-xl px-3 py-2 text-sm font-semibold ${pick === null ? "invisible" : right ? "bg-(--success)/15" : "bg-(--error)/15"}`}>
-        {pick !== null && (right ? feedback?.correct || "Nice one!" : feedback?.incorrect || "Not quite. Try another answer!")}
+    <div className="relative size-24 shrink-0" role="img" aria-label={`${value} of ${total} lessons done`}>
+      <svg viewBox="0 0 80 80" className="size-full -rotate-90">
+        <circle cx="40" cy="40" r={r} fill="none" stroke="var(--line)" strokeWidth="9" />
+        <circle cx="40" cy="40" r={r} fill="none" stroke="var(--color-primary, #a32b2b)" strokeWidth="9" strokeLinecap="round" strokeDasharray={c} strokeDashoffset={c * (1 - value / total)} className="transition-all duration-700" />
+      </svg>
+      <p className="absolute inset-0 grid place-items-center text-lg font-extrabold">
+        {value}/{total}
       </p>
     </div>
   );
 }
 
-export default function DayPage({ params }: { params: Promise<{ day: string }> }) {
-  const { day: rawDay } = use(params);
-  const day = Number(rawDay);
-  const lesson = getLesson(day);
+function CertCard({ P }: { P: ReturnType<typeof useProgress> }) {
+  const [asking, setAsking] = useState(false);
+  const [name, setName] = useState("");
+  const text = P.certificate
+    ? "Your certificate is ready. Open it anytime."
+    : !P.canCertify
+      ? `Finish all ${TOTAL_DAYS} days to unlock it (${P.completed.length}/${TOTAL_DAYS}).`
+      : !P.online
+        ? "Connect to the internet once so we can save your results and issue it."
+        : "Save your results and get your certificate.";
+  const cta = `rounded-2xl bg-primary px-5 py-3 text-sm font-extrabold text-white shadow-[0_4px_0_0_#7d1f1f] disabled:opacity-40 disabled:shadow-none ${focus}`;
+  return (
+    <div className={`flex flex-wrap items-center gap-4 rounded-3xl border-2 p-5 ${P.canCertify ? "border-primary bg-(--crimson-pale) shadow-[0_6px_0_0_var(--line)]" : "border-border opacity-80"}`}>
+      <span className="text-4xl" aria-hidden>🎓</span>
+      <div className="min-w-0 flex-1">
+        <p className="text-base font-extrabold">Your certificate</p>
+        <p className="text-sm font-semibold text-(--muted)">{text}</p>
+      </div>
+      {P.certificate ? (
+        <Link href={`/certificate/${P.certificate.id}`} className={cta}>Open</Link>
+      ) : (
+        !asking && (
+          <button type="button" disabled={!P.canCertify || !P.online} onClick={() => setAsking(true)} className={cta}>
+            Get certificate
+          </button>
+        )
+      )}
+      {asking && !P.certificate && (
+        <form
+          className="basis-full"
+          onSubmit={(e) => {
+            e.preventDefault();
+            if (name.trim()) P.claim(name.trim());
+          }}
+        >
+          <label htmlFor="cert-name" className="text-sm font-bold">Name on your certificate</label>
+          <input
+            id="cert-name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            maxLength={60}
+            autoComplete="name"
+            className="mt-1 w-full rounded-xl border-2 border-border bg-background px-3 py-2.5 text-base font-semibold focus-visible:outline-2 focus-visible:outline-primary"
+          />
+          <p className="mt-1 text-xs font-semibold text-(--muted)">We&apos;ll upload your results now. The name can&apos;t be changed later.</p>
+          {P.error && <p role="alert" className="mt-2 text-sm font-bold text-(--error)">{P.error}</p>}
+          <div className="mt-3 flex gap-3">
+            <button type="submit" disabled={!name.trim() || P.busy || !P.online} className={cta}>
+              {P.busy ? "Saving your results…" : "Save and get certificate"}
+            </button>
+            <button type="button" onClick={() => setAsking(false)} disabled={P.busy} className={`rounded-2xl border-2 border-border px-5 py-3 text-sm font-bold ${focus}`}>Cancel</button>
+          </div>
+        </form>
+      )}
+    </div>
+  );
+}
+
+export default function CoursePage() {
   const lessons = getLessons();
-  const { ready, complete, statusOf } = useProgress();
-  const [saved, setSaved] = useState(false);
-  const [t0] = useState(() => Date.now());
-  const [i, setI] = useState(0);
-  const [who, setWho] = useState<"boy" | "girl">("boy");
-  const [practice, setPractice] = useState<number | null>(null);
-  const [quiz, setQuiz] = useState<number | null>(null);
-  const [misses, setMisses] = useState(0);
+  const P = useProgress();
+  const router = useRouter();
+  const [allowed, setAllowed] = useState(false);
+  const [pending, setPending] = useState<number | null>(null); // day whose "one lesson a day" popup is open
+  // null until the user manually picks a week; until then we follow the current week
+  const [pickedWeek, setPickedWeek] = useState<number | null>(null);
 
-  const screens = useMemo<Screen[]>(() => {
-    if (!lesson) return [];
-    const sentences = fix(lesson.concept).split(/(?<=[.!?])\s+/).filter(Boolean);
-    const chunks: string[] = [];
-    for (let k = 0; k < sentences.length; k += 2) chunks.push(sentences.slice(k, k + 2).join(" "));
-    return [
-      { t: "hook" },
-      ...chunks.map((text, n) => ({ t: "learn" as const, text, n: n + 1, of: chunks.length })),
-      ...(lesson.action ? [{ t: "practice" as const }] : []),
-      ...(lesson.quiz ? [{ t: "quiz" as const }] : []),
-      { t: "done" },
-    ];
-  }, [lesson]);
+  // Guard: no email saved on this device -> back to the gate
+  useEffect(() => {
+    getEmail().then((e) => {
+      if (e) setAllowed(true);
+      else router.replace("/involve");
+    });
+  }, [router]);
 
-  if (!ready) return <main className="h-dvh bg-background" />;
-  if (!lesson)
-    return <Notice title="This lesson isn't ready yet" text="Head back to the course to pick a lesson that's open." href="/course" cta="Back to course" />;
-  // "waiting" days are allowed now: the course page shows the "one lesson a day" popup instead.
-  if (statusOf(day) === "locked")
-    return <Notice title={`Finish Day ${Math.max(1, day - 1)} first`} text="Small steps make it stick. Complete the last lesson to unlock this one." href={`/course/${Math.max(1, day - 1)}`} cta="Go to the last lesson" />;
+  const { completed } = P;
+  const total = WEEK_COUNT * PER_WEEK;
 
-  const idx = lessons.findIndex((l) => l.day === day);
-  const next = idx < lessons.length - 1 ? lessons[idx + 1] : null;
-  const s = screens[i];
-  const practiceDone = practice !== null;
-  const quizRight = quiz !== null && lesson.quiz?.options[quiz]?.correct;
-  const stars = misses === 0 ? 3 : misses === 1 ? 2 : 1;
+  const roadmap = Array.from({ length: total }, (_, k) => lessons[k] ?? { day: k + 1, hook: "", concept: "Coming soon" });
+  const nextDay = roadmap.find((l) => !completed.includes(l.day))?.day ?? total;
+  const currentWeek = Math.min(WEEK_COUNT, Math.max(1, Math.ceil(nextDay / PER_WEEK)));
+  // Follows currentWeek automatically (including after progress loads) unless the user picked one
+  const selectedWeek = pickedWeek ?? currentWeek;
 
-  const mood: Mood =
-    s.t === "hook" ? "surprised"
-    : s.t === "learn" ? "explaining"
-    : s.t === "practice" ? (practiceDone ? (lesson.action?.options[practice!]?.correct ? "happy" : "surprised") : "thinking")
-    : s.t === "quiz" ? (quizRight ? "happy" : quiz !== null ? "surprised" : "thinking")
-    : "winking";
+  const weeks = useMemo(
+    () =>
+      Array.from({ length: WEEK_COUNT }, (_, k) => {
+        const ls = roadmap.slice(k * PER_WEEK, (k + 1) * PER_WEEK);
+        const done = ls.filter((l) => completed.includes(l.day)).length;
+        return { week: k + 1, lessons: ls, done, complete: done === ls.length, locked: k + 1 > currentWeek };
+      }),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [completed, currentWeek, lessons.length],
+  );
+  const sel = weeks[selectedWeek - 1];
+  const doneCount = Math.min(completed.length, total);
 
-  const canGo = s.t === "practice" ? practiceDone : s.t === "quiz" ? Boolean(quizRight) : true;
-  const label = s.t === "hook" ? "Let's learn!" : s.t === "learn" && s.n === s.of ? "Got it!" : "Next";
-  const bubble = "relative rounded-3xl border-2 border-border bg-(--crimson-pale) p-5 font-semibold";
-  // text scales with screen height so it fills the space on any device
-  const bubbleStyle = { fontSize: "clamp(1.125rem, 3.8dvh, 1.875rem)", lineHeight: 1.5 };
+  // Must stay AFTER all hooks
+  if (!allowed) return null;
 
   return (
-    <main className="relative isolate flex h-dvh touch-manipulation select-none flex-col overflow-hidden overscroll-none bg-background pt-[env(safe-area-inset-top)] font-sans text-foreground">
-      <style>{`
-        @keyframes pop{0%{transform:scale(.96)}50%{transform:scale(1.03)}100%{transform:scale(1)}}
-        @keyframes shake{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
-        @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
-        @keyframes bob{50%{transform:translateY(-6px)}}
-        .pop{animation:pop .35s}.shake{animation:shake .3s}.enter{animation:rise .35s both}.mascot{animation:bob 3s ease-in-out infinite}
-        @media (prefers-reduced-motion:reduce){.pop,.shake,.enter,.mascot{animation:none}}
-      `}</style>
+    <main className="min-h-dvh overflow-x-clip bg-background font-sans text-foreground antialiased">
+ 
+    <header className="site-nav shell">
+  <Link href="/" className="brand">
+    Sika<span>AI</span>
+  </Link>
+  <nav className="nav-links" aria-label="Main navigation">
+    <ThemeToggle />
+  </nav>
+</header>
+ 
 
-      <header className="mx-auto flex w-full max-w-3xl items-center gap-3 px-4 pt-3">
-        <Link href="/course" aria-label="Back to course" className="grid size-10 place-items-center rounded-xl border-2 border-border text-lg font-bold hover:bg-(--crimson-pale)">✕</Link>
-        <div className="h-4 flex-1 overflow-hidden rounded-full bg-(--line)" role="progressbar" aria-valuemin={0} aria-valuemax={screens.length - 1} aria-valuenow={i} aria-label="Lesson progress">
-          <div className="h-full rounded-full bg-primary transition-all duration-500" style={{ width: `${(i / (screens.length - 1)) * 100}%` }} />
-        </div>
-        <button type="button" onClick={() => setWho((w) => (w === "boy" ? "girl" : "boy"))} className="rounded-xl border-2 border-border px-3 py-2 text-xs font-bold hover:bg-(--crimson-pale)" aria-label="Switch guide">
-          Switch guide
-        </button>
-        <ThemeToggle />
-      </header>
-
-      <div className="mx-auto flex min-h-0 w-full max-w-3xl flex-1 flex-col overflow-y-auto px-4 pb-4 pt-2">
-
-        <section key={i} className={`${frame} enter relative my-auto p-4 [@media(min-height:800px)]:p-8`}>
-          {s.t === "hook" && (
-            <div className="flex flex-col items-center gap-5 text-center">
-              <Mascot who={who} mood={mood} size={170} />
-              <p className={bubble} style={bubbleStyle}>{fix(lesson.hook)}</p>
-              <Deco name="book" className="-bottom-3 -left-3 rotate-[-8deg]" />
-            </div>
-          )}
-
-          {s.t === "learn" && (
-            <div className="flex flex-col items-center gap-4">
-              <Mascot who={who} mood={mood} size={170} />
-              <div className="w-full">
-                <div className="mb-3 flex gap-1.5" aria-label={`Part ${s.n} of ${s.of}`}>
-                  {Array.from({ length: s.of }, (_, k) => (
-                    <span key={k} className={`h-2 flex-1 rounded-full ${k < s.n ? "bg-primary" : "bg-(--line)"}`} />
-                  ))}
-                </div>
-                <p className={bubble} style={bubbleStyle}>{s.text}</p>
-              </div>
-              <Deco name="pencil" className="-bottom-4 -right-2 rotate-12" />
-            </div>
-          )}
-
-          {s.t === "practice" && lesson.action && (
-            <div>
-              <Question mascot={<Mascot who={who} mood={mood} size={110} />} title={lesson.action.title} options={lesson.action.options} pick={practice} onPick={setPractice} feedback={lesson.action.feedback} graded={false} locked={false} />
-            </div>
-          )}
-
-          {s.t === "quiz" && lesson.quiz && (
-            <div>
-              <Question mascot={<Mascot who={who} mood={mood} size={110} />}
-                title={lesson.quiz.title}
-                options={lesson.quiz.options}
-                pick={quiz}
-                onPick={(n) => {
-                  if (quizRight) return;
-                  if (!lesson.quiz?.options[n]?.correct) setMisses((m) => m + 1);
-                  setQuiz(n);
-                }}
-                feedback={lesson.quiz.feedback}
-                graded
-                locked={Boolean(quizRight)}
-              />
-            
-            </div>
-          )}
-
-          {s.t === "done" && (
-            <div className="flex flex-col items-center gap-3 text-center">
-              <Mascot who={who} mood={mood} size={170} />
-              <h2 className="text-3xl font-extrabold tracking-tight">{saved ? "Day complete!" : "You did it!"}</h2>
-              <p className="text-3xl tracking-widest text-(--gold)" aria-label={`${stars} out of 3 stars`}>
-                {"★".repeat(stars)}<span className="text-(--line)">{"★".repeat(3 - stars)}</span>
-              </p>
-              <p className="max-w-md text-(--muted)">{lesson.reward?.message || "Save your progress to unlock the next lesson."}</p>
-              {saved && next ? (
-                <>
-                  <p className="font-bold">Day {next.day} is ready. Tomorrow is best, but you decide!</p>
-                  <Link href="/course" className={`${btn} mt-1`}>Back to course</Link>
-                </>
-              ) : !saved ? (
-                <button type="button" className={`${btn} mt-3`} onClick={async () => {
-                  await complete(day, { misses, ms: Date.now() - t0 });
-                  setSaved(true);
-                }}>Save my progress</button>
-              ) : (
-                <Link href="/course" className={`${btn} mt-3`}>Back to course</Link>
-              )}
-              <Deco name="flower" className="-bottom-4 -left-3" />
-              <Deco name="flower2" className="-bottom-4 -right-3" />
-            </div>
-          )}
+      <div className="mx-auto w-full max-w-3xl px-5 pb-24 pt-6 sm:px-8">
+        {/* Greeting + overall progress */}
+        <section className="flex items-center gap-4 rounded-3xl border-2 border-border bg-(--crimson-pale) p-5 shadow-[0_6px_0_0_var(--line)] sm:gap-6 sm:p-6">
+          <Image src="/graphics/boy/winking.png" alt="" aria-hidden width={110} height={110} className="h-auto w-20 sm:w-28" />
+          <div className="min-w-0 flex-1">
+            <h1 className="text-2xl font-extrabold leading-tight tracking-[-0.04em] sm:text-3xl">
+              {doneCount === 0 ? "Ready for your first lesson?" : doneCount === total ? "You finished the course!" : "Welcome back, keep going!"}
+            </h1>
+            <p className="mt-1 text-sm font-semibold text-(--muted)">Each lesson takes about 2.5 minutes.</p>
+          </div>
+          <Ring value={doneCount} total={total} />
         </section>
+
+{P.canCertify && !P.certificate && sel.week !== WEEK_COUNT && <div className="mt-5"><CertCard P={P} /></div>}
+        {/* Week picker */}
+        <nav aria-label="Weeks" className="mt-8 grid grid-cols-4 gap-2 sm:gap-3">
+          {weeks.map((w) => {
+            const active = w.week === selectedWeek;
+            return (
+              <button
+                key={w.week}
+                type="button"
+                aria-current={active ? "step" : undefined}
+                onClick={() => setPickedWeek(w.week)}
+                className={`rounded-2xl border-2 px-2 py-3 text-center transition ${focus} ${
+                  active ? "border-primary bg-primary text-white shadow-[0_4px_0_0_#7d1f1f]" : "border-border hover:border-primary disabled:opacity-50 disabled:hover:border-border"
+                }`}
+              >
+                <span className="block text-base font-extrabold">{w.complete ? "✓" : w.locked ? "🔒" : w.week}</span>
+                <span className="block text-xs font-bold">Week {w.week}</span>
+                <span className={`mt-0.5 block text-[11px] font-semibold ${active ? "text-white/80" : "text-(--muted)"}`}>
+                  {w.done}/{PER_WEEK}
+                </span>
+              </button>
+            );
+          })}
+        </nav>
+
+        <h2 className="mt-8 text-2xl font-extrabold tracking-[-0.04em] sm:text-3xl">{weekTitles[sel.week - 1]}</h2>
+
+        {/* Winding path of lessons */}
+        <ol className="relative mt-6 flex flex-col gap-5 rounded-3xl border-2 border-border px-4 py-8 sm:px-8">
+          <Image src="/graphics/elements/flower.png" alt="" aria-hidden width={60} height={60} className="pointer-events-none absolute right-3 top-3 h-auto w-10 opacity-80" />
+          <Image src="/graphics/elements/hill.png" alt="" aria-hidden width={300} height={100} className="pointer-events-none absolute bottom-0 right-5 h-auto w-40 opacity-30" />
+
+          {sel.lessons.map((lesson, k) => {
+            const status = P.statusOf(lesson.day);
+            const waiting = status === "waiting";
+            const locked = status === "locked"; // waiting is no longer locked
+            const done = status === "completed";
+            const current = status === "current";
+            const shift = Math.round(Math.sin(k * 1.1) * 36);
+            const title = (locked || waiting) && !lesson.hook ? "Coming soon" : getCourseTitle(lesson);
+
+            const node = (
+              <>
+                <span
+                  className={`relative grid size-16 shrink-0 place-items-center rounded-full border-4 text-xl font-extrabold transition ${
+                    done
+                      ? "border-(--success) bg-(--success) text-white"
+                      : current
+                        ? "border-primary bg-primary text-white shadow-[0_5px_0_0_#7d1f1f] group-hover:-translate-y-0.5"
+                        : "border-border bg-(--crimson-pale) text-(--muted)"
+                  }`}
+                >
+                  {done ? "✓" : waiting ? "🌙" : locked ? "🔒" : lesson.day}
+                  {current && <span className="absolute -inset-2 animate-ping rounded-full border-2 border-primary/40 motion-reduce:hidden" aria-hidden />}
+                </span>
+                <span className="min-w-0 text-left">
+                  <span className={`block text-xs font-bold ${current ? "text-primary" : "text-(--muted)"}`}>
+                    Day {lesson.day}
+                    {current && " · Start here"}
+                    {waiting && " · Best tomorrow"}
+                  </span>
+                  <span className={`block text-base font-extrabold leading-snug ${locked || waiting ? "text-(--muted)" : ""}`}>{title}</span>
+                </span>
+              </>
+            );
+
+            return (
+              <li
+                key={lesson.day}
+                style={{ "--shift": `${shift}px` } as React.CSSProperties}
+                className="w-full max-w-sm self-center [transform:translateX(var(--shift))] max-sm:[transform:translateX(calc(var(--shift)*0.25))]"
+              >
+                {locked ? (
+                  <div className="flex items-center gap-4 opacity-70" aria-label={`Day ${lesson.day}, locked`}>{node}</div>
+                ) : waiting ? (
+                  <button type="button" onClick={() => setPending(lesson.day)} className={`group flex w-full items-center gap-4 rounded-2xl text-left ${focus}`}>
+                    {node}
+                  </button>
+                ) : (
+                  <Link href={`/course/${lesson.day}`} className={`group flex items-center gap-4 rounded-2xl ${focus}`}>
+                    {node}
+                    {current && <Image src="/graphics/boy/explaining.png" alt="" aria-hidden width={64} height={64} className="ml-auto h-auto w-14 sm:w-16" />}
+                  </Link>
+                )}
+              </li>
+            );
+          })}
+        </ol>
+
+        {sel.week === WEEK_COUNT && <div className="mt-5"><CertCard P={P} /></div>}
+
+        {pending !== null && (
+          <PacePrompt
+            day={pending}
+            when={P.opensIn(pending)}
+            onClose={() => setPending(null)}
+            onContinue={() => {
+              const d = pending;
+              setPending(null);
+              router.push(`/course/${d}`);
+            }}
+          />
+        )}
+
+        {sel.locked && (
+          <p className="mt-4 text-center text-sm font-semibold text-(--muted)">Finish Week {sel.week - 1} to unlock this week.</p>
+        )}
       </div>
-
-      {s.t !== "done" && (
-        <footer className="mx-auto flex w-full max-w-3xl items-center justify-between gap-3 px-4 pb-[max(1rem,env(safe-area-inset-bottom))] pt-2">
-            <button type="button" onClick={() => setI((v) => v - 1)} disabled={i === 0} aria-label="Previous" className="rounded-2xl border-2 border-border px-5 py-3 text-base font-extrabold hover:bg-(--crimson-pale) disabled:invisible">←</button>
-            <button type="button" className={btn} disabled={!canGo} onClick={() => setI((v) => v + 1)}>{label}</button>
-        </footer>
-      )}
-
-      <Image src="/graphics/elements/hill.png" alt="" aria-hidden width={300} height={150} className="pointer-events-none absolute -bottom-2 left-0 -z-10 h-auto w-20 opacity-30 sm:w-50" />
     </main>
   );
 }
