@@ -6,11 +6,14 @@ import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import "../globals.css";
 import { ThemeProvider } from "../components/ThemeProvider";
+import RegisterSW from "@/app/components/RegisterSW";
 
 export const metadata: Metadata = {
   title: "SikaAI: AI for All",
   description: "SikaAI: AI for All",
   generator: "SikaAI",
+  applicationName: "SikaAI",
+  appleWebApp: { capable: true, title: "SikaAI", statusBarStyle: "default" },
   icons: {
     icon: [
       { url: "/icon-light-32x32.png", media: "(prefers-color-scheme: light)" },
@@ -23,7 +26,7 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   colorScheme: "light dark",
-  themeColor: "#00aaff",
+  themeColor: "#a32b2b",
   userScalable: true,
 };
 
@@ -35,7 +38,6 @@ export default async function LocaleLayout({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
-  console.log("LocaleLayout rendered for", locale);
 
   if (!routing.locales.includes(locale as (typeof routing.locales)[number])) {
     notFound();
@@ -49,6 +51,7 @@ export default async function LocaleLayout({
         <NextIntlClientProvider messages={messages}>
           <ThemeProvider>{children}</ThemeProvider>
         </NextIntlClientProvider>
+        <RegisterSW />
         {process.env.NODE_ENV === "production" && <Analytics />}
       </body>
     </html>
