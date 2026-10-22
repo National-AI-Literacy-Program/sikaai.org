@@ -11,10 +11,10 @@ import PacePrompt from "@/app/components/involvepage/paceprompt";
 const WEEK_COUNT = 4;
 const PER_WEEK = 7;
 const weekTitles = [
-  "Start with the foundations.",
-  "Make AI useful day to day.",
-  "Create with more confidence.",
-  "Put it all into practice.",
+  "Say hi to AI!",
+  "Let's create together!",
+  "You're in charge!",
+  "Make AI even better!",
 ];
 const focus =
   "focus-visible:outline-3 focus-visible:outline-offset-4 focus-visible:outline-primary";
