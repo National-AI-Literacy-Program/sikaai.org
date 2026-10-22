@@ -138,13 +138,13 @@ export default function CoursePage() {
   return (
     <main className="min-h-dvh overflow-x-clip bg-background font-sans text-foreground antialiased">
  
-    <header className="site-nav shell">
+  <header className="site-nav shell">
   <Link href="/course" className="brand">
     Sika<span>AI</span>
   </Link>
-  <nav className="nav-links" aria-label="Main navigation">
+  <div className="nav-right">
     <ThemeToggle />
-  </nav>
+  </div>
 </header>
  
 
