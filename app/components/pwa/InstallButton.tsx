@@ -15,6 +15,7 @@ declare global {
 }
 
 const PROMPT_CHANGED = 'installpromptchange';
+const FLOW_KEY = 'sikaai-install-flow'; // 'pending' | 'done', per browser tab
 
 function subscribePrompt(callback: () => void) {
   window.addEventListener(PROMPT_CHANGED, callback);
@@ -46,9 +47,25 @@ function getIsIOS() {
   );
 }
 
-// True when the visitor arrived from sikaai.org via learn.sikaai.org/?install=1
+// True when the visitor arrived from sikaai.org via learn.sikaai.org/?install=1.
+// The flag is remembered for the tab, so it survives a redirect that drops the
+// query string (e.g. /involve?install=1 -> /course for registered users).
 function getWantsInstall() {
-  return new URLSearchParams(window.location.search).get('install') === '1';
+  const hasParam =
+    new URLSearchParams(window.location.search).get('install') === '1';
+  try {
+    if (hasParam) sessionStorage.setItem(FLOW_KEY, 'pending');
+    return sessionStorage.getItem(FLOW_KEY) === 'pending';
+  } catch {
+    return hasParam; // storage blocked: fall back to the URL only
+  }
+}
+
+// Stops the modal from coming back on later page loads in this tab
+function markDone() {
+  try {
+    sessionStorage.setItem(FLOW_KEY, 'done');
+  } catch {}
 }
 
 // Only the learn. subdomain is the app (covers learn.sikaai.org and learn.localhost)
@@ -91,6 +108,11 @@ export default function InstallButton({
 
   const installed = isStandalone || justInstalled;
 
+  const dismiss = () => {
+    markDone();
+    setDismissed(true);
+  };
+
   useEffect(() => {
     // Backup in case the layout script is missing. Does nothing harmful if both run.
     const onPrompt = (e: Event) => {
@@ -98,11 +120,15 @@ export default function InstallButton({
       setPrompt(e as BeforeInstallPromptEvent);
     };
     const onInstalled = () => {
+      markDone();
       setJustInstalled(true);
       setPrompt(null);
     };
     const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setDismissed(true);
+      if (e.key === 'Escape') {
+        markDone();
+        setDismissed(true);
+      }
     };
 
     window.addEventListener('beforeinstallprompt', onPrompt);
@@ -121,7 +147,7 @@ export default function InstallButton({
     await deferred.prompt();
     await deferred.userChoice;
     setPrompt(null); // the event can only be used once
-    setDismissed(true);
+    dismiss();
   };
 
   // Invisible unless the visitor is on learn. and came from the "Install" button on sikaai.org
@@ -167,7 +193,7 @@ export default function InstallButton({
         )}
 
         <button
-          onClick={() => setDismissed(true)}
+          onClick={dismiss}
           className="mt-3 w-full text-sm text-neutral-500"
         >
           Not now
