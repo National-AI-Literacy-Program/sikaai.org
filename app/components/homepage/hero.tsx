@@ -32,22 +32,30 @@ export default function Hero() {
               </h1>
 
            <p className={`${lede} mx-auto mt-7 max-w-2xl md:mx-0`}>
-  SikaAI is a four-week AI literacy program made for school
-  students and open to everyone. Learn to spot AI, understand how
-  it’s used, and use it wisely. Install it once, then{" "}
-  <span className="relative isolate inline-block whitespace-nowrap text-foreground">
-  <svg
-    aria-hidden="true"
-    viewBox="0 0 240 60"
-    preserveAspectRatio="none"
-    className="absolute -left-3 -top-1 -z-10 h-[calc(100%+8px)] w-[calc(100%+24px)] fill-primary/40 animate-[swipe_0.7s_0.6s_ease-out_both] motion-reduce:animate-none"
-  >
-   <path d="M6 19 C30 11 62 17 100 11 S168 15 204 9 L232 8 L239 14 L229 18 L240 24 L228 28 L237 34 L226 38 L234 44 L220 47 C190 51 150 46 110 52 S50 47 22 52 L13 49 L8 53 L4 46 L11 42 L2 37 L9 32 L3 27 L9 23 Z" />
-  </svg>
-  learn offline
-</span>
-  .
-</p>
+                SikaAI is a four-week AI literacy program made for school
+                students and open to everyone. Learn to spot AI, understand how
+                it’s used, and use it wisely. Install it once, then{" "}
+                {/* Outer nowrap keeps the full stop glued to "offline" so it can't wrap alone */}
+                <span className="whitespace-nowrap">
+                  <span className="relative isolate inline-block text-foreground">
+                    {/* Sized and positioned in em, so it tracks the text at any font size or line height */}
+                    <svg
+                      aria-hidden="true"
+                      focusable="false"
+                      viewBox="0 0 280 40"
+                      preserveAspectRatio="none"
+                      className="pointer-events-none absolute left-[-0.3em] top-[calc(50%-0.475em)] -z-10 h-[1.05em] w-[calc(100%+0.6em)] origin-left fill-primary/35 animate-[swipe_0.7s_0.6s_ease-out_both] motion-reduce:animate-none"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M10 10C55 5 105 9 155 6C200 3 238 7 262 9C270 9.5 276 11 280 13.5C272 14.5 266 14.8 258 15C268 16.5 275 18.5 279 21C271 22 264 22.2 256 22.5C265 24 270 26 273 28.5C267 29.5 260 30 253 30.5C215 32 175 36 130 34C85 32.5 45 36 18 33C8 32 3 27 4 21C5 15 7 12 10 10ZM188 13.2C208 12.4 230 13.4 248 14.2C230 16.8 208 15.6 188 13.2ZM212 22C228 21.3 242 22.2 250 22.6C240 24.6 226 24 212 22Z"
+                      />
+                    </svg>
+                    learn offline
+                  </span>
+                  .
+                </span>
+              </p>
 
               <div className="mt-9 flex flex-col items-center gap-3 sm:flex-row sm:justify-center md:justify-start">
                 <Link
