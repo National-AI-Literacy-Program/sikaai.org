@@ -7,7 +7,7 @@ import { getCourseTitle, getLessons } from "@/lib/course";
 import { TOTAL_DAYS, getEmail, useProgress } from "@/lib/progress";
 import ThemeToggle from "@/app/components/ThemeToggle";
 import PacePrompt from "@/app/components/involvepage/paceprompt";
-import InstallButton from "@/app/components/pwa/InstallButton";
+
 
 const WEEK_COUNT = 4;
 const PER_WEEK = 7;
@@ -146,7 +146,7 @@ export default function CoursePage() {
   <div className="nav-right">
     <ThemeToggle />
   </div>
-    <InstallButton />
+   
 </header>
  
 

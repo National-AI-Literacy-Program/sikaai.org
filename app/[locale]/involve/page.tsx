@@ -5,7 +5,7 @@ import { Link, useRouter } from "@/i18n/navigation";
 import Involve from "@/app/components/involvepage/Involve";
 import { getEmail } from "@/lib/progress";
 import ThemeToggle from "@/app/components/ThemeToggle";
-import InstallButton from "@/app/components/pwa/InstallButton";
+
 export default function InvolvePage() {
   const router = useRouter();
   const [checking, setChecking] = useState(true);
@@ -32,7 +32,7 @@ export default function InvolvePage() {
   <nav className="nav-links" aria-label="Main navigation">
      <ThemeToggle />
   </nav>
-  <InstallButton />
+
 </header>
       <Involve />
     </div>
