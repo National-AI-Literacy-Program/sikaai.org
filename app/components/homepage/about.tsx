@@ -40,11 +40,7 @@ export default function About() {
               <strong className="text-foreground font-semibold">
                 educational polarization
               </strong>
-              ! <br /> As AI rapidly advances, the gap between the digital-savvy
-              and the left-behind is widening at an alarming rate. Those who
-              know how to leverage AI are boosting their productivity and
-              knowledge, while underprivileged communities risk being left
-              further behind.
+              ! <br /> As AI spreads, a gap is opening between people who know how to use it and people who don’t. Those with the skills are learning and working faster, while learners without access or guidance risk falling further behind.
             </p>
 
             <p className="font-semibold text-foreground text-lg sm:text-xl pt-1">
@@ -52,12 +48,7 @@ export default function About() {
             </p>
 
             <p>
-              At its core, SikaAI is an AI literacy initiative designed to help
-              bridge the digital divide starting with youth and older community
-              members in Nepal. We empower learners to understand AI-generated
-              content, use AI safely, and build practical skills. While rooted
-              in Nepali culture with simple, accessible language, SikaAI has no
-              age limits; anyone, from anywhere can learn from it.
+              SikaAI is an AI literacy program designed first for school students in Nepal (primary and secondary, K-12), and open to youth, adults, and older community members too. In four weeks, learners build the skills to understand AI-generated content, use AI safely, and apply it in everyday life. Lessons use simple language and examples from Nepali life, and work offline once installed, so there are no age limits and no need for a constant connection. Anyone, from anywhere, can learn from it.
             </p>
 
             <p className="font-medium text-foreground italic pt-1">

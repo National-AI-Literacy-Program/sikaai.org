@@ -11,7 +11,7 @@ import InstallButton from "@/app/components/pwa/InstallButton";
 
 export const metadata: Metadata = {
   title: "SikaAI: AI for All",
-  description: "SikaAI: AI for All",
+  description: "SikaAI is a four-week, offline-ready AI literacy program for Nepali school students (K-12) and learners of all ages.",
   generator: "SikaAI",
   applicationName: "SikaAI",
   appleWebApp: { capable: true, title: "SikaAI", statusBarStyle: "default" },
