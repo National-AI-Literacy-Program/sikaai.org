@@ -7,6 +7,7 @@ import { routing } from "@/i18n/routing";
 import "../globals.css";
 import { ThemeProvider } from "../components/ThemeProvider";
 import RegisterSW from "@/app/components/RegisterSW";
+import InstallButton from "@/app/components/pwa/InstallButton"; 
 
 export const metadata: Metadata = {
   title: "SikaAI: AI for All",
@@ -30,18 +31,19 @@ export const viewport: Viewport = {
   userScalable: true,
 };
 
-// Runs inline in <head>, before React hydrates, so it can't miss Chrome's
-// one-time `beforeinstallprompt` event. InstallButton reads window.__installPrompt.
+
 const installCapture = `
-  window.addEventListener('beforeinstallprompt', function (e) {
-    e.preventDefault();
-    window.__installPrompt = e;
-    window.dispatchEvent(new Event('installpromptchange'));
-  });
-  window.addEventListener('appinstalled', function () {
-    window.__installPrompt = null;
-    window.dispatchEvent(new Event('installpromptchange'));
-  });
+  if (location.hostname.indexOf('learn.') === 0) {
+    window.addEventListener('beforeinstallprompt', function (e) {
+      e.preventDefault();
+      window.__installPrompt = e;
+      window.dispatchEvent(new Event('installpromptchange'));
+    });
+    window.addEventListener('appinstalled', function () {
+      window.__installPrompt = null;
+      window.dispatchEvent(new Event('installpromptchange'));
+    });
+  }
 `;
 
 export default async function LocaleLayout({
@@ -68,6 +70,7 @@ export default async function LocaleLayout({
         <NextIntlClientProvider messages={messages}>
           <ThemeProvider>{children}</ThemeProvider>
         </NextIntlClientProvider>
+        <InstallButton />
         <RegisterSW />
         {process.env.NODE_ENV === "production" && <Analytics />}
       </body>

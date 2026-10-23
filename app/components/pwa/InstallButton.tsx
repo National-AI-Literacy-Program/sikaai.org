@@ -51,6 +51,11 @@ function getWantsInstall() {
   return new URLSearchParams(window.location.search).get('install') === '1';
 }
 
+// Only the learn. subdomain is the app (covers learn.sikaai.org and learn.localhost)
+function getIsLearnHost() {
+  return window.location.hostname.startsWith('learn.');
+}
+
 const getServerSnapshot = () => false;
 
 function setPrompt(value: BeforeInstallPromptEvent | null) {
@@ -76,6 +81,11 @@ export default function InstallButton({
   const wantsInstall = useSyncExternalStore(
     subscribeNoop,
     getWantsInstall,
+    getServerSnapshot
+  );
+  const isLearnHost = useSyncExternalStore(
+    subscribeNoop,
+    getIsLearnHost,
     getServerSnapshot
   );
 
@@ -114,8 +124,8 @@ export default function InstallButton({
     setDismissed(true);
   };
 
-  // Invisible unless the visitor came from the "Install" button on sikaai.org
-  if (!wantsInstall || installed || dismissed) return null;
+  // Invisible unless the visitor is on learn. and came from the "Install" button on sikaai.org
+  if (!isLearnHost || !wantsInstall || installed || dismissed) return null;
 
   return (
     <div
@@ -142,7 +152,7 @@ export default function InstallButton({
               onClick={install}
               disabled={!deferred}
               autoFocus
-              className={`mt-5 inline-flex w-full items-center justify-center gap-2 ${className} focus:outline-none focus-visible:ring-2 focus-visible:ring-red-900/40 focus-visible:ring-offset-2`}
+              className={`mt-5 inline-flex w-full items-center justify-center gap-2 outline-none ${className}`}
             >
               <Download size={18} aria-hidden="true" />
               Install SikaAI
