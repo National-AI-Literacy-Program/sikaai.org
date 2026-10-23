@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from "react";
 import { Link, usePathname } from "@/i18n/navigation";
 import ThemeToggle from "./ThemeToggle";
 import { Download } from 'lucide-react';
-import InstallLink from "@/app/components/pwa/InstallLink";
 
 export default function Header() {
   const pathname = usePathname();
@@ -101,7 +100,7 @@ export default function Header() {
           </Link>
          
 <Link
-  href="http://learn.localhost:3000/en/involve/?install=1"
+  href="http://learn.sikaai3000/en/involve/?install=1"
   className="nav-cta button button-primary gap-2"
   onClick={() => setOpen(false)}
 >

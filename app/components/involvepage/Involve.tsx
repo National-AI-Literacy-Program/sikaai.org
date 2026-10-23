@@ -67,7 +67,7 @@ export default function Involve() {
             />
           </div>
 
-          <div className="-ml-5 mb-[-10px] size-28 rotate-6 overflow-hidden rounded-full border-4 border-background bg-(--saffron)/25 shadow-[0_6px_0_0_#9a1c1c] transition-transform duration-300 hover:rotate-12 hover:scale-105 motion-reduce:transition-none sm:size-36">
+          <div className="-ml-5 -mb-2.5 size-28 rotate-6 overflow-hidden rounded-full border-4 border-background bg-(--saffron)/25 shadow-[0_6px_0_0_#9a1c1c] transition-transform duration-300 hover:rotate-12 hover:scale-105 motion-reduce:transition-none sm:size-36">
             <Image
               className="h-full w-full object-contain p-1.5"
               src="/graphics/boy/happy.png"
