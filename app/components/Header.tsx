@@ -100,7 +100,7 @@ export default function Header() {
           </Link>
          
 <Link
-  href="http://learn.sikaai3000/en/involve/?install=1"
+  href="http://learn.sikaai.org/?install=1"
   className="nav-cta button button-primary gap-2"
   onClick={() => setOpen(false)}
 >
