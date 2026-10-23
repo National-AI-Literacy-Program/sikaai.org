@@ -31,12 +31,23 @@ export default function Hero() {
                 <span className="block">AI.</span>
               </h1>
 
-              <p className={`${lede} mx-auto mt-7 max-w-2xl md:mx-0`}>
-                SikaAI is a four-week AI literacy program made for school
-                students and open to everyone. Learn to spot AI, understand how
-                it’s used, and use it wisely, even without internet. Install it
-                once, then learn offline.
-              </p>
+           <p className={`${lede} mx-auto mt-7 max-w-2xl md:mx-0`}>
+  SikaAI is a four-week AI literacy program made for school
+  students and open to everyone. Learn to spot AI, understand how
+  it’s used, and use it wisely. Install it once, then{" "}
+  <span className="relative isolate inline-block whitespace-nowrap text-foreground">
+  <svg
+    aria-hidden="true"
+    viewBox="0 0 240 60"
+    preserveAspectRatio="none"
+    className="absolute -left-3 -top-1 -z-10 h-[calc(100%+8px)] w-[calc(100%+24px)] fill-primary/40 animate-[swipe_0.7s_0.6s_ease-out_both] motion-reduce:animate-none"
+  >
+   <path d="M6 19 C30 11 62 17 100 11 S168 15 204 9 L232 8 L239 14 L229 18 L240 24 L228 28 L237 34 L226 38 L234 44 L220 47 C190 51 150 46 110 52 S50 47 22 52 L13 49 L8 53 L4 46 L11 42 L2 37 L9 32 L3 27 L9 23 Z" />
+  </svg>
+  learn offline
+</span>
+  .
+</p>
 
               <div className="mt-9 flex flex-col items-center gap-3 sm:flex-row sm:justify-center md:justify-start">
                 <Link
