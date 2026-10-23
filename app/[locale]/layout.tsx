@@ -30,6 +30,20 @@ export const viewport: Viewport = {
   userScalable: true,
 };
 
+// Runs inline in <head>, before React hydrates, so it can't miss Chrome's
+// one-time `beforeinstallprompt` event. InstallButton reads window.__installPrompt.
+const installCapture = `
+  window.addEventListener('beforeinstallprompt', function (e) {
+    e.preventDefault();
+    window.__installPrompt = e;
+    window.dispatchEvent(new Event('installpromptchange'));
+  });
+  window.addEventListener('appinstalled', function () {
+    window.__installPrompt = null;
+    window.dispatchEvent(new Event('installpromptchange'));
+  });
+`;
+
 export default async function LocaleLayout({
   children,
   params,
@@ -47,6 +61,9 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale} suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: installCapture }} />
+      </head>
       <body className="bg-background antialiased">
         <NextIntlClientProvider messages={messages}>
           <ThemeProvider>{children}</ThemeProvider>

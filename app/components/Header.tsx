@@ -3,11 +3,12 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, usePathname } from "@/i18n/navigation";
 import ThemeToggle from "./ThemeToggle";
+import { Download } from 'lucide-react';
+import InstallLink from "@/app/components/pwa/InstallLink";
 
 export default function Header() {
   const pathname = usePathname();
-  // The menu counts as open only on the page where it was opened,
-  // so navigating anywhere closes it without needing an effect.
+
   const [openAt, setOpenAt] = useState<string | null>(null);
   const open = openAt === pathname;
   const setOpen = (value: boolean) => setOpenAt(value ? pathname : null);
@@ -46,6 +47,7 @@ export default function Header() {
 
   return (
     <header className="site-nav shell" ref={headerRef}>
+
       <Link href="/" className="brand">
         Sika<span>AI</span>
       </Link>
@@ -97,13 +99,16 @@ export default function Header() {
           >
             Curriculum
           </Link>
-          <Link
-            href="/involve"
-            className="nav-cta button button-primary"
-            onClick={() => setOpen(false)}
-          >
-            Start Learning
-          </Link>
+         
+<Link
+  href="http://learn.localhost:3000/en/involve/?install=1"
+  className="nav-cta button button-primary gap-2"
+  onClick={() => setOpen(false)}
+>
+  <Download size={18} aria-hidden="true" />
+  Install
+</Link>
+
         </nav>
 
         <ThemeToggle />

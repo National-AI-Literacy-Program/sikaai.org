@@ -11,7 +11,7 @@ const lede = "text-base leading-7 text-(color:--muted) sm:text-lg sm:leading-8";
 const stats = [
   { value: "4", label: "Domains" },
   { value: "28", label: "Lessons" },
-  { value: "2.5", label: "mins/day" },
+  { value: "2", label: "mins/day" },
 ];
 
   return (
@@ -34,9 +34,7 @@ const stats = [
                     </h1>
       
                     <p className={`${lede} mx-auto mt-7 max-w-2xl md:mx-0`}>
-                      SikaAI is a four-week AI literacy program that helps you
-                      identify AI, understand how it is used, and make more informed
-                      choices online.
+               SikaAI is a four-week program that teaches you to spot AI, understand how it is used, and use it wisely, even without internet. Install it once, then learn offline.
                     </p>
       
                     <div className="mt-9 flex flex-col items-center gap-3 sm:flex-row sm:justify-center md:justify-start">
