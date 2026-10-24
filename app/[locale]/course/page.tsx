@@ -8,7 +8,7 @@ import { getCourseTitle, getLessons } from "@/lib/course";
 import { TOTAL_DAYS, getEmail, useProgress } from "@/lib/progress";
 import ThemeToggle from "@/app/components/ThemeToggle";
 import PacePrompt from "@/app/components/involvepage/paceprompt";
-
+import LanguageToggle from "@/app/components/LanguageToggle";
 
 const WEEK_COUNT = 4;
 const PER_WEEK = 7;
@@ -154,6 +154,7 @@ export default function CoursePage() {
   </Link>
   <div className="nav-right">
     <ThemeToggle />
+    <LanguageToggle />
   </div>
    
 </header>

@@ -7,7 +7,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { getLessons } from "@/lib/course";
 import { useProgress } from "@/lib/progress";
 import ThemeToggle from "@/app/components/ThemeToggle";
-
+import LanguageToggle from "@/app/components/LanguageToggle";
 type Option = { label: string; correct: boolean };
 type Mood = "explaining" | "happy" | "thinking" | "winking" | "surprised";
 type Screen =
@@ -187,6 +187,7 @@ export default function DayPage({ params }: { params: Promise<{ day: string }> }
           {t("switchGuide")}
         </button>
         <ThemeToggle />
+        <LanguageToggle />
       </header>
 
       <div className="mx-auto flex min-h-0 w-full max-w-3xl flex-1 flex-col overflow-y-auto px-4 pb-4 pt-2">

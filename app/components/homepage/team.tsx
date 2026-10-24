@@ -15,11 +15,11 @@ type TeamMember = {
 
 function TeamCard({ member }: { member: TeamMember }) {
   return (
-    <div className="group w-full perspective-[1000px]">
-      <div className="relative w-full rounded-2xl transition-transform duration-1000 ease-in-out transform-3d group-hover:transform-[rotateY(180deg)]">
+    <div className="group h-full w-full perspective-[1000px]">
+      <div className="relative h-full w-full rounded-2xl transition-transform duration-1000 ease-in-out transform-3d group-hover:transform-[rotateY(180deg)]">
         
         {/* FRONT SIDE */}
-        <div className="relative flex flex-col items-center rounded-2xl border border-border bg-background p-5 text-center shadow-sm backface-hidden">
+        <div className="relative flex h-full flex-col items-center rounded-2xl border border-border bg-background p-5 text-center shadow-sm backface-hidden">
           
       
           <div className="mx-auto relative size-20 overflow-hidden rounded-full mb-4 mt-2">
@@ -33,7 +33,7 @@ function TeamCard({ member }: { member: TeamMember }) {
           <h3 className="text-base font-bold tracking-tight text-foreground">
             {member.name}
           </h3>
-          <p className="mt-1 text-[11px] font-bold uppercase tracking-wider text-primary">
+          <p className="mt-1 text-[11px] font-bold uppercase tracking-wider text-primary [html:lang(ne)_&]:text-[13px]">
             {member.role}
           </p>
         </div>
@@ -43,7 +43,7 @@ function TeamCard({ member }: { member: TeamMember }) {
       
 
           <h3 className="text-sm font-bold text-foreground">{member.name}</h3>
-          <p className="mt-1 text-[11px] font-semibold text-(--muted)">
+          <p className="mt-1 text-[11px] font-semibold text-(--muted) [html:lang(ne)_&]:text-[13px]">
             {member.skills}
           </p>
 
@@ -86,7 +86,7 @@ export default function Team() {
   const t = useTranslations("Team");
   const wrap = "mx-auto w-full max-w-6xl px-5 sm:px-8";
   const eyebrow =
-    "text-[11px] font-extrabold uppercase tracking-[0.18em] text-(--blue-deep)";
+    "text-[11px] font-extrabold uppercase tracking-[0.18em] text-(--blue-deep) [html:lang(ne)_&]:text-sm";
   const h2 =
     "text-4xl font-extrabold leading-[1.02] tracking-[-0.045em] text-foreground sm:text-5xl lg:text-6xl";
 
