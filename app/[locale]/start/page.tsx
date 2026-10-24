@@ -2,7 +2,7 @@
 
 import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
-
+import {Link} from "@/i18n/navigation"
 export default function StartPage() {
   const router = useRouter();
   const [email, setEmail] = useState("");
@@ -21,9 +21,9 @@ export default function StartPage() {
   return (
     <main className="gate-page">
       <div className="gate-card">
-        <a className="brand" href="/">
+        <Link className="brand" href="/">
           Sikaai<span>AI</span>
-        </a>
+        </Link>
         <p className="eyebrow">READY WHEN YOU ARE</p>
         <h1>Start your AI learning journey.</h1>
         <p>
@@ -49,9 +49,9 @@ export default function StartPage() {
             Get involved <span aria-hidden="true">→</span>
           </button>
         </form>
-        <a className="back-link" href="/">
+        <Link className="back-link" href="/">
           ← Back home
-        </a>
+        </Link>
       </div>
     </main>
   );

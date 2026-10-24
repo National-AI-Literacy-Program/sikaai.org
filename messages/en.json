@@ -1,6 +1,46 @@
 {
+  "Meta": {
+    "title": "SikaAI: AI for All",
+    "description": "SikaAI is a four-week, offline-ready AI literacy program for Nepali school students (K-12) and learners of all ages."
+  },
+  "Header": {
+    "about": "About",
+    "courseStructure": "Course Structure",
+    "content": "Content",
+    "curriculum": "Curriculum",
+    "install": "Install",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "mainNav": "Main navigation",
+    "language": "Language"
+  },
+  "Hero": {
+    "phrases": ["Engage with", "Create with", "Manage", "Shape"],
+    "fixed": "AI.",
+    "fixedPosition": "after",
+    "lede": "SikaAI is a four-week AI literacy program made for school students and open to everyone. Learn to spot AI, understand how it’s used, and use it wisely. Install it once, then <keep><hl>learn offline</hl>.</keep>",
+    "start": "Start learning",
+    "howItWorks": "See how it works",
+    "namaste": "Namaste",
+    "imageAlt": "A boy and a girl in traditional Nepali dress greeting with namaste",
+    "stats": {
+      "domains": "Domains",
+      "lessons": "Lessons",
+      "minsPerDay": "mins/day"
+    }
+  },
+  "Course": {
+    "day": "Day {day, number}",
+    "week": "Week {week, number}",
+    "weekTitles": [
+      "Say hi to AI!",
+      "Let’s create together!",
+      "You’re in charge!",
+      "Make AI even better!"
+    ]
+  },
   "Involve": {
-    "eyebrowJourney": "YOUR SIKAI JOURNEY",
+    "eyebrowJourney": "YOUR SIKAAI JOURNEY",
     "title": "From curious to capable.",
     "lede": "Understand AI in simple language, at your own pace.",
     "steps": {
@@ -10,6 +50,246 @@
     },
     "eyebrowStart": "START HERE",
     "startDescription": "Share your email and we’ll take you straight to the course.",
-    "noPassword": "No password needed."
+    "noPassword": "No password needed.",
+
+    "greeting": "Namaste!",
+    "girlAlt": "Smiling girl in traditional dress waving hello",
+    "boyAlt": "Smiling boy in a dhaka topi waving hello",
+    "headline": "Start learning <ai>AI</ai> today.",
+    "emailLabel": "Email address",
+    "emailPlaceholder": "Enter your email address",
+    "submit": "Start",
+    "freeNote": "Free to join. No password needed.",
+    "errorInvalid": "Enter a valid email address, like name@example.com.",
+    "errorSave": "Couldn’t save on this device. Check your browser storage settings."
+  },
+
+  "About": {
+    "title": "What’s & Why <br></br> Sika<ai>AI</ai>",
+    "imageAlt": "SikaAI - Bridging the Digital Divide",
+    "intro": "We aim to stop <b>educational polarization</b>! <br></br> As AI spreads, a gap is opening between people who know how to use it and people who don’t. Those with the skills are learning and working faster, while learners without access or guidance risk falling further behind.",
+    "tagline": "SikaAI was built to pull everyone forward.",
+    "program": "SikaAI is an AI literacy program designed first for school students in Nepal (primary and secondary, K-12), and open to youth, adults, and older community members too. In four weeks, learners build the skills to understand AI-generated content, use AI safely, and apply it in everyday life. Lessons use simple language and examples from Nepali life, and work offline once installed, so there are no age limits and no need for a constant connection. Anyone, from anywhere, can learn from it.",
+    "closing": "We can’t stop the rise of AI, but together, we can bridge the gap."
+  },
+  "CourseStructure": {
+    "eyebrow": "FOUR-WEEK JOURNEY",
+    "title": "Progress,<br></br><hl>one domain each week.</hl>",
+    "lede": "Move from recognizing AI to making thoughtful, responsible choices. Start small, build context, and finish with habits you can actually use.",
+    "explore": "Explore the curriculum →",
+    "weekTag": "Week {n, number}",
+    "weeks": {
+      "engage": {
+        "title": "Engage with AI",
+        "description": "Become a critical and responsible participant in a world marked by AI."
+      },
+      "create": {
+        "title": "Create with AI",
+        "description": "Use AI as a creative partner while maintaining human agency."
+      },
+      "manage": {
+        "title": "Manage AI",
+        "description": "Divide work intentionally between humans and AI."
+      },
+      "shape": {
+        "title": "Shape AI",
+        "description": "Improve AI systems to reflect human values."
+      }
+    }
+  },
+  "Approach": {
+    "title": "Learn it. Use it. Test it.",
+    "lede": "Each lesson combines everyday examples and intreactive tests so learning never feels like a lecture.",
+    "stepLabel": "Step {n, number}",
+    "steps": {
+      "learn": {
+        "title": "Learn",
+        "description": "Simple explanations introduce each idea."
+      },
+      "practise": {
+        "title": "Practise",
+        "description": "Apply the idea to familiar situations."
+      },
+      "mcq": {
+        "title": "Take an MCQ",
+        "description": "Answer a short quiz to check your understanding."
+      },
+      "reflect": {
+        "title": "Reflect",
+        "description": "Take one useful habit into everyday life."
+      }
+    }
+  },
+  "Incubator": {
+    "name": "Institute for Rural Development",
+    "eyebrow": "INCUBATED BY",
+    "description": "SikaAI is proudly incubated and supported by the {name}, a non-profit working in education, agriculture, heritage conservation, tourism, entrepreneurship, etc. to foster sustainable development in Nepal.",
+    "visit": "Visit Website ↗"
+  },
+  "Reference": {
+    "title": "Based on<br></br><hl>AILit <br></br> Framework</hl>",
+    "body": "SikaAI is built on the AILit Framework. Its {lessons, number} lessons are meticulously designed to align with the framework guidelines while being tailored to Nepal’s unique cultural context.",
+    "explore": "Explore AILit ↗"
+  },
+  "Team": {
+    "eyebrow": "THE PEOPLE BEHIND SIKAAI",
+    "title": "Our core team",
+    "members": {
+      "komalhari": {
+        "name": "Komalhari Shrestha",
+        "role": "FOUNDER | PROGRAM DIRECTOR",
+        "skills": "Project Management, Frontend Dev & Curriculum Design"
+      },
+      "mandeep": {
+        "name": "Mandeep Bhandari",
+        "role": "BACKEND DESIGN | DEVELOPMENT",
+        "skills": "Backend DESIGN & Development"
+      },
+      "pranjal": {
+        "name": "Pranjal Panthi",
+        "role": "Frontend DEVELOPMENT",
+        "skills": "Frontend Development"
+      },
+      "mandip": {
+        "name": "Mandip Sapkota",
+        "role": "System Architect | DevOps",
+        "skills": "System Architect & DevOps"
+      },
+      "himalhari": {
+        "name": "Himalhari Shrestha",
+        "role": "CURRICULUM DEVELOPMENT",
+        "skills": "Curriculum Development & Revision"
+      }
+    }
+  },
+
+  "PacePrompt": {
+    "tips": {
+      "seed": {
+        "title": "Seeds need a night’s sleep",
+        "body": "You plant a seed and water it today. Digging it up tomorrow to check won’t make it grow faster. Your brain is the same: it grows what you learned while you sleep."
+      },
+      "momos": {
+        "title": "Don’t eat all the momos at once!",
+        "body": "You could eat {all, number} momos in one go, but you’d get a tummy ache and forget how good they were. {daily, number} momos a day is much happier. Lessons work the same way."
+      },
+      "cricket": {
+        "title": "Champions practise a little every day",
+        "body": "A cricket player who practises {minutes, number} minutes every day gets better than one who plays {hours, number} hours on Saturday only. Small and daily beats big and rare."
+      },
+      "backpack": {
+        "title": "Your brain is a backpack",
+        "body": "Sleep is when your brain packs today’s lessons neatly into the backpack. If you keep stuffing things in, they get messy and fall out."
+      },
+      "song": {
+        "title": "Like learning a song",
+        "body": "Play a new song {times, number} times in one night and your fingers forget it by morning. Play it a little each day and soon you know it by heart."
+      }
+    },
+    "recommendation": "We recommend {lessons, plural, one {# lesson} other {# lessons}} a day. Day {day, number} will be best {when}.",
+    "okay": "Okay, see you {when}!",
+    "startAnyway": "Start anyway",
+    "whenTomorrow": "tomorrow",
+    "whenHours": "in {hours, number}h"
+  },
+  "InstallButton": {
+    "title": "Install SikaAI",
+    "description": "Add SikaAI to your device so it opens like any other app.",
+    "iosHint": "Tap the Share icon, then choose “Add to Home Screen”.",
+    "button": "Install SikaAI",
+    "disabledHint": "If this stays disabled, <b>reload the page</b> or open your browser menu and choose “Install app”.",
+    "notNow": "Not now"
+  },
+  "Footer": {
+    "copyright": "© {year} SikaAI"
+  },
+  "Curriculum": {
+  "loading": "Loading curriculum...",
+  "selectWeek": "Select a week",
+  "weekButton": "Week {week, number}: {domain}",
+  "weekRange": "Week {week, number}, days {from, number} to {to, number}",
+  "day": "Day",
+  "kinds": {
+    "project": "Mini-project",
+    "capstone": "Capstone",
+    "extension": "SikaAI addition"
+  },
+  "reviewTag": "Includes quiz review",
+  "levels": {
+    "basic": "Basic",
+    "basicToIntermediate": "Basic to Intermediate"
+  },
+  "competenceLink": "{domain} {number, number}",
+  "levelSuffix": ", {level}",
+  "opensPdfSr": ". Opens the framework PDF in a new tab.",
+  "chipAria": "{label}. Opens the framework PDF in a new tab.",
+  "chipKnowledge": "Knowledge {id}: {label}",
+  "chipSkill": "Skill: {name}. {description}",
+  "chipAttitude": "Attitude: {name}. {description}",
+  "ksa": {
+    "knowledge": { "letter": "K", "name": "Knowledge", "legend": "What learners understand about AI." },
+    "skills": { "letter": "S", "name": "Skills", "legend": "What learners can do." },
+    "attitudes": { "letter": "A", "name": "Attitudes", "legend": "The mindset learners bring." }
+  },
+  "howToRead": "How to read each lesson",
+  "howToReadLede": "Every tag opens the matching page of the framework PDF.",
+  "sourceTitle": "Source framework",
+  "sourceBody": "This curriculum is mapped to the {name}: <em>{fullName}</em> ({publisher}), licensed under CC BY 4.0. This is an adaptation of an original work by the OECD and the European Union. The opinions expressed and arguments employed in this adaptation should not be reported as representing the official views of the OECD, its Member countries or the European Union.",
+  "sourceLink": "Open the framework PDF ↗"
+},
+"Common": {
+    "cancel": "Cancel"
+  },
+  "CoursePage": {
+    "ring": "{value, number} of {total, number} lessons done",
+    "fraction": "{done, number}/{total, number}",
+    "certTitle": "Your certificate",
+    "certReady": "Your certificate is ready. Open it anytime.",
+    "certLocked": "Finish all {total, number} days to unlock it ({done, number}/{total, number}).",
+    "certOffline": "Connect to the internet once so we can save your results and issue it.",
+    "certSave": "Save your results and get your certificate.",
+    "open": "Open",
+    "getCertificate": "Get certificate",
+    "nameLabel": "Name on your certificate",
+    "nameNote": "We’ll upload your results now. The name can’t be changed later.",
+    "saving": "Saving your results…",
+    "saveAndGet": "Save and get certificate",
+    "greetingStart": "Ready for your first lesson?",
+    "greetingDone": "You finished the course!",
+    "greetingBack": "Welcome back, keep going!",
+    "lessonLength": "Each lesson takes about {minutes, number} minutes.",
+    "weeksNav": "Weeks",
+    "dayStartHere": "Day {day, number} · Start here",
+    "dayBestTomorrow": "Day {day, number} · Best tomorrow",
+    "dayLocked": "Day {day, number}, locked",
+    "comingSoon": "Coming soon",
+    "unlockHint": "Finish Week {week, number} to unlock this week.",
+    "errorNetwork": "Couldn’t reach the server. Check your connection and try again."
+  },
+  "LessonPage": {
+    "quizTime": "Quiz time. This one counts!",
+    "warmUp": "Warm-up. Just for practice.",
+    "niceOne": "Nice one!",
+    "tryAgain": "Not quite. Try another answer!",
+    "optionLetters": "ABCD",
+    "notReadyTitle": "This lesson isn’t ready yet",
+    "notReadyText": "Head back to the course to pick a lesson that’s open.",
+    "backToCourse": "Back to course",
+    "finishFirst": "Finish Day {day, number} first",
+    "lockedText": "Small steps make it stick. Complete the last lesson to unlock this one.",
+    "goLastLesson": "Go to the last lesson",
+    "letsLearn": "Let’s learn!",
+    "gotIt": "Got it!",
+    "next": "Next",
+    "previous": "Previous",
+    "lessonProgress": "Lesson progress",
+    "switchGuide": "Switch guide",
+    "part": "Part {n, number} of {total, number}",
+    "dayComplete": "Day complete!",
+    "youDidIt": "You did it!",
+    "starsOutOf": "{stars, number} out of {total, number} stars",
+    "saveToUnlock": "Save your progress to unlock the next lesson.",
+    "dayReady": "Day {day, number} is ready. Tomorrow is best, but you decide!",
+    "saveProgress": "Save my progress"
   }
 }

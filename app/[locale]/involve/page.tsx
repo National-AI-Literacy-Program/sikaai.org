@@ -5,6 +5,7 @@ import { Link, useRouter } from "@/i18n/navigation";
 import Involve from "@/app/components/involvepage/Involve";
 import { getEmail } from "@/lib/progress";
 import ThemeToggle from "@/app/components/ThemeToggle";
+import LanguageToggle from "@/app/components/LanguageToggle";
 export default function InvolvePage() {
   const router = useRouter();
   const [checking, setChecking] = useState(true);
@@ -24,12 +25,15 @@ export default function InvolvePage() {
   return (
     <div className="flex h-dvh flex-col overflow-hidden">
       <header className="site-nav shell">
+
   <Link href="/" className="brand">
     Sika<span>AI</span>
   </Link>
   <nav className="nav-links" aria-label="Main navigation">
      <ThemeToggle />
+     <LanguageToggle/>
   </nav>
+
 </header>
       <Involve />
     </div>
