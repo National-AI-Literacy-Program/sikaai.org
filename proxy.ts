@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import createMiddleware from 'next-intl/middleware';
-import { routing } from './i18n/routing';
+import { routing, LOCALE_PREFIX  } from './i18n/routing';
 
 const intl = createMiddleware(routing);
 
@@ -9,10 +9,12 @@ const LEARN_ROUTES = ['/course', '/certificate', '/involve'];
 
 function splitLocale(pathname: string) {
   for (const locale of routing.locales) {
-    if (pathname === `/${locale}`) return { locale, path: '/' };
-    if (pathname.startsWith(`/${locale}/`)) return { locale, path: pathname.slice(locale.length + 1) };
+    const prefix = LOCALE_PREFIX[locale];
+    if (pathname === prefix) return { locale, prefix, path: '/' };
+    if (pathname.startsWith(`${prefix}/`))
+      return { locale, prefix, path: pathname.slice(prefix.length) };
   }
-  return { locale: null, path: pathname };
+  return { locale: null, prefix: '', path: pathname };
 }
 
 const isLearnRoute = (path: string) =>
@@ -21,15 +23,16 @@ const isLearnRoute = (path: string) =>
 export default function middleware(req: NextRequest) {
   const host = req.headers.get('host') ?? '';
   const isLearnHost = host.startsWith('learn.');
-  const { locale, path } = splitLocale(req.nextUrl.pathname);
+ const { prefix, path } = splitLocale(req.nextUrl.pathname);
+
 
   if (isLearnHost) {
    
-    if (path === '/') {
-      const url = req.nextUrl.clone();
-      url.pathname = locale ? `/${locale}/involve` : '/involve';
-      return NextResponse.redirect(url);
-    }
+  if (path === '/') {
+  const url = req.nextUrl.clone();
+  url.pathname = `${prefix}/involve`;
+  return NextResponse.redirect(url);
+}
 
     if (!isLearnRoute(path)) {
       return NextResponse.redirect(new URL(req.nextUrl.pathname + req.nextUrl.search, MAIN_SITE));

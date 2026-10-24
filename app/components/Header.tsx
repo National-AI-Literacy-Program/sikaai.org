@@ -1,11 +1,16 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useLocale, useTranslations } from "next-intl";
+import { Download } from "lucide-react";
 import { Link, usePathname } from "@/i18n/navigation";
+import { learnUrl } from "@/lib/host";
 import ThemeToggle from "./ThemeToggle";
-import { Download } from 'lucide-react';
+import LanguageToggle from "./LanguageToggle";
 
 export default function Header() {
+  const t = useTranslations("Header");
+  const locale = useLocale();
   const pathname = usePathname();
 
   const [openAt, setOpenAt] = useState<string | null>(null);
@@ -46,7 +51,6 @@ export default function Header() {
 
   return (
     <header className="site-nav shell" ref={headerRef}>
-
       <Link href="/" className="brand">
         Sika<span>AI</span>
       </Link>
@@ -55,7 +59,7 @@ export default function Header() {
         <button
           type="button"
           className={`nav-toggle${open ? " is-open" : ""}`}
-          aria-label={open ? "Close menu" : "Open menu"}
+          aria-label={open ? t("closeMenu") : t("openMenu")}
           aria-expanded={open}
           aria-controls="main-nav"
           onClick={() => setOpen(!open)}
@@ -68,48 +72,48 @@ export default function Header() {
         <nav
           id="main-nav"
           className={`nav-links${open ? " nav-links-open" : ""}`}
-          aria-label="Main navigation"
+          aria-label={t("mainNav")}
         >
           <Link
             href="/#about"
             onClick={(e) => handleHashClick(e, "#about")}
             className="nav-cta"
           >
-            About
+            {t("about")}
           </Link>
           <Link
             href="/#course-structure"
             onClick={(e) => handleHashClick(e, "#course-structure")}
             className="nav-cta"
           >
-            Course Structure
+            {t("courseStructure")}
           </Link>
           <Link
             href="/#approach"
             onClick={(e) => handleHashClick(e, "#approach")}
             className="nav-cta"
           >
-            Content
+            {t("content")}
           </Link>
           <Link
             href="/curriculum"
             className="nav-cta"
             onClick={() => setOpen(false)}
           >
-            Curriculum
+            {t("curriculum")}
           </Link>
-         
-<Link
-  href="http://learn.sikaai.org/?install=1"
-  className="nav-cta button button-primary gap-2"
-  onClick={() => setOpen(false)}
->
-  <Download size={18} aria-hidden="true" />
-  Install
-</Link>
 
+          <a
+            href={learnUrl(locale, "?install=1")}
+            className="nav-cta button button-primary gap-2"
+            onClick={() => setOpen(false)}
+          >
+            <Download size={18} aria-hidden="true" />
+            {t("install")}
+          </a>
         </nav>
 
+        <LanguageToggle />
         <ThemeToggle />
       </div>
     </header>
