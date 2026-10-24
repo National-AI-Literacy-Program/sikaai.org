@@ -228,7 +228,7 @@ export default function DayPage({ params }: { params: Promise<{ day: string }> }
                 graded
                 locked={Boolean(quizRight)}
               />
-            
+
             </div>
           )}
 
@@ -247,8 +247,11 @@ export default function DayPage({ params }: { params: Promise<{ day: string }> }
                 </>
               ) : !saved ? (
                 <button type="button" className={`${btn} mt-3`} onClick={async () => {
-                  await complete(day, { misses, ms: Date.now() - t0 });
-                  setSaved(true);
+                  await complete(day, {
+                    misses,
+                    ms: Date.now() - t0,
+                    total: lesson.quiz ? 1 : 0,
+                    });
                 }}>Save my progress</button>
               ) : (
                 <Link href="/course" className={`${btn} mt-3`}>Back to course</Link>
