@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useSyncExternalStore } from 'react';
 import { Download } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 type BeforeInstallPromptEvent = Event & {
   prompt: () => Promise<void>;
@@ -85,6 +86,7 @@ export default function InstallButton({
 }: {
   className?: string;
 }) {
+  const t = useTranslations('InstallButton');
   const [justInstalled, setJustInstalled] = useState(false);
   const [dismissed, setDismissed] = useState(false);
 
@@ -162,15 +164,15 @@ export default function InstallButton({
     >
       <div className="w-full max-w-sm rounded-2xl bg-white p-6 text-neutral-900 shadow-xl">
         <h2 id="install-title" className="text-lg font-semibold">
-          Install SikaAI
+          {t('title')}
         </h2>
         <p className="mt-2 text-sm text-neutral-600">
-          Add SikaAI to your device so it opens like any other app.
+          {t('description')}
         </p>
 
         {isIOS ? (
           <p className="mt-5 text-sm">
-            Tap the Share icon, then choose “Add to Home Screen”.
+            {t('iosHint')}
           </p>
         ) : (
           <>
@@ -181,12 +183,13 @@ export default function InstallButton({
               className={`mt-5 inline-flex w-full items-center justify-center gap-2 outline-none ${className}`}
             >
               <Download size={18} aria-hidden="true" />
-              Install SikaAI
+              {t('button')}
             </button>
             {!deferred && (
               <p className="mt-3 text-xs text-neutral-500">
-                If this stays disabled, <strong> reload the page </strong>  or open your
-                browser menu and choose “Install app”.
+                {t.rich('disabledHint', {
+                  b: (chunks) => <strong>{chunks}</strong>,
+                })}
               </p>
             )}
           </>
@@ -196,7 +199,7 @@ export default function InstallButton({
           onClick={dismiss}
           className="mt-3 w-full text-sm text-neutral-500"
         >
-          Not now
+          {t('notNow')}
         </button>
       </div>
     </div>

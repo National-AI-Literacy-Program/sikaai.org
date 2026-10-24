@@ -1,71 +1,44 @@
 "use client";
 
-import { useState, useEffect, Suspense } from "react";
+import { useState, useEffect, useMemo, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
+import { useFormatter, useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import Header from "../../components/Header";
-import data from "@/data/curriculum.json"
-/* ---------- types ---------- */
-
-type Competence = {
-  domain: string;
-  number: number;
-  level: string;
-  page: number;
-};
-
-type Day = {
-  day: number;
-  title: string;
-  summary: string;
-  kind: string;           // lesson | project | capstone | extension
-  review: boolean;
-  competence: Competence | null;
-  basis?: string;
-  knowledge: string[];
-  skills: string[];
-  attitudes: string[];
-};
-
-type Week = { week: number; domain: string; tagline: string; days: Day[] };
-
-type Curriculum = {
-  meta: {
-    title: string;
-    frameworkName: string;
-    frameworkFullName: string;
-    frameworkPublisher: string;
-    frameworkPdf: string;
-  };
-  framework: {
-    knowledge: { id: string; label: string; page: number }[];
-    skills: { id: string; name: string; description: string; page: number }[];
-    attitudes: { id: string; name: string; description: string; page: number }[];
-  };
-  weeks: Week[];
-};
-
-const curriculum = data as unknown as Curriculum;
-const { meta, framework, weeks } = curriculum;
+import {
+  getCurriculum,
+  indexFramework,
+  domainKey,
+  levelKey,
+  meta,
+  pdfAt,
+  type Day,
+  type Framework,
+} from "@/lib/curriculum";
 
 /* ---------- helpers ---------- */
 
-const pdfAt = (page: number) => `${meta.frameworkPdf}#page=${page}`;
-
-const knowledgeById = Object.fromEntries(framework.knowledge.map((k) => [k.id, k]));
-const skillById = Object.fromEntries(framework.skills.map((s) => [s.id, s]));
-const attitudeById = Object.fromEntries(framework.attitudes.map((a) => [a.id, a]));
-
-const kindLabel: Record<string, string> = {
-  project: "Mini-project",
-  capstone: "Capstone",
-  extension: "SikaAI addition",
-};
+const KIND_TAGS = ["project", "capstone", "extension"];
 
 const wrap = "mx-auto w-full max-w-6xl px-5 sm:px-8";
 const muted = "text-(color:--muted)";
 const focusRing =
   "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
+
+// Week titles and taglines already exist under CourseStructure, so reuse them
+function useDomainText() {
+  const cs = useTranslations("CourseStructure");
+  return {
+    name: (domain: string) => {
+      const k = domainKey(domain);
+      return k ? cs(`weeks.${k}.title`) : domain;
+    },
+    tagline: (domain: string, fallback: string) => {
+      const k = domainKey(domain);
+      return k ? cs(`weeks.${k}.description`) : fallback;
+    },
+  };
+}
 
 /* ---------- small components ---------- */
 
@@ -80,6 +53,7 @@ function Chip({
   label: string;
   tone: "k" | "s" | "a";
 }) {
+  const t = useTranslations("Curriculum");
   const tones = {
     k: "border-primary/40 text-primary hover:bg-primary/10",
     s: "border-foreground/25 text-foreground hover:bg-foreground/10",
@@ -90,7 +64,7 @@ function Chip({
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      aria-label={`${label}. Opens the framework PDF in a new tab.`}
+      aria-label={t("chipAria", { label })}
       title={label}
       className={`rounded-md border px-2 py-0.5 text-xs font-bold transition-colors ${tones[tone]} ${focusRing}`}
     >
@@ -128,13 +102,19 @@ function Row({
   );
 }
 
-function DayItem({ d }: { d: Day }) {
+function DayItem({ d, fw }: { d: Day; fw: Framework }) {
+  const t = useTranslations("Curriculum");
+  const format = useFormatter();
+  const domain = useDomainText();
+
   const tags = [
-    kindLabel[d.kind],
-    d.review ? "Includes quiz review" : null,
+    KIND_TAGS.includes(d.kind) ? t(`kinds.${d.kind}`) : null,
+    d.review ? t("reviewTag") : null,
   ].filter(Boolean) as string[];
 
   const hasKsa = d.knowledge.length + d.skills.length + d.attitudes.length > 0;
+
+  const lk = d.competence ? levelKey(d.competence.level) : undefined;
 
   return (
     <li
@@ -142,9 +122,9 @@ function DayItem({ d }: { d: Day }) {
       className="grid scroll-mt-24 gap-4 border-t border-border py-6 first:border-t-0 md:grid-cols-[4rem_minmax(0,1fr)_minmax(0,1.1fr)] md:gap-8 print:break-inside-avoid"
     >
       <div className="flex items-baseline gap-2 md:block">
-        <p className={`text-xs font-bold ${muted}`}>Day</p>
+        <p className={`text-xs font-bold ${muted}`}>{t("day")}</p>
         <p className="text-3xl font-extrabold leading-none tracking-[-0.04em]">
-          {d.day}
+          {format.number(d.day)}
         </p>
       </div>
 
@@ -158,12 +138,12 @@ function DayItem({ d }: { d: Day }) {
 
         {tags.length > 0 && (
           <p className="mt-3 flex flex-wrap gap-1.5">
-            {tags.map((t) => (
+            {tags.map((tag) => (
               <span
-                key={t}
+                key={tag}
                 className="rounded-full border border-border px-2.5 py-0.5 text-xs font-semibold"
               >
-                {t}
+                {tag}
               </span>
             ))}
           </p>
@@ -177,14 +157,21 @@ function DayItem({ d }: { d: Day }) {
               rel="noopener noreferrer"
               className={`font-bold text-primary underline decoration-2 underline-offset-4 hover:opacity-75 ${focusRing}`}
             >
-              {d.competence.domain} {d.competence.number}
-              <span className="sr-only">. Opens the framework PDF in a new tab.</span>
+              {t("competenceLink", {
+                domain: domain.name(d.competence.domain),
+                number: d.competence.number,
+              })}
+              <span className="sr-only">{t("opensPdfSr")}</span>
             </a>
           ) : (
             <span className={muted}>{d.basis}</span>
           )}
           {d.competence && (
-            <span className={muted}>, {d.competence.level}</span>
+            <span className={muted}>
+              {t("levelSuffix", {
+                level: lk ? t(`levels.${lk}`) : d.competence.level,
+              })}
+            </span>
           )}
         </p>
       </div>
@@ -192,13 +179,13 @@ function DayItem({ d }: { d: Day }) {
       {hasKsa && (
         <dl className="space-y-2.5 md:pt-1">
           {d.knowledge.length > 0 && (
-            <Row letter="K" word="Knowledge" tone="k">
+            <Row letter={t("ksa.knowledge.letter")} word={t("ksa.knowledge.name")} tone="k">
               {d.knowledge.map((id) => (
                 <Chip
                   key={id}
                   tone="k"
-                  href={pdfAt(knowledgeById[id].page)}
-                  label={`Knowledge ${id}: ${knowledgeById[id].label}`}
+                  href={pdfAt(fw.knowledge[id].page)}
+                  label={t("chipKnowledge", { id, label: fw.knowledge[id].label })}
                 >
                   {id}
                 </Chip>
@@ -206,29 +193,35 @@ function DayItem({ d }: { d: Day }) {
             </Row>
           )}
           {d.skills.length > 0 && (
-            <Row letter="S" word="Skills" tone="s">
+            <Row letter={t("ksa.skills.letter")} word={t("ksa.skills.name")} tone="s">
               {d.skills.map((id) => (
                 <Chip
                   key={id}
                   tone="s"
-                  href={pdfAt(skillById[id].page)}
-                  label={`Skill: ${skillById[id].name}. ${skillById[id].description}`}
+                  href={pdfAt(fw.skills[id].page)}
+                  label={t("chipSkill", {
+                    name: fw.skills[id].name,
+                    description: fw.skills[id].description,
+                  })}
                 >
-                  {skillById[id].name}
+                  {fw.skills[id].name}
                 </Chip>
               ))}
             </Row>
           )}
           {d.attitudes.length > 0 && (
-            <Row letter="A" word="Attitudes" tone="a">
+            <Row letter={t("ksa.attitudes.letter")} word={t("ksa.attitudes.name")} tone="a">
               {d.attitudes.map((id) => (
                 <Chip
                   key={id}
                   tone="a"
-                  href={pdfAt(attitudeById[id].page)}
-                  label={`Attitude: ${attitudeById[id].name}. ${attitudeById[id].description}`}
+                  href={pdfAt(fw.attitudes[id].page)}
+                  label={t("chipAttitude", {
+                    name: fw.attitudes[id].name,
+                    description: fw.attitudes[id].description,
+                  })}
                 >
-                  {attitudeById[id].name}
+                  {fw.attitudes[id].name}
                 </Chip>
               ))}
             </Row>
@@ -242,6 +235,15 @@ function DayItem({ d }: { d: Day }) {
 /* ---------- main content component ---------- */
 
 function CurriculumContent() {
+  const t = useTranslations("Curriculum");
+  const tf = useTranslations("Footer");
+  const format = useFormatter();
+  const locale = useLocale();
+  const domain = useDomainText();
+
+  const { framework, weeks } = useMemo(() => getCurriculum(locale), [locale]);
+  const fw = useMemo(() => indexFramework(framework), [framework]);
+
   const searchParams = useSearchParams();
   const weekParam = searchParams.get("week");
 
@@ -267,7 +269,7 @@ function CurriculumContent() {
       {/* Intro */}
       <section className={`${wrap} pb-5`}>
         {/* Week selection buttons */}
-        <nav aria-label="Select a week" className="mt-8">
+        <nav aria-label={t("selectWeek")} className="mt-8">
           <ul className="flex flex-wrap gap-2">
             {weeks.map((w) => (
               <li key={w.week}>
@@ -280,7 +282,7 @@ function CurriculumContent() {
                       : "border-border text-foreground hover:border-primary hover:text-primary"
                   }`}
                 >
-                  Week {w.week}: {w.domain}
+                  {t("weekButton", { week: w.week, domain: domain.name(w.domain) })}
                 </button>
               </li>
             ))}
@@ -299,20 +301,26 @@ function CurriculumContent() {
           >
             <header className="max-w-2xl">
               <p className={`text-sm font-bold ${muted}`}>
-                Week {w.week}, days {w.days[0].day} to {w.days[w.days.length - 1].day}
+                {t("weekRange", {
+                  week: w.week,
+                  from: w.days[0].day,
+                  to: w.days[w.days.length - 1].day,
+                })}
               </p>
               <h2
                 id={`week-${w.week}-title`}
                 className="mt-1 text-3xl font-extrabold tracking-[-0.04em] sm:text-4xl"
               >
-                {w.domain}
+                {domain.name(w.domain)}
               </h2>
-              <p className={`mt-3 text-base leading-7 ${muted}`}>{w.tagline}</p>
+              <p className={`mt-3 text-base leading-7 ${muted}`}>
+                {domain.tagline(w.domain, w.tagline)}
+              </p>
             </header>
 
             <ol className="mt-8 rounded-2xl border border-border px-5 sm:px-8">
               {w.days.map((d) => (
-                <DayItem key={d.day} d={d} />
+                <DayItem key={d.day} d={d} fw={fw} />
               ))}
             </ol>
           </section>
@@ -323,43 +331,43 @@ function CurriculumContent() {
       <section className={`${wrap} pb-16 grid gap-20`}>
         <div className="mt-10 rounded-2xl border border-border p-5 sm:p-6">
           <h2 className="text-base font-extrabold tracking-tight">
-            How to read each lesson
+            {t("howToRead")}
           </h2>
           <p className={`mt-1 text-sm leading-6 ${muted}`}>
-            Every tag opens the matching page of the framework PDF.
+            {t("howToReadLede")}
           </p>
           <dl className="mt-5 grid gap-5 sm:grid-cols-3">
             <div>
               <dt className="flex items-center gap-2 text-sm font-extrabold">
                 <span className="grid size-6 place-items-center rounded-md bg-primary text-xs text-white">
-                  K
+                  {t("ksa.knowledge.letter")}
                 </span>
-                Knowledge
+                {t("ksa.knowledge.name")}
               </dt>
               <dd className={`mt-1.5 text-sm leading-6 ${muted}`}>
-                What learners understand about AI. 
+                {t("ksa.knowledge.legend")}
               </dd>
             </div>
             <div>
               <dt className="flex items-center gap-2 text-sm font-extrabold">
                 <span className="grid size-6 place-items-center rounded-md bg-foreground text-xs text-background">
-                  S
+                  {t("ksa.skills.letter")}
                 </span>
-                Skills
+                {t("ksa.skills.name")}
               </dt>
               <dd className={`mt-1.5 text-sm leading-6 ${muted}`}>
-                What learners can do.
+                {t("ksa.skills.legend")}
               </dd>
             </div>
             <div>
               <dt className="flex items-center gap-2 text-sm font-extrabold">
                 <span className="grid size-6 place-items-center rounded-md border border-foreground text-xs">
-                  A
+                  {t("ksa.attitudes.letter")}
                 </span>
-                Attitudes
+                {t("ksa.attitudes.name")}
               </dt>
               <dd className={`mt-1.5 text-sm leading-6 ${muted}`}>
-                The mindset learners bring.
+                {t("ksa.attitudes.legend")}
               </dd>
             </div>
           </dl>
@@ -367,16 +375,15 @@ function CurriculumContent() {
 
         <div className="rounded-2xl border border-border p-6 sm:p-8">
           <h2 className="text-lg font-extrabold tracking-tight">
-            Source framework
+            {t("sourceTitle")}
           </h2>
           <p className={`mt-2 max-w-3xl text-sm leading-6 ${muted}`}>
-            This curriculum is mapped to the {meta.frameworkName}:{" "}
-            <em>{meta.frameworkFullName}</em> ({meta.frameworkPublisher}),
-            licensed under CC BY 4.0. This is an adaptation of an original work
-            by the OECD and the European Union. The opinions expressed and
-            arguments employed in this adaptation should not be reported as
-            representing the official views of the OECD, its Member countries or
-            the European Union.
+            {t.rich("sourceBody", {
+              name: meta.frameworkName,
+              fullName: meta.frameworkFullName,
+              publisher: meta.frameworkPublisher,
+              em: (chunks) => <em>{chunks}</em>,
+            })}
           </p>
           <Link
             href={meta.frameworkPdf}
@@ -384,14 +391,14 @@ function CurriculumContent() {
             rel="noopener noreferrer"
             className={`mt-5 inline-flex text-sm font-extrabold text-primary underline decoration-2 underline-offset-4 hover:opacity-75 ${focusRing}`}
           >
-            Open the framework PDF ↗
+            {t("sourceLink")}
           </Link>
         </div>
       </section>
 
       <footer className="border-t border-border">
         <div className={`${wrap} py-7 text-xs ${muted}`}>
-          <p>© 2026 SikaAI</p>
+          <p>{tf("copyright", { year: format.number(2026, { useGrouping: false }) })}</p>
         </div>
       </footer>
     </main>
@@ -401,8 +408,9 @@ function CurriculumContent() {
 /* ---------- page wrapper with suspense boundary ---------- */
 
 export default function CurriculumPage() {
+  const t = useTranslations("Curriculum");
   return (
-    <Suspense fallback={<div className="min-h-dvh grid place-items-center text-sm font-bold">Loading curriculum...</div>}>
+    <Suspense fallback={<div className="min-h-dvh grid place-items-center text-sm font-bold">{t("loading")}</div>}>
       <CurriculumContent />
     </Suspense>
   );

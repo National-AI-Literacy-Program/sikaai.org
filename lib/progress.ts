@@ -138,10 +138,15 @@ export function useProgress() {
     : !first.has(day - 1) ? "locked"
     : now >= unlockAt(day) ? "current"
     : "waiting";
-const opensIn = (day: number) => {
-  const h = Math.ceil((unlockAt(day) - now) / 36e5);
-  return h <= 2 ? `in ${Math.max(1, h)}h` : "tomorrow";
-};
+  const opensWhen = (day: number): { kind: "tomorrow" } | { kind: "hours"; hours: number } => {
+    const h = Math.ceil((unlockAt(day) - now) / 36e5);
+    return h <= 2 ? { kind: "hours", hours: Math.max(1, h) } : { kind: "tomorrow" };
+  };
+  // Kept so existing callers keep working. Prefer opensWhen for anything shown to people.
+  const opensIn = (day: number) => {
+    const w = opensWhen(day);
+    return w.kind === "hours" ? `in ${w.hours}h` : "tomorrow";
+  };
   const complete = useCallback(
     async (day: number, r: { misses: number; ms: number }) => {
       const at = await trustedNow();
@@ -161,7 +166,7 @@ const opensIn = (day: number) => {
       await kvSet("certificate", await post("/api/certificate", { email, name, attempts }));
       await refresh();
     } catch {
-      setError("Couldn't reach the server. Check your connection and try again.");
+      setError("network");
     } finally {
       setBusy(false);
     }
@@ -178,7 +183,7 @@ const opensIn = (day: number) => {
   };
 
   return {
-    ready: now > 0, completed, statusOf, opensIn, complete, stats,
+    ready: now > 0, completed, statusOf, opensIn, opensWhen, complete, stats,
     online, busy, error, certificate, claim,
     canCertify: days >= TOTAL_DAYS,
   };

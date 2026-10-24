@@ -81,8 +81,9 @@ const messages = await getMessages();
     />
     <NextIntlClientProvider messages={messages}>
       <ThemeProvider>{children}</ThemeProvider>
+         <InstallButton />
     </NextIntlClientProvider>
-    <InstallButton />
+ 
     <RegisterSW />
     {process.env.NODE_ENV === "production" && <Analytics />}
   </body>

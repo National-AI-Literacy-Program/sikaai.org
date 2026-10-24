@@ -1,11 +1,13 @@
 "use client";
 
 import { FormEvent, useState } from "react";
+import { useTranslations } from "next-intl";
 import { saveEmail } from "@/lib/progress";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/i18n/navigation";
 import Image from "next/image";
 
 export default function Involve() {
+  const t = useTranslations("Involve");
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
@@ -16,16 +18,14 @@ export default function Involve() {
     const value = email.trim();
 
     if (!/^\S+@\S+\.\S+$/.test(value)) {
-      setError("Enter a valid email address, like name@example.com.");
+      setError(t("errorInvalid"));
       return;
     }
 
     try {
       await saveEmail(value); // must finish before navigating
     } catch {
-      setError(
-        "Couldn't save on this device. Check your browser storage settings.",
-      );
+      setError(t("errorSave"));
       return;
     }
 
@@ -52,7 +52,7 @@ export default function Involve() {
             aria-hidden="true"
             className="absolute -top-5 left-1/2 z-10 -translate-x-1/2 rotate-[-4deg] rounded-2xl border border-border bg-background px-4 py-1.5 text-sm font-extrabold tracking-[-0.02em] shadow-sm sm:-top-6 sm:text-base"
           >
-            Namaste!
+            {t("greeting")}
             <span className="absolute -bottom-1.5 left-1/2 size-3 -translate-x-1/2 rotate-45 border-b border-r border-border bg-background" />
           </div>
 
@@ -60,7 +60,7 @@ export default function Involve() {
             <Image
               className="h-full w-full object-contain p-1.5"
               src="/graphics/girl/happy.png"
-              alt="Smiling girl in traditional dress waving hello"
+              alt={t("girlAlt")}
               width={288}
               height={288}
               priority
@@ -71,7 +71,7 @@ export default function Involve() {
             <Image
               className="h-full w-full object-contain p-1.5"
               src="/graphics/boy/happy.png"
-              alt="Smiling boy in a dhaka topi waving hello"
+              alt={t("boyAlt")}
               width={288}
               height={288}
               priority
@@ -80,7 +80,9 @@ export default function Involve() {
         </div>
 
         <h1 className="text-[clamp(34px,7vw,56px)] font-extrabold leading-[0.96] tracking-[-0.06em]">
-          Start learning <span className="text-primary">AI</span> today.
+          {t.rich("headline", {
+            ai: (chunks) => <span className="text-primary">{chunks}</span>,
+          })}
         </h1>
 
         <form
@@ -90,7 +92,7 @@ export default function Involve() {
         >
           <div className="w-full text-left">
             <label htmlFor="course-email" className="sr-only">
-              Email address
+              {t("emailLabel")}
             </label>
             <input
               id="course-email"
@@ -102,7 +104,7 @@ export default function Involve() {
                 setEmail(e.target.value);
                 setError("");
               }}
-              placeholder="Enter your email address"
+              placeholder={t("emailPlaceholder")}
               aria-invalid={!!error}
               aria-describedby={error ? "email-error" : undefined}
               className={`w-full rounded-xl border bg-background/80 px-4 py-3.5 text-sm font-semibold text-foreground shadow-sm backdrop-blur transition placeholder:font-medium placeholder:text-(--muted) ${
@@ -124,7 +126,7 @@ export default function Involve() {
             type="submit"
             className="group inline-flex w-full shrink-0 items-center justify-center gap-3 rounded-xl bg-primary px-6 py-3.5 text-sm font-extrabold text-white shadow-[0_4px_0_0_#9a1c1c] transition hover:-translate-y-0.5 hover:brightness-110 hover:shadow-[0_6px_0_0_#9a1c1c] focus-visible:outline-3 focus-visible:outline-offset-4 focus-visible:outline-(--saffron) active:translate-y-0.5 active:shadow-[0_2px_0_0_#9a1c1c] sm:w-auto"
           >
-            Start
+            {t("submit")}
             <span className="transition-transform group-hover:translate-x-1">
               →
             </span>
@@ -132,7 +134,7 @@ export default function Involve() {
         </form>
 
         <p className="mt-5 text-xs font-semibold text-(--muted) sm:text-sm">
-          Free to join. No password needed.
+          {t("freeNote")}
         </p>
       </div>
     </main>

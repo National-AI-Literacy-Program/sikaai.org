@@ -5,6 +5,7 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 import rawCourse from "@/data/course.json";
+import rawCourseNe from "@/data/course.ne.json";
 
 export type Choice = { label: string; correct: boolean };
 export type QuestionProfile = {
@@ -31,12 +32,71 @@ export type Lesson = {
   reward?: { message: string };
 };
 
-export function getLessons(): Lesson[] {
-  return (rawCourse as Lesson[]).slice().sort((a, b) => a.day - b.day);
+/* ---------- Nepali text laid over the English lessons ---------- */
+
+type Block = NonNullable<Lesson["action"]>;
+type BlockText = {
+  title?: string;
+  options?: { label?: string }[];
+  feedback?: { correct?: string; incorrect?: string };
+};
+type LessonText = {
+  day: number;
+  hook?: string;
+  concept?: string;
+  ksa?: { knowledge?: string[]; skills?: string[]; attitude?: string[] };
+  action?: BlockText;
+  quiz?: BlockText;
+  reward?: { message?: string };
+};
+
+const neLessons = rawCourseNe as unknown as LessonText[];
+
+// Text comes from ne; structure, order and the `correct` flags always come from en.
+function mergeBlock(base: Block | undefined, over?: BlockText): Block | undefined {
+  if (!base || !over) return base;
+  return {
+    ...base,
+    title: over.title ?? base.title,
+    options: base.options.map((o, i) => ({
+      ...o,
+      label: over.options?.[i]?.label ?? o.label,
+    })),
+    feedback: base.feedback && {
+      correct: over.feedback?.correct ?? base.feedback.correct,
+      incorrect: over.feedback?.incorrect ?? base.feedback.incorrect,
+    },
+  };
 }
 
-export function getLesson(day: number) {
-  return getLessons().find((lesson) => lesson.day === day);
+function localise(base: Lesson, over?: LessonText): Lesson {
+  if (!over) return base;
+  return {
+    ...base,
+    hook: over.hook ?? base.hook,
+    concept: over.concept ?? base.concept,
+    ksa: base.ksa && {
+      knowledge: over.ksa?.knowledge ?? base.ksa.knowledge,
+      skills: over.ksa?.skills ?? base.ksa.skills,
+      attitude: over.ksa?.attitude ?? base.ksa.attitude,
+    },
+    action: mergeBlock(base.action, over.action),
+    quiz: mergeBlock(base.quiz, over.quiz),
+    reward: base.reward && {
+      ...base.reward,
+      message: over.reward?.message ?? base.reward.message,
+    },
+  };
+}
+
+export function getLessons(locale: string = "en"): Lesson[] {
+  const sorted = (rawCourse as Lesson[]).slice().sort((a, b) => a.day - b.day);
+  if (locale !== "ne") return sorted;
+  return sorted.map((l) => localise(l, neLessons.find((n) => n.day === l.day)));
+}
+
+export function getLesson(day: number, locale: string = "en") {
+  return getLessons(locale).find((lesson) => lesson.day === day);
 }
 
 export function getLessonStatus(day: number, completed: number[]) {
@@ -52,8 +112,12 @@ export function getCourseTotal() {
   return getLessons().length;
 }
 
-export function getCourseTitle(lesson: Lesson) {
-  return `Day ${lesson.day}`;
+// Pass a translated label, e.g. (day) => t("day", { day }). Defaults to English.
+export function getCourseTitle(
+  lesson: Lesson,
+  dayLabel: (day: number) => string = (day) => `Day ${day}`,
+) {
+  return dayLabel(lesson.day);
 }
 
 export function getQuestionProfile(

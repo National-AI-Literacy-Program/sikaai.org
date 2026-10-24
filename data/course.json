@@ -2,15 +2,15 @@
   {
     "day": 1,
     "title": "What Is AI, Really?",
-    "hook": "Ever wondered how TikTok knows which video will make you laugh? Or how eSewa spots a fake payment in a flash? That is not magic. That is Artificial Intelligence (AI).",
-    "concept": "AI is a way to teach computers to find patterns and make choices. People learn from what they have seen before. AI learns in a way that is a bit like that.\nThink of a farmer who guesses when the rain will come. The farmer looks at the clouds. The farmer remembers past rains. Then the farmer makes a smart guess.\nAI does the same thing. But AI looks at data, not the sky. Data can be millions of old videos or payment records. AI uses it to guess what you want to watch, or if a payment is safe.\nAI is not a robot from a movie. It is a fast, smart computer tool. It helps us sort through lots of information and solve everyday problems.",
+    "hook": "Have you ever wondered how TikTok knows exactly which video will make you laugh, or how digital wallets like eSewa spot a fake transaction instantly? That is not magic. That is Artificial Intelligence (AI).",
+    "concept": "AI is a computer program that learns from many examples. It finds patterns, then makes a good guess. Think of a local farmer predicting the monsoon. A farmer doesn't just guess; they look at the clouds, remember past weather patterns, and make a prediction. AI does something similar but instead of looking at the sky, it looks at data, like millions of past videos or financial records, to predict what you want to watch or if a payment is safe. AI is not a movie robot. It is a computer tool. Sometimes you can see it like a chatbot but it often works quietly in the background of your apps.",
     "ksa": {
       "knowledge": ["1.4"],
       "skills": ["Self-awareness,Social awareness"],
       "attitude": ["Curious,Responsible"]
     },
     "action": {
-      "title": "Think about your phone. Tap the app where you think AI is working right now:",
+      "title": "Think about your smartphone. Tap the app below where you think AI is working right now:",
       "options": [
         {
           "label": "YouTube",
@@ -30,23 +30,23 @@
         }
       ],
       "feedback": {
-        "correct": "Right! YouTube, digital wallets and Maps all use AI.",
-        "incorrect": "That is true, but look at every option."
+        "correct": "Right! YouTube, digital wallets, and Maps all run on AI.",
+        "incorrect": "True, but look closer: other options here use AI too."
       }
     },
     "quiz": {
       "title": "Based on what you just read, what is AI?",
       "options": [
         {
-          "label": "A robot that has human feelings.",
+          "label": "A robot with feelings.",
           "correct": false
         },
         {
-          "label": "A computer system that learns from data to spot patterns and make predictions.",
+          "label": "A computer tool that finds patterns and makes guesses.",
           "correct": true
         },
         {
-          "label": "A new type of fast internet.",
+          "label": "A fast internet connection.",
           "correct": false
         },
         {
@@ -60,7 +60,7 @@
       }
     },
     "reward": {
-      "message": "Great job! You took your first step. Come back tomorrow to learn why AI chatbots are not what they seem."
+      "message": "Great job! You have taken your first step. See you tomorrow to uncover why AI chatbots aren't quite what they seem."
     }
   },
   {
