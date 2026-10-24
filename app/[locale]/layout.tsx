@@ -5,6 +5,7 @@ import { routing } from "@/i18n/routing";
 import "../globals.css";
 import { ThemeProvider } from "../components/ThemeProvider";
 import RegisterSW from "@/app/components/RegisterSW";
+import LocaleSync from "@/app/components/LocaleSync"
 import InstallButton from "@/app/components/pwa/InstallButton"; 
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getMessages, getTranslations, setRequestLocale } from "next-intl/server";
@@ -82,6 +83,7 @@ const messages = await getMessages();
     <NextIntlClientProvider messages={messages}>
       <ThemeProvider>{children}</ThemeProvider>
          <InstallButton />
+         <LocaleSync />
     </NextIntlClientProvider>
  
     <RegisterSW />
@@ -94,5 +96,3 @@ const messages = await getMessages();
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
-
-

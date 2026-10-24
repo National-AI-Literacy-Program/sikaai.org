@@ -2,7 +2,7 @@
 
 import { useTransition } from "react";
 import { useLocale, useTranslations } from "next-intl";
-import { usePathname, useRouter } from "@/i18n/navigation";
+import { getPathname, usePathname, useRouter } from "@/i18n/navigation";
 
 const OPTIONS = [
   { locale: "en", label: "EN", name: "English" },
@@ -33,7 +33,13 @@ export default function LanguageToggle() {
             aria-pressed={on}
             disabled={pending}
             onClick={() => {
-              if (!on) startTransition(() => router.replace(pathname, { locale }));
+              if (on) return;
+              // Offline: skip the client-side fetch that can only fail and open the cached page directly
+              if (!navigator.onLine) {
+                window.location.assign(getPathname({ href: pathname, locale }));
+                return;
+              }
+              startTransition(() => router.replace(pathname, { locale }));
             }}
             className={`rounded-full px-2.5 py-1.5 transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary ${
               on ? "bg-primary text-white" : "text-(--muted) hover:text-foreground"

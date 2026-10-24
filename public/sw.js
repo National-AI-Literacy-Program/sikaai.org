@@ -1,12 +1,15 @@
 const VERSION = "v1";
 const STATIC_CACHE = `sikaai-static-${VERSION}`;
 const PAGE_CACHE = `sikaai-pages-${VERSION}`;
-const FALLBACK = "/en/course";
+// Small, unversioned cache that remembers the language the person last used
+const META_CACHE = "sikaai-meta";
+const LANG_URL = "/__sikaai-lang";
 const NAV_TIMEOUT_MS = 4000;
-const MAX_PAGES = 80;
+const MAX_PAGES = 110; // 60 precached pages (2 languages x 30) + room for visited ones
 
-// Add every locale you support, e.g. ["en", "fr"]
-const LOCALES = ["en"];
+// URL prefixes, NOT locale codes: Nepali is the locale "ne" but its URLs start with /np
+const LOCALES = ["en", "np"];
+const PREFIXES = LOCALES.map((l) => `/${l}`);
 const DAYS = Array.from({ length: 28 }, (_, i) => i + 1);
 
 const PRECACHE_PAGES = LOCALES.flatMap((l) => [
@@ -110,7 +113,7 @@ self.addEventListener("activate", (event) => {
       .keys()
       .then((keys) =>
         Promise.all(
-          keys.filter((k) => ![STATIC_CACHE, PAGE_CACHE].includes(k)).map((k) => caches.delete(k))
+          keys.filter((k) => ![STATIC_CACHE, PAGE_CACHE, META_CACHE].includes(k)).map((k) => caches.delete(k))
         )
       )
       .then(() => self.clients.claim())
@@ -120,6 +123,11 @@ self.addEventListener("activate", (event) => {
 /* ---------- the page can send us extra assets it loaded ---------- */
 
 self.addEventListener("message", (event) => {
+  // The page tells us when the language changes (the toggle is a client-side navigation we never see)
+  if (event.data?.type === "SET_LOCALE") {
+    if (PREFIXES.includes(event.data.prefix)) event.waitUntil(setLang(event.data.prefix).catch(() => {}));
+    return;
+  }
   if (event.data?.type !== "CACHE_ASSETS") return;
 
   const assets = (event.data.urls || [])
@@ -153,8 +161,29 @@ async function trimPages() {
   for (let i = 0; i < excess && i < removable.length; i++) await cache.delete(removable[i]);
 }
 
+const prefixOf = (pathname) => PREFIXES.find((p) => pathname === p || pathname.startsWith(p + "/"));
+
+async function setLang(prefix) {
+  const cache = await caches.open(META_CACHE);
+  await cache.put(LANG_URL, new Response(prefix));
+}
+
+async function getLang() {
+  try {
+    const hit = await (await caches.open(META_CACHE)).match(LANG_URL);
+    const value = hit ? await hit.text() : "";
+    return PREFIXES.includes(value) ? value : PREFIXES[0];
+  } catch {
+    return PREFIXES[0];
+  }
+}
+
 async function handleNavigation(event) {
   const req = event.request;
+  const url = new URL(req.url);
+  const seen = prefixOf(url.pathname);
+  // Remember the language of every full page load
+  if (seen) event.waitUntil(setLang(seen).catch(() => {}));
 
   const network = fetch(req).then((res) => {
     if (res.ok && !res.redirected) {
@@ -174,11 +203,20 @@ async function handleNavigation(event) {
       new Promise((_, reject) => setTimeout(reject, NAV_TIMEOUT_MS)),
     ]);
   } catch {
-    return (
-      (await caches.match(req, { ignoreSearch: true })) ||
-      (IS_LEARN && (await caches.match(FALLBACK))) ||
-      Response.error()
-    );
+    const cached = await caches.match(req, { ignoreSearch: true });
+    if (cached) return cached;
+    if (!IS_LEARN) return Response.error();
+
+    // No language prefix (the installed app opens "/course"). Online, the server picks the
+    // language from a cookie; offline that cannot happen, so use the last language chosen.
+    if (!seen) {
+      const lang = await getLang();
+      const path = url.pathname === "/" ? "/involve" : url.pathname;
+      return Response.redirect(`${self.location.origin}${lang}${path}${url.search}`, 302);
+    }
+
+    // Unknown page: fall back to the course home in the SAME language
+    return (await caches.match(`${seen}/course`)) || Response.error();
   }
 }
 

@@ -2,11 +2,11 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    id: "/en/course",
+    id: "/course",
     name: "SikaAI: AI for ALL",
     short_name: "SikaAI",
     description: "A four-week AI literacy course.",
-    start_url: "/en/course",
+    start_url: "/course",
     scope: "/",
     display: "standalone",
     orientation: "portrait",
