@@ -23,7 +23,10 @@ export async function generateMetadata({
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "Meta" });
   return {
-    title: t("title"),
+    title: {
+    default: t("title"),
+    template: "%s",
+  },
     description: t("description"),
     generator: "SikaAI",
     applicationName: "SikaAI",
