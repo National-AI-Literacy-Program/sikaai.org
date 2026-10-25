@@ -2,45 +2,20 @@
 
 import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
+import { saveEmail } from "@/lib/progress";
 
 export default function EmailGate() {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
-  function submit(event: FormEvent) {
-    event.preventDefault();
-    if (!/^\S+@\S+\.\S+$/.test(email)) {
-      setError("Please enter a valid email address.");
-      return;
-    }
-    window.localStorage.setItem("Sikaai-email", email);
-    router.push("/course");
+  async function submit(event: FormEvent) {
+  event.preventDefault();
+  if (!/^\S+@\S+\.\S+$/.test(email)) {
+    setError("Please enter a valid email address.");
+    return;
   }
-  return (
-    <form className="email-gate" onSubmit={submit} noValidate>
-      
-      <div className="email-row">
-        <input
-          id="course-email"
-          type="email"
-          value={email}
-          onChange={(event) => {
-            setEmail(event.target.value);
-            setError("");
-          }}
-          placeholder="Enter email address"
-          autoComplete="email"
-        />
-        <button className="button button-primary" type="submit">
-        Start →
-        </button>
-      </div>
-      {error? (
-        <p className="form-error" role="alert">
-          {error}
-        </p>
-      ) : ( <small>ss</small>)}
-     
-    </form>
-  );
+  await saveEmail(email);
+  window.localStorage.setItem("Sikaai-email", email); // keep until nothing else reads it
+  router.push("/course");
+}
 }

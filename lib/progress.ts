@@ -3,7 +3,15 @@
 import { useCallback, useEffect, useState } from "react";
 
 export const TOTAL_DAYS = 28;
-export type Attempt = { id: string; day: number; at: number; misses: number; ms: number; synced: boolean };
+export type Attempt = {
+  id: string;
+  day: number;
+  at: number;
+  misses: number;
+  ms: number;
+  total?: number; // number of graded questions that day (older rows don't have it)
+  synced: boolean;
+};
 export type Status = "completed" | "current" | "waiting" | "locked";
 export type Certificate = {
   id: string;
@@ -13,6 +21,11 @@ export type Certificate = {
   stats: { days: number; firstTryPct: number; minutes: number; tries: number };
 };
 export const getEmail = () => kvGet<string>("email");
+
+// No localhost fallback: a missing value must fail loudly, not call the wrong server.
+// Must be written exactly as process.env.NEXT_PUBLIC_API_URL so Next.js can inline it at build time.
+const API_URL = process.env.NEXT_PUBLIC_API_URL?.replace(/\/$/, "");
+
 /* ---------- tiny IndexedDB wrapper (no dependencies) ---------- */
 const open = () =>
   new Promise<IDBDatabase>((res, rej) => {
@@ -57,7 +70,7 @@ const nextMidnight = (t: number) => {
   return d.getTime();
 };
 
-/* ---------- sync ---------- */
+/* ---------- certificate request (unchanged, still uses /api/certificate) ---------- */
 const post = async (url: string, body: unknown) => {
   const token = await kvGet<string>("token");
   const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
@@ -70,13 +83,74 @@ const post = async (url: string, body: unknown) => {
   return r.json();
 };
 
-/** Pushes unsynced attempts. Server must be idempotent on attempt.id and return { serverTime }. */
+/* ---------- FastAPI sync ---------- */
+
+// Any non-2xx (including 422) throws, so the caller treats it as "not synced".
+async function api<T>(method: "POST" | "PUT", path: string, body: unknown): Promise<T> {
+  if (!API_URL) {
+    console.error(
+      "NEXT_PUBLIC_API_URL is not set. Add it to .env.local (dev) or the host's environment variables (production), then restart/rebuild.",
+    );
+    throw new Error("API URL missing");
+  }
+
+  const token = await kvGet<string>("token");
+  const r = await fetch(`${API_URL}${path}`, {
+    method,
+    headers: { "Content-Type": "application/json", ...(token ? { Authorization: `Bearer ${token}` } : {}) },
+    body: JSON.stringify(body),
+  });
+  if (!r.ok) throw new Error(String(r.status));
+  return r.json();
+}
+
+// Register first; if the email already exists, fall back to login.
+async function ensureUserId(email: string) {
+  const saved = await kvGet<string>("userId");
+  if (saved) return saved;
+
+  let user: { id: string };
+  try {
+    user = await api<{ id: string }>("POST", "/auth/register", { email });
+  } catch {
+    user = await api<{ id: string }>("POST", "/auth/login", { email });
+  }
+
+  await kvSet("userId", user.id);
+  return user.id;
+}
+
+// Turns local attempts into DayProgressSchema items: one entry per day,
+// using the FIRST attempt (the one that counts for the certificate).
+function toProgress(all: Attempt[]) {
+  const first = new Map<number, Attempt>();
+  for (const a of [...all].sort((x, y) => x.at - y.at)) {
+    if (!first.has(a.day)) first.set(a.day, a);
+  }
+
+  return [...first.values()].map((a) => {
+    const total = a.total ?? 1;
+    return {
+      day: a.day,
+      completed: true,
+      total_question: total,
+      missed_question: Math.min(a.misses, total),
+      completed_at: new Date(a.at).toISOString(),
+    };
+  });
+}
+
+/** Pushes progress to FastAPI. Throws on 422 / network error, so attempts stay synced:false. */
 export async function syncAttempts() {
   const [email, all] = await Promise.all([kvGet<string>("email"), allAttempts()]);
   const todo = all.filter((a) => !a.synced);
   if (!email || !todo.length) return;
-  const { serverTime } = await post("/api/sync", { email, attempts: todo });
-  await kvSet("serverOffset", serverTime - Date.now());
+
+  const userId = await ensureUserId(email);
+
+  // The PUT replaces the whole progress list, so always send ALL days.
+  await api("PUT", `/auth/progress/${userId}`, { progress: toProgress(all) });
+
   for (const a of todo) await db("attempts", "readwrite", (s) => s.put({ ...a, synced: true }));
 }
 
@@ -138,17 +212,13 @@ export function useProgress() {
     : !first.has(day - 1) ? "locked"
     : now >= unlockAt(day) ? "current"
     : "waiting";
-  const opensWhen = (day: number): { kind: "tomorrow" } | { kind: "hours"; hours: number } => {
-    const h = Math.ceil((unlockAt(day) - now) / 36e5);
-    return h <= 2 ? { kind: "hours", hours: Math.max(1, h) } : { kind: "tomorrow" };
-  };
-  // Kept so existing callers keep working. Prefer opensWhen for anything shown to people.
   const opensIn = (day: number) => {
-    const w = opensWhen(day);
-    return w.kind === "hours" ? `in ${w.hours}h` : "tomorrow";
+    const h = Math.ceil((unlockAt(day) - now) / 36e5);
+    return h <= 2 ? `in ${Math.max(1, h)}h` : "tomorrow";
   };
+
   const complete = useCallback(
-    async (day: number, r: { misses: number; ms: number }) => {
+    async (day: number, r: { misses: number; ms: number; total?: number }) => {
       const at = await trustedNow();
       await db("attempts", "readwrite", (s) => s.add({ id: crypto.randomUUID(), day, at, ...r, synced: false }));
       await refresh();
@@ -166,7 +236,7 @@ export function useProgress() {
       await kvSet("certificate", await post("/api/certificate", { email, name, attempts }));
       await refresh();
     } catch {
-      setError("network");
+      setError("Couldn't reach the server. Check your connection and try again.");
     } finally {
       setBusy(false);
     }
@@ -183,7 +253,7 @@ export function useProgress() {
   };
 
   return {
-    ready: now > 0, completed, statusOf, opensIn, opensWhen, complete, stats,
+    ready: now > 0, completed, statusOf, opensIn, complete, stats,
     online, busy, error, certificate, claim,
     canCertify: days >= TOTAL_DAYS,
   };
