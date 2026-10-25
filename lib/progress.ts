@@ -22,7 +22,9 @@ export type Certificate = {
 };
 export const getEmail = () => kvGet<string>("email");
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000";
+// No localhost fallback: a missing value must fail loudly, not call the wrong server.
+// Must be written exactly as process.env.NEXT_PUBLIC_API_URL so Next.js can inline it at build time.
+const API_URL = process.env.NEXT_PUBLIC_API_URL?.replace(/\/$/, "");
 
 /* ---------- tiny IndexedDB wrapper (no dependencies) ---------- */
 const open = () =>
@@ -85,6 +87,13 @@ const post = async (url: string, body: unknown) => {
 
 // Any non-2xx (including 422) throws, so the caller treats it as "not synced".
 async function api<T>(method: "POST" | "PUT", path: string, body: unknown): Promise<T> {
+  if (!API_URL) {
+    console.error(
+      "NEXT_PUBLIC_API_URL is not set. Add it to .env.local (dev) or the host's environment variables (production), then restart/rebuild.",
+    );
+    throw new Error("API URL missing");
+  }
+
   const token = await kvGet<string>("token");
   const r = await fetch(`${API_URL}${path}`, {
     method,
@@ -95,8 +104,7 @@ async function api<T>(method: "POST" | "PUT", path: string, body: unknown): Prom
   return r.json();
 }
 
-// CHECK in Swagger (/docs): the body fields of RegisterRequest / LoginRequest
-// and the id field name in UserInfoOut / LoginResponse. Change only here if they differ.
+// Register first; if the email already exists, fall back to login.
 async function ensureUserId(email: string) {
   const saved = await kvGet<string>("userId");
   if (saved) return saved;
@@ -140,7 +148,7 @@ export async function syncAttempts() {
 
   const userId = await ensureUserId(email);
 
-  // Send ALL days, not only the new ones, in case the PUT replaces the whole progress list.
+  // The PUT replaces the whole progress list, so always send ALL days.
   await api("PUT", `/auth/progress/${userId}`, { progress: toProgress(all) });
 
   for (const a of todo) await db("attempts", "readwrite", (s) => s.put({ ...a, synced: true }));
