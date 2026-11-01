@@ -123,7 +123,7 @@
   "Supporter": {
     "name": "Institute for Rural Development",
     "eyebrow": "Supported by",
-    "description": "SikaAI is supported by the Institute for Rural Development, a non-profit working in education, agriculture, heritage conservation, tourism, entrepreneurship, and more. IRD supports SikaAI with our domain and pilot.",
+    "description": "{name} (IRD) supports SikaAI with our domain and pilot. IRD is a Nepal-registered non-profit working in education, agriculture, heritage conservation, tourism, entrepreneurship, and more.",
     "visit": "Visit Website ↗"
   },
   "Reference": {
