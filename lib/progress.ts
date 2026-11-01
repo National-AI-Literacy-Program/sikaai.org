@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
@@ -65,6 +64,9 @@ const kvGet = <T,>(k: string) =>
 const kvSet = (k: string, v: unknown) =>
   db("kv", "readwrite", (s) => s.put(v, k));
 
+const kvDelete = (k: string) =>
+  db("kv", "readwrite", (s) => s.delete(k));
+
 const allAttempts = () =>
   db<Attempt[]>("attempts", "readonly", (s) => s.getAll());
 
@@ -82,6 +84,10 @@ export const getCertificate = () =>
 // ---------- API configuration ----------
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL?.replace(/\/$/, "");
+
+// Fired after progress changes outside the hook (sign in / restore),
+// so every mounted useProgress() refreshes itself.
+const PROGRESS_EVENT = "sikaai:progress-changed";
 
 // ---------- Trusted offline clock ----------
 
@@ -128,11 +134,23 @@ const post = async (url: string, body: unknown) => {
 
 // ---------- FastAPI synchronization ----------
 
-async function api<T>(
+export class HttpError extends Error {
+  status: number;
+
+  constructor(status: number) {
+    super(String(status));
+    this.status = status;
+  }
+}
+
+// fetch() rejects with a TypeError when the device is offline or the server is down
+export const isOfflineError = (e: unknown) => e instanceof TypeError;
+
+async function apiFetch(
   method: "POST" | "PUT",
   path: string,
   body: unknown,
-): Promise<T> {
+) {
   if (!API_URL) {
     console.error(
       "NEXT_PUBLIC_API_URL is not set. Add it to .env.local (dev) or the host's environment variables (production), then restart/rebuild.",
@@ -143,7 +161,7 @@ async function api<T>(
 
   const token = await kvGet<string>("token");
 
-  const r = await fetch(`${API_URL}${path}`, {
+  return fetch(`${API_URL}${path}`, {
     method,
     headers: {
       "Content-Type": "application/json",
@@ -151,37 +169,108 @@ async function api<T>(
     },
     body: JSON.stringify(body),
   });
+}
 
-  if (!r.ok) throw new Error(String(r.status));
+async function api<T>(
+  method: "POST" | "PUT",
+  path: string,
+  body: unknown,
+): Promise<T> {
+  const r = await apiFetch(method, path, body);
+
+  if (!r.ok) throw new HttpError(r.status);
 
   return r.json();
 }
 
-// Register first; if the email already exists, fall back to login.
-async function ensureUserId(email: string) {
-  const saved = await kvGet<string>("userId");
+type Account = { email: string; id: string };
 
-  if (saved) return saved;
+type ServerProgress = {
+  day: number;
+  completed: boolean;
+  total_question: number;
+  missed_question: number;
+  completed_at: string | null;
+};
 
-  let user: { id: string };
+const normEmail = (e: string) => e.trim().toLowerCase();
 
-  try {
-    user = await api<{ id: string }>(
-      "POST",
-      "/auth/register",
-      { email },
-    );
-  } catch {
-    user = await api<{ id: string }>(
-      "POST",
-      "/auth/login",
-      { email },
-    );
+// The backend returns UTC datetimes without a timezone, e.g.
+// "2026-10-30T13:59:20.381000". Add the Z so JS does not read them as local time.
+function toUtcMs(value: string | null): number | null {
+  if (!value) return null;
+
+  const hasZone = /(Z|[+-]\d{2}:?\d{2})$/.test(value);
+  const ms = new Date(hasZone ? value : `${value}Z`).getTime();
+
+  return Number.isNaN(ms) ? null : ms;
+}
+
+// Turn the server's one-entry-per-day list back into local attempts.
+// A day that already exists locally is left alone (local wins).
+async function importServerProgress(items: ServerProgress[]) {
+  const have = new Set((await allAttempts()).map((a) => a.day));
+
+  for (const p of items) {
+    if (!p.completed || have.has(p.day)) continue;
+
+    const attempt: Attempt = {
+      id: `server:${p.day}`, // stable id, so importing twice never duplicates
+      day: p.day,
+      at: toUtcMs(p.completed_at) ?? (await trustedNow()),
+      misses: p.missed_question,
+      ms: 0, // the server does not store time spent
+      total: p.total_question,
+      synced: true,
+    };
+
+    await db("attempts", "readwrite", (s) => s.put(attempt));
+  }
+}
+
+// Different person on the same device: their attempts are not ours.
+async function clearLocalProgress() {
+  await db("attempts", "readwrite", (s) => s.clear());
+  await kvDelete("certificate");
+}
+
+/**
+ * Register first. Only a 201 creates a new account.
+ * A 409 means the email exists, so log in and restore the saved progress.
+ * Throws HttpError for server errors (422 = invalid email) and a TypeError
+ * when offline (see isOfflineError).
+ */
+export async function connectAccount(rawEmail: string) {
+  const email = normEmail(rawEmail);
+  const account = await kvGet<Account>("account");
+
+  if (account?.email === email) return account.id; // already connected
+
+  if (account) await clearLocalProgress(); // a different email signed in
+
+  let id: string;
+  const reg = await apiFetch("POST", "/auth/register", { email });
+
+  if (reg.status === 201) {
+    id = (await reg.json()).id;
+  } else if (reg.status === 409) {
+    const res = await apiFetch("POST", "/auth/login", { email });
+
+    if (!res.ok) throw new HttpError(res.status);
+
+    const data = await res.json(); // { id, email, progress: [...] }
+    id = data.id;
+    await importServerProgress(data.progress ?? []);
+  } else {
+    throw new HttpError(reg.status);
   }
 
-  await kvSet("userId", user.id);
+  await kvSet("account", { email, id } satisfies Account);
+  await kvSet("email", email);
 
-  return user.id;
+  window.dispatchEvent(new Event(PROGRESS_EVENT));
+
+  return id;
 }
 
 // Convert local attempts to one progress entry per day,
@@ -208,23 +297,29 @@ function toProgress(all: Attempt[]) {
   });
 }
 
-/**
- * Push local attempts to FastAPI.
- * Failed requests leave attempts marked as unsynced.
- */
-export async function syncAttempts() {
-  const [email, all] = await Promise.all([
+async function runSync() {
+  const [email, account, before] = await Promise.all([
     kvGet<string>("email"),
+    kvGet<Account>("account"),
     allAttempts(),
   ]);
 
-  const todo = all.filter((a) => !a.synced);
+  if (!email) return;
 
-  if (!email || !todo.length) return;
+  const todo = before.filter((a) => !a.synced);
+  const needsConnect = !account || account.email !== normEmail(email);
 
-  const userId = await ensureUserId(email);
+  if (!todo.length && !needsConnect) return;
 
-  // Always send the complete progress list.
+  // Connect (and restore saved progress) BEFORE any PUT. The PUT replaces the
+  // whole list on the server, so pushing first would erase days saved elsewhere.
+  const userId = await connectAccount(email);
+
+  if (!todo.length) return;
+
+  // Re-read: connectAccount may have imported days from the server.
+  const all = await allAttempts();
+
   await api("PUT", `/auth/progress/${userId}`, {
     progress: toProgress(all),
   });
@@ -234,6 +329,23 @@ export async function syncAttempts() {
       s.put({ ...a, synced: true }),
     );
   }
+}
+
+let syncing: Promise<void> | null = null;
+
+/**
+ * Push local attempts to FastAPI (and restore saved progress if this
+ * device has not connected yet). One run at a time.
+ * Failed requests leave attempts marked as unsynced.
+ */
+export function syncAttempts() {
+  if (!syncing) {
+    syncing = runSync().finally(() => {
+      syncing = null;
+    });
+  }
+
+  return syncing;
 }
 
 // ---------- Progress hook ----------
@@ -259,6 +371,7 @@ export function useProgress() {
     };
 
     const down = () => setOnline(false);
+    const changed = () => void refresh();
 
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setOnline(navigator.onLine);
@@ -269,12 +382,14 @@ export function useProgress() {
 
     window.addEventListener("online", up);
     window.addEventListener("offline", down);
+    window.addEventListener(PROGRESS_EVENT, changed);
 
     const tick = setInterval(refresh, 60_000);
 
     return () => {
       window.removeEventListener("online", up);
       window.removeEventListener("offline", down);
+      window.removeEventListener(PROGRESS_EVENT, changed);
       clearInterval(tick);
     };
   }, [refresh]);
