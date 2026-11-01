@@ -4,7 +4,7 @@ import About from "@/app/components/homepage/about";
 import Content from "@/app/components/homepage/content";
 import Course from "@/app/components/homepage/course";
 import Hero from "@/app/components/homepage/hero";
-import Incubator from "@/app/components/homepage/incubate";
+import Partners from "@/app/components/homepage/partners";
 import Ref from "@/app/components/homepage/ref";
 import Team from "@/app/components/homepage/team";
 export default function App() {
@@ -19,7 +19,7 @@ export default function App() {
       <Ref />
       <About />
       <Team />
-      <Incubator />
+      <Partners />
 
       <Footer />
     </main> 

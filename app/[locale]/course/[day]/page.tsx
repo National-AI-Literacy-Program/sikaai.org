@@ -181,7 +181,7 @@ export default function DayPage({ params }: { params: Promise<{ day: string }> }
 
       <header className="mx-auto flex w-full max-w-3xl items-center gap-3 px-4 pt-3">
         <Link href="/course" aria-label={t("backToCourse")} className="grid size-10 place-items-center rounded-xl border-2 border-border text-lg font-bold hover:bg-(--crimson-pale)">✕</Link>
-        <div className="h-4 flex-1 overflow-hidden rounded-full bg-(--line)" role="progressbar" aria-valuemin={0} aria-valuemax={screens.length - 1} aria-valuenow={i} aria-label={t("lessonProgress")}>
+        <div className="h-4 flex-1 overflow-hidden rounded-full bg-border" role="progressbar" aria-valuemin={0} aria-valuemax={screens.length - 1} aria-valuenow={i} aria-label={t("lessonProgress")}>
           <div className="h-full rounded-full bg-primary transition-all duration-500" style={{ width: `${(i / (screens.length - 1)) * 100}%` }} />
         </div>
         <button type="button" onClick={() => setWho((w) => (w === "boy" ? "girl" : "boy"))} className="rounded-xl border-2 border-border px-3 py-2 text-xs font-bold hover:bg-(--crimson-pale)" aria-label={t("switchGuide")}>
@@ -208,7 +208,7 @@ export default function DayPage({ params }: { params: Promise<{ day: string }> }
               <div className="w-full">
                 <div className="mb-3 flex gap-1.5" aria-label={t("part", { n: s.n, total: s.of })}>
                   {Array.from({ length: s.of }, (_, k) => (
-                    <span key={k} className={`h-2 flex-1 rounded-full ${k < s.n ? "bg-primary" : "bg-(--line)"}`} />
+                    <span key={k} className={`h-2 flex-1 rounded-full ${k < s.n ? "bg-primary" : "bg-border"}`} />
                   ))}
                 </div>
                 <p className={bubble} style={bubbleStyle}>{s.text}</p>
@@ -247,7 +247,7 @@ export default function DayPage({ params }: { params: Promise<{ day: string }> }
               <Mascot who={who} mood={mood} size={170} />
               <h2 className="text-3xl font-extrabold tracking-tight">{saved ? t("dayComplete") : t("youDidIt")}</h2>
               <p className="text-3xl tracking-widest text-(--gold)" aria-label={t("starsOutOf", { stars, total: 3 })}>
-                {"★".repeat(stars)}<span className="text-(--line)">{"★".repeat(3 - stars)}</span>
+                {"★".repeat(stars)}<span className="text-border">{"★".repeat(3 - stars)}</span>
               </p>
               <p className="max-w-md text-(--muted)">{lesson.reward?.message || t("saveToUnlock")}</p>
               {saved && next ? (

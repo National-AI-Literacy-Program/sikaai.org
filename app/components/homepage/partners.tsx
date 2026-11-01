@@ -10,8 +10,8 @@ const incubator = {
   logo: "/IRD_logo.png",
   website: "https://ird.com.np",
 };
-export default async function Incubator() {
-  const t = await getTranslations("Incubator");
+export default async function Partners() {
+  const t = await getTranslations("Supporter");
   const name = t("name");
 
   return (

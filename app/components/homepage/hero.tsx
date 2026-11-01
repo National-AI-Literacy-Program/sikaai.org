@@ -38,7 +38,7 @@ export default async function Hero() {
         <div className="mx-auto grid max-w-6xl grid-cols-1 items-center gap-30 md:grid-cols-2 md:gap-20">
           {/* Left column */}
           <div className="order-2 self-center text-center sm:order-1 md:text-left">
-            <h1 className="text-[length:calc(clamp(40px,7.5vw,65px)*var(--ne-h1,1))] font-extrabold leading-[0.94] tracking-[-0.06em]">
+            <h1 className="text-[calc(clamp(40px,7.5vw,65px)*var(--ne-h1,1))] font-extrabold leading-[0.94] tracking-[-0.06em]">
               {fixedFirst ? (
                 <>
                   {fixed}

@@ -120,10 +120,10 @@
       }
     }
   },
-  "Incubator": {
+  "Supporter": {
     "name": "Institute for Rural Development",
-    "eyebrow": "INCUBATED BY",
-    "description": "SikaAI is proudly incubated and supported by the {name}, a non-profit working in education, agriculture, heritage conservation, tourism, entrepreneurship, etc. to foster sustainable development in Nepal.",
+    "eyebrow": "Supported by",
+    "description": "SikaAI is supported by the Institute for Rural Development, a non-profit working in education, agriculture, heritage conservation, tourism, entrepreneurship, and more. IRD supports SikaAI with our domain and pilot.",
     "visit": "Visit Website ↗"
   },
   "Reference": {
